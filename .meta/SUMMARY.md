@@ -77,7 +77,6 @@
   - [CORS](../安全认证/Spring Security/CORS.md) 
   - [CSRF](../安全认证/Spring Security/CSRF.md) 
   - [JWT](../安全认证/Spring Security/JWT.md) 
-  - [Spring Security](../安全认证/Spring Security/Spring Security.md) 
   - [表单登录](../安全认证/Spring Security/表单登录.md) 
   - [验证码](../安全认证/Spring Security/验证码.md) 
 
