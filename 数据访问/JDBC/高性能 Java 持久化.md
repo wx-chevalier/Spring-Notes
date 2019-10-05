@@ -12,7 +12,7 @@
 
 # JDBC Batching:批量 JDBC 操作
 
-JDBC Batching 允许在单次数据库连接中发送多个 SQL 语句。[这篇博客里进行了对比可以看出 Batch 操作的性能提升非常巨大](https://leanpub.com/high-performance-java-persistence/read#jdbc-batch-updates) ，无论是在客户端还是数据库端。 `PreparedStatements` 是不错的用于 Batching 操作的选择，像 Oracle 也仅支持基于 PreparedStatements 的 Batching 操作。
+JDBC Batching 允许在单次数据库连接中发送多个 SQL 语句。[这篇博客里进行了对比可以看出 Batch 操作的性能提升非常巨大](https://leanpub.com/high-performance-java-persistence/read#jdbc-batch-updates) ，无论是在客户端还是数据库端。`PreparedStatements` 是不错的用于 Batching 操作的选择，像 Oracle 也仅支持基于 PreparedStatements 的 Batching 操作。
 JDBC 中已经基于[`PreparedStataement.addBatch`](https://docs.oracle.com/javase/8/docs/api/java/sql/PreparedStatement.html#addBatch--) 与 [`PreparedStataement.executeBatch`](https://docs.oracle.com/javase/8/docs/api/java/sql/Statement.html#executeBatch--))提供了 Batching 操作的辅助，不过如果打算手动的构造 Batching 操作，那么在设计阶段就要考虑到是否需要引入 Batching。如果你用的是 Hibernate，那么[可以用简单的配置就开启 Batching](https://vladmihalcea.com/2015/03/18/how-to-batch-insert-and-update-statements-with-hibernate/)，Hibernate 5.2 提供了 [Session 级别的 Batching](https://hibernate.atlassian.net/browse/HHH-10431), 也是非常方便的。
 
 # Statement Caching:语句缓存

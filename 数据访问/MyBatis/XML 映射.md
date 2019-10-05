@@ -113,7 +113,7 @@ public interface BlogMapper 
   resultType="hashmap"
   resultMap="personResultMap"
 
-  <!-- 将其设置为 true 后，只要语句被调用，都会导致本地缓存和二级缓存被清空，默认值：false。 -->
+  <!-- 将其设置为 true 后，只要语句被调用，都会导致本地缓存和二级缓存被清空，默认值：false。-->
   flushCache="false"
   useCache="true"
   timeout="10"
@@ -132,7 +132,7 @@ public interface BlogMapper 
   parameterType="domain.blog.Author"
   flushCache="true"
   statementType="PREPARED"
-  <!-- 通过生成的键值设置表中的列名，这个设置仅在某些数据库（像 PostgreSQL）是必须的，当主键列不是表中的第一列的时候需要设置。如果希望使用多个生成的列，也可以设置为逗号分隔的属性名称列表。 -->
+  <!-- 通过生成的键值设置表中的列名，这个设置仅在某些数据库（像 PostgreSQL）是必须的，当主键列不是表中的第一列的时候需要设置。如果希望使用多个生成的列，也可以设置为逗号分隔的属性名称列表。-->
   keyProperty=""
   keyColumn=""
   <!-- 令 MyBatis 使用 JDBC 的 getGeneratedKeys 方法来取出由数据库内部生成的主键（比如：像 MySQL 和 SQL Server 这样的关系数据库管理系统的自动递增字段） -->
@@ -208,7 +208,7 @@ public interface BlogMapper 
 <selectKey
   keyProperty="id"
   resultType="int"
-  <!-- 这可以被设置为 BEFORE 或 AFTER。如果设置为 BEFORE，那么它会首先生成主键，设置 keyProperty 然后执行插入语句。如果设置为 AFTER，那么先执行插入语句，然后是 selectKey 中的语句 - 这和 Oracle 数据库的行为相似，在插入语句内部可能有嵌入索引调用。 -->
+  <!-- 这可以被设置为 BEFORE 或 AFTER。如果设置为 BEFORE，那么它会首先生成主键，设置 keyProperty 然后执行插入语句。如果设置为 AFTER，那么先执行插入语句，然后是 selectKey 中的语句 - 这和 Oracle 数据库的行为相似，在插入语句内部可能有嵌入索引调用。-->
   order="BEFORE"
   statementType="PREPARED">
 ```
@@ -270,7 +270,7 @@ void mapCategoryAndPage(@Param("categoryLocalId") Long categoryLocalId, @Param("
 ORDER BY ${columnName}
 ```
 
-当 SQL 语句中的元数据（如表名或列名）是动态生成的时候，字符串替换将会非常有用。 举个例子，如果你想通过任何一列从表中 select 数据时，只需要像做如下的转化就好：
+当 SQL 语句中的元数据（如表名或列名）是动态生成的时候，字符串替换将会非常有用。举个例子，如果你想通过任何一列从表中 select 数据时，只需要像做如下的转化就好：
 
 ```java
 @Select("select * from user where id = #{id}")
@@ -404,7 +404,7 @@ ResultMap 可以帮我们优雅地解决别名问题：
 
 ## 自动映射
 
-当自动映射查询结果时，MyBatis 会获取结果中返回的列名并在 Java 类中查找相同名字的属性（忽略大小写）。 这意味着如果发现了 ID 列和 id 属性，MyBatis 会将列 ID 的值赋给 id 属性。通常数据库列使用大写字母组成的单词命名，单词间用下划线分隔；而 Java 属性一般遵循驼峰命名法约定。为了在这两种命名方式之间启用自动映射，需要将 mapUnderscoreToCamelCase 设置为 true。
+当自动映射查询结果时，MyBatis 会获取结果中返回的列名并在 Java 类中查找相同名字的属性（忽略大小写）。这意味着如果发现了 ID 列和 id 属性，MyBatis 会将列 ID 的值赋给 id 属性。通常数据库列使用大写字母组成的单词命名，单词间用下划线分隔；而 Java 属性一般遵循驼峰命名法约定。为了在这两种命名方式之间启用自动映射，需要将 mapUnderscoreToCamelCase 设置为 true。
 
 对于每一个结果映射，在 ResultSet 出现的列，如果没有设置手动映射，将被自动映射。在自动映射处理完毕后，再处理手动映射。
 
