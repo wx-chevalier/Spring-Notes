@@ -7,3 +7,4 @@ Servlet 是 J2EE 规范之一，在遵守该规范的前提下，我们可将 We
 # Todos
 
 - https://mp.weixin.qq.com/s/LGuXzhtHt2LNcgLq36jqyw
+- https://www.zhihu.com/question/21416727/answer/690289895 servlet的本质是什么，它是如何工作的？
