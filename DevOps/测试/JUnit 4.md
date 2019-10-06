@@ -32,7 +32,7 @@ public class JSuit {
 }
 ```
 
-TestSuite 测试包类——多个测试的组合 TestSuite 类负责组装多个 Test Cases。待测得类中可能包括了对被测类的多个测试，而 TestSuit 负责收集这些测试，使我们可以在一个测试中，完成全部的对被测类的多个测试。 TestSuite 类实现了 Test 接口，且可以包含其它的 TestSuites。它可以处理加入 Test 时的所有抛出的异常。
+TestSuite 测试包类——多个测试的组合 TestSuite 类负责组装多个 Test Cases。待测得类中可能包括了对被测类的多个测试，而 TestSuit 负责收集这些测试，使我们可以在一个测试中，完成全部的对被测类的多个测试。TestSuite 类实现了 Test 接口，且可以包含其它的 TestSuites。它可以处理加入 Test 时的所有抛出的异常。
 
 TestResult 结果类集合了任意测试累加结果，通过 TestResult 实例传递个每个测试的 Run() 方法。TestResult 在执行 TestCase 是如果失败会异常抛出 TestListener 接口是个事件监听规约，可供 TestRunner 类使用。它通知 listener 的对象相关事件，方法包括测试开始 startTest(Test test)，测试结束 endTest(Test test),错误，增加异常 addError(Test test, Throwable t) 和增加失败 addFailure(Test test, AssertionFailedError t) 。TestFailure 失败类是个“失败”状况的收集类，解释每次测试执行过程中出现的异常情况，其 toString() 方法返回“失败”状况的简要描述。
 
