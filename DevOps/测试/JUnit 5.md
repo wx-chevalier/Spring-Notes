@@ -2,7 +2,7 @@
 
 JUnit 是 Java 中使用最广泛的测试框架，JUnit5 主要在希望能够适应 Java8 风格的编码以及相关工，这就是为什么建议在 Java 8 之后的项目中使用 JUnit5 来创建和执行测试。JUnit5 的第一个可用性版本是在 2017 年 9 月 10 日发布的。
 
-![](https://i.postimg.cc/4x81wh5F/image.png)
+![JUnit 5 平台构成](https://i.postimg.cc/4x81wh5F/image.png)
 
 `JUnit 5 = JUnit Platform + JUnit Jupiter + JUnit Vintage`：
 
@@ -99,6 +99,7 @@ public class JUnit5TestSuiteExample
 @ExcludeTags("PROD")
 public class JUnit5TestSuiteExample
 {
+    // ...
 }
 ```
 
