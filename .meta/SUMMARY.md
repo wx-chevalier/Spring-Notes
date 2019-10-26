@@ -21,22 +21,6 @@
   - [单元测试](../DevOps/测试/单元测试.md) 
   - [集成测试](../DevOps/测试/集成测试.md) 
 
-## [IoC](../IoC/README.md) 
-
-- [Introduction](../IoC/README.md) 
-
-- [依赖注入](../IoC/依赖注入/README.md) 
-  - [Bean 声明](../IoC/依赖注入/Bean 声明.md) 
-  - [Bean 注入](../IoC/依赖注入/Bean 注入.md) 
-  - [Bean 生命周期](../IoC/依赖注入/Bean 生命周期.md) 
-- [切面编程](../IoC/切面编程/README.md) 
-  - [AOP](../IoC/切面编程/AOP.md) 
-- [机制原理](../IoC/机制原理/README.md) 
-  - [事务源码分析](../IoC/机制原理/事务源码分析.md) 
-  - [启动流程](../IoC/机制原理/启动流程.md) 
-  - [循环依赖](../IoC/机制原理/循环依赖.md) 
-  - [请求的处理流程](../IoC/机制原理/请求的处理流程.md) 
-
 ## [Java Web](../Java Web/README.md) 
 
 - [Introduction](../Java Web/README.md) 
@@ -70,6 +54,24 @@
 
 - [Introduction](../winter-boot/README.md) 
 
+
+## [内部架构](../内部架构/README.md) 
+
+- [Introduction](../内部架构/README.md) 
+
+- [依赖注入](../内部架构/依赖注入/README.md) 
+  - [Bean 声明](../内部架构/依赖注入/Bean 声明.md) 
+  - [Bean 注入](../内部架构/依赖注入/Bean 注入.md) 
+  - [Bean 生命周期](../内部架构/依赖注入/Bean 生命周期.md) 
+- [切面编程](../内部架构/切面编程/README.md) 
+  - [AOP](../内部架构/切面编程/AOP.md) 
+- [加载与启动](../内部架构/加载与启动/README.md) 
+  - [Jar 加载](../内部架构/加载与启动/Jar 加载.md) 
+- [机制原理](../内部架构/机制原理/README.md) 
+  - [事务源码分析](../内部架构/机制原理/事务源码分析.md) 
+  - [启动流程](../内部架构/机制原理/启动流程.md) 
+  - [循环依赖](../内部架构/机制原理/循环依赖.md) 
+  - [请求的处理流程](../内部架构/机制原理/请求的处理流程.md) 
 
 ## [安全认证](../安全认证/README.md) 
 
