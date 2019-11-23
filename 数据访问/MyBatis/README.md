@@ -42,3 +42,5 @@ MyBatis 允许将 SQL 写在 XML 中，便于统一的管理与优化，并且�
 # 链接
 
 - https://mp.weixin.qq.com/s/X4pCR662mmFrcRM0tglaLg?from=groupmessage&isappinstalled=0
+
+- https://zhuanlan.zhihu.com/p/88607398
