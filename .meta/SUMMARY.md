@@ -84,7 +84,7 @@
 
 - [Alibaba Cloud](../微服务/Alibaba Cloud/README.md) 
 - [DDD](../微服务/DDD/README.md) 
-  - [POJO](../微服务/DDD/POJO.md) 
+  - [Java 对象分类](../微服务/DDD/Java 对象分类.md) 
 - [Spring Cloud](../微服务/Spring Cloud/README.md) 
 - [安全认证](../微服务/安全认证/README.md) 
   - [Pac4j](../微服务/安全认证/Pac4j/README.md) 
