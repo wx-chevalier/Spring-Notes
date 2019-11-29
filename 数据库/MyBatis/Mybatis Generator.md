@@ -1,5 +1,7 @@
 # MyBatis Generator
 
+# 基础使用
+
 MyBatis Generator 可以直接通过命令行调用：
 
 ```sh
