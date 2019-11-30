@@ -321,3 +321,148 @@ UserExample ex = new UserExample();
 ex.setPage(pager);
 List<User> userList = userDao.selectByExample(ex);
 ```
+
+## Mapper 类
+
+Mapper 也就是数据库访问类 DAO：
+
+```java
+package org.dev.repo.dao;
+
+import java.util.List;
+import org.apache.ibatis.annotations.Param;
+import org.dev.repo.dto.OrderDTO;
+import org.dev.repo.dto.OrderDTOExample;
+
+public interface OrderDTOMapper {
+    //通过条件计数
+    int countByExample(OrderDTOExample example);
+    //通过条件删除
+    int deleteByExample(OrderDTOExample example);
+    //通过主键删除
+    int deleteByPrimaryKey(Long id);
+    //插入DTO
+    int insert(OrderDTO record);
+    //dto非空字段插入
+    int insertSelective(OrderDTO record);
+    //条件查询,返回结果包括text等大字段
+    List<OrderDTO> selectByExampleWithBLOBs(OrderDTOExample example);
+    //条件查询,返回结果不包括text等大字段
+    List<OrderDTO> selectByExample(OrderDTOExample example);
+    //通过主键查询
+    OrderDTO selectByPrimaryKey(Long id);
+    //条件更新,只更新dto中非空字段的值
+    int updateByExampleSelective(@Param("record") OrderDTO record, @Param("example") OrderDTOExample example);
+    //条件更新全部字段,并包含text等大字段
+    int updateByExampleWithBLOBs(@Param("record") OrderDTO record, @Param("example") OrderDTOExample example);
+    //条件更新dto全部字段
+    int updateByExample(@Param("record") OrderDTO record, @Param("example") OrderDTOExample example);
+    //通过主键更新,dto非空字段
+    int updateByPrimaryKeySelective(OrderDTO record);
+    //通过主键更新,dto全部字段,包含text等大字段
+    int updateByPrimaryKeyWithBLOBs(OrderDTO record);
+    //通过主键更新,dto全部字段,不包含text等大字段
+    int updateByPrimaryKey(OrderDTO record);
+}
+```
+
+- 最常用的动态查询方法 selectByExample(OrderDTOExample example),简单通过构造不同的 example 对象就可以实现.
+
+- 后缀为 Selective 的插入和更新方法,只处理 dto 对象的非空字段,例如经常我们只想更新某些记录的部分字段,那么 updateByExampleSelective 方法最合适不过.
+
+- 后缀为 WithBLOBs 的方法是对大字段的处理方法,与常规处理方法分离。
+
+使用 Example 进行动态查询也是颇为便捷的：
+
+```java
+LocalDate ld=LocalDate.of(2017,1,1);
+Instant instant = Instant.from(ld);
+Date date = Date.from(instant);
+
+OrderDTOExample example=new OrderDTOExample();
+//设置排序字段
+example.setOrderByClause(" order by create_time desc ");
+
+//创建查询条件对象
+example.createCriteria().andCustomerIdEqualTo(123456L).
+andCreateTimeGreaterThan(date).
+andPaymentAmtGreaterThan(300L);
+
+//执行查询
+return orderMapper.selectByExample(example);
+```
+
+# Example
+
+Example 类中有三个内部类 Criteria，Criterion，GeneratedCriteria：
+
+- Criteria 是查询条件类,继承 GeneratedCriteria 类,,我们构造查询条件就是使用它的方法,它由 Example 对象的 createCriteria()方法来创建。
+
+- Criterion 是存储字段的条件,例如 id=5 这个条件就是存储在这个类对象的属性中。
+
+- GeneratedCriteria 是 Criteria 父类,Example 对象映射表的每个字段的 12 个方法都属于这个类,它保存一组 Criterion 对象。
+
+动态查询的 sqlmapper.xml 片段如下：
+
+```xml
+<select id="selectByExample" parameterType="org.dev.repo.dto.OrderDTOExample" resultMap="BaseResultMap">
+select
+<!--对应Example中的distinct属性 -->
+<if test="distinct">
+    distinct
+</if>
+<!-- sql片段,order表字段 -->
+<include refid="Base_Column_List" />
+from order
+<if test="_parameter != null">
+    <!--这里是重点,sql片段,查询条件-->
+    <include refid="Example_Where_Clause" />
+</if>
+<!--对应Example中的orderByClause属性 -->
+<if test="orderByClause != null">
+    order by ${orderByClause}
+</if>
+</select>
+```
+
+sqlmapper.xml 是如何构造动态查询条件：
+
+```xml
+<sql id="Example_Where_Clause">
+    <where>
+      <!-- 遍历Example中的oredCriteria属性中的元素Criteria,多个Criteria组成or条件 -->
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+      <!-- 如果Example.Criteria对象存在一个或多个Criterion对象那么进行遍历,多个Criterion构成and条件 -->
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <!-- 无值条件,例如name is null -->
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <!-- 单值条件,例如 name='张三' -->
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <!-- 双值条件,对应between -->
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <!-- 多值条件,对应in -->
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+```
+
+通过以上 sqlmapper.xml 我们可以看出 Example 对象及它的内部对象属性在运行时被 mybatis 框架循环遍历解析成动态 sql 语句，与我们手写 sql 语句并无差别。
