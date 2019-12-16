@@ -29,7 +29,11 @@ MyBatis-Plus（简称 MP）是一个 MyBatis 的增强工具，在 MyBatis 的�
 - 添加依赖
 
 ```xml
-<dependency>    <groupId>com.baomidou</groupId>    <artifactId>mybatis-plus-boot-starter</artifactId>    <version>3.1.1</version></dependency>
+<dependency>
+    <groupId>com.baomidou</groupId>
+    <artifactId>mybatis-plus-boot-starter</artifactId>
+    <version>3.1.1</version>
+</dependency>
 ```
 
 - 继承通用接口
@@ -41,11 +45,155 @@ public interface UserMapper extends BaseMapper<User> {}
 - 查询
 
 ```java
-List<User> userList = userMapper.selectList(        new QueryWrapper<User>()                .lambda()                .ge(User::getAge, 18));
+List<User> userList = userMapper
+    .selectList(
+        new QueryWrapper<User>()
+            .lambda()
+            .ge(User::getAge, 18)
+    );
 ```
 
 MyBatis-Plus 将会生成以下查询 SQL：
 
-```
+```sql
 SELECT * FROM user WHERE age >= 18
 ```
+
+# 案例：用户操作
+
+创建 MybatisPlusConfig 类，指定 Mapper 地址，启用分页功能。
+
+```java
+@Configuration
+@MapperScan("wx.mapper")
+public class MybatisPlusConfig {
+
+    /**
+     * 分页插件
+     */
+    @Bean
+    public PaginationInterceptor paginationInterceptor() {
+        return new PaginationInterceptor();
+    }
+}
+```
+
+创建实体类 User
+
+```java
+@Data
+public class User {
+    private Long id;
+    private String name;
+    private Integer age;
+    private String email;
+}
+```
+
+`@Data` 为 lombok 语法，自动注入 getter/setter 方法。接下来创建对象对于的 Mapper。
+
+```java
+public interface UserMapper extends BaseMapper<User> {
+}
+```
+
+## 测试
+
+创建 MyBatisPlusTest 类，注入上面创建的 UserMapper 类。
+
+```java
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class MyBatisPlusTest {
+    @Autowired
+    private UserMapper userMapper;
+}
+```
+
+- 测试查询单挑数据，并输出
+
+```java
+@Test
+public void testSelectOne() {
+    User user = userMapper.selectById(1L);
+    System.out.println(user);
+}
+```
+
+- 测试添加数据
+
+```java
+@Test
+public void testInsert() {
+    User user = new User();
+    user.setName("微笑");
+    user.setAge(3);
+    user.setEmail("neo@tooool.org");
+    assertThat(userMapper.insert(user)).isGreaterThan(0);
+    // 成功直接拿会写的 ID
+    assertThat(user.getId()).isNotNull();
+}
+```
+
+assertThat() 是 Assert 的一个精通方法，用来比对返回结果，包来自 `import static org.assertj.core.api.Assertions.assertThat;`。
+
+- 测试删除数据
+
+```java
+@Test
+public void testDelete() {
+    assertThat(userMapper.deleteById(3L)).isGreaterThan(0);
+    assertThat(userMapper.delete(new QueryWrapper<User>()
+            .lambda().eq(User::getName, "smile"))).isGreaterThan(0);
+}
+```
+
+`QueryWrapper` 是 MyBatis-Plus 内部辅助查询类，可以使用 lambda 语法，也可以不使用。利用 QueryWrapper 类可以构建各种查询条件。
+
+- 测试更新数据
+
+```java
+@Test
+public void testUpdate() {
+    User user = userMapper.selectById(2);
+    assertThat(user.getAge()).isEqualTo(36);
+    assertThat(user.getName()).isEqualTo("keep");
+
+    userMapper.update(
+            null,
+            Wrappers.<User>lambdaUpdate().set(User::getEmail, "123@123").eq(User::getId, 2)
+    );
+    assertThat(userMapper.selectById(2).getEmail()).isEqualTo("123@123");
+}
+```
+
+- 测试查询所有数据
+
+```java
+@Test
+public void testSelect() {
+    List<User> userList = userMapper.selectList(null);
+    Assert.assertEquals(5, userList.size());
+    userList.forEach(System.out::println);
+}
+```
+
+- 测试非分页查询
+
+```java
+@Test
+public void testPage() {
+    System.out.println("----- baseMapper 自带分页 ------");
+    Page<User> page = new Page<>(1, 2);
+    IPage<User> userIPage = userMapper.selectPage(page, new QueryWrapper<User>()
+            .gt("age", 6));
+    assertThat(page).isSameAs(userIPage);
+    System.out.println("总条数 ------> " + userIPage.getTotal());
+    System.out.println("当前页数 ------> " + userIPage.getCurrent());
+    System.out.println("当前每页显示数 ------> " + userIPage.getSize());
+    print(userIPage.getRecords());
+    System.out.println("----- baseMapper 自带分页 ------");
+}
+```
+
+查询大于 6 岁的用户，并且分页展示，每页两条数据，展示第一页。
