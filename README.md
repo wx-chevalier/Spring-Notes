@@ -18,34 +18,6 @@ Spring 的设计目标是为我们提供一个一站式的轻量级应用开发�
 
 - 如果你想寻求分布式系统的解决方案，
 
-# Spring 历史
-
-## 特性
-
-- 轻量非侵入：从大小与开销两方面而言，Spring 都是非常轻量的，完整的 Spring 框架可以在一个大小仅有 1M 多的 JAR 文件里发布，并且 Spring 所需要的处理开销也是微不足道的。
-
-- 控制反转：Spring 通过所谓的 IoC 控制反转的技术来促进低耦合，在应用了 IoC 之后，一个对象依赖的其他对象会通过被动的方式传递进来，而不是这个对象自己创建或者查找依赖对象。
-
-- 面向切面：Spring 支持面向切面的编程，并且把应用业务逻辑和系统服务分开。
-
-- 容器：Spring 包含并管理应用对象的配置和生命周期，在这个意义上它是一种容器，我们可以基于可配置原型来配置 Bean 是如何被创建的、如何被关联的；可以设置是创建一个单独的实例或者每次需要时都生成一个新的实例。
-
-- 框架：Spring 可以将简单的组件配置，组合成复杂的应用，在 Spring 中，应用对象被声明式地组合，典型的是在 XML 文件中进行声明。Spring 也提供了很多的基础功能（事务管理、持久化框架集成等），将应用逻辑的开发留给开发者。
-
-## 配置方式
-
-在 Spring 1.x 的时代，主要使用 XML 来配置 Bean，我们需要频繁的在开发的类和配置文件之间切换。到了在 Spring2.x 时代，随着 JDK1.5 带来的注解支持，Spring 提供了声明 Bean 的注解（@Component,@Service 等），大大减少了配置量。而从 Spring 3.x 以后，Spring 提供了更为丰富的 Java 配置的能力（@Configuration，@Bean）等。
-
-## Spring Boot
-
-![Spring Boot 概述](https://s2.ax1x.com/2019/09/03/nFQxUO.png)
-
-Spring Boot 充分利用了 JavaConfig 的配置模式以及“约定优于配置”的理念，能够极大的简化基于 Spring MVC 的 Web 应用和 REST 服务开发。Spring Boot 可以使得创建独立的产品级别的基于 Spring 的应用程序变得更加简单，使得能够做到开箱即用。Spring Boot 可以用于创建能够直接用 `java -jar` 命令运行的或者类似于传统的 war 部署方式的应用程序。同样也提供了所谓的 `spring scripts` 这样的命令行工具。
-
-# 架构与生态圈
-
-![Spring Framework Runtime](https://s2.ax1x.com/2019/09/03/nFNE40.png)
-
 # About
 
 ## Copyright

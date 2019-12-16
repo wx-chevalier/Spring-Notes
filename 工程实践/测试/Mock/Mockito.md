@@ -117,13 +117,10 @@ doAnswer(new Answer<Object>() {
 一旦使用 mock() 对模拟对象打桩，意味着 Mockito 会记录着这个模拟对象调用了什么方法，还有调用了多少次。最后由用户决定是否需要进行验证，即 verify() 方法。
 verify() 说明其作用的例子，
 
-```
-
+```java
 mockedList.add("one");
 mockedList.add("two");
 verify(mockedList).add("one"); // 如果times不传入，则默认是1
-
-
 ```
 
 verify 内部跟踪了所有的方法调用和参数的调用情况，然后会返回一个结果，说明是否通过。参见另外一个详细的例子。
