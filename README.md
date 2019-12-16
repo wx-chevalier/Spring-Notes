@@ -10,6 +10,14 @@ Spring 的设计目标是为我们提供一个一站式的轻量级应用开发�
 
 本篇是《[服务端开发实践与工程架构](https://ngte-be.gitbook.io/i/)》系列文章的一部分，关联的示例代码请参考 [java-snippets](https://github.com/wx-chevalier/java-snippets)，[spring-snippets](https://github.com/wx-chevalier/spring-snippets)。
 
+## RoadMap
+
+- 如果你是才入门的新手，
+
+- 如果你已经有了一定的经验，想了解更多工程架构方面的知识，
+
+- 如果你想寻求分布式系统的解决方案，
+
 # Spring 历史
 
 ## 特性
@@ -30,7 +38,7 @@ Spring 的设计目标是为我们提供一个一站式的轻量级应用开发�
 
 ## Spring Boot
 
-![](https://s2.ax1x.com/2019/09/03/nFQxUO.png)
+![Spring Boot 概述](https://s2.ax1x.com/2019/09/03/nFQxUO.png)
 
 Spring Boot 充分利用了 JavaConfig 的配置模式以及“约定优于配置”的理念，能够极大的简化基于 Spring MVC 的 Web 应用和 REST 服务开发。Spring Boot 可以使得创建独立的产品级别的基于 Spring 的应用程序变得更加简单，使得能够做到开箱即用。Spring Boot 可以用于创建能够直接用 `java -jar` 命令运行的或者类似于传统的 war 部署方式的应用程序。同样也提供了所谓的 `spring scripts` 这样的命令行工具。
 
