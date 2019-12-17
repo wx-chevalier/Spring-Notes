@@ -1,6 +1,6 @@
-# Spring Boot 中集成 MyBatis 
+# Spring Boot 中集成 MyBatis
 
-在 Mybatis 3.5支持Optional 之后，我们还可以将判断优雅化为如下形式：
+在 Mybatis 3.5 支持 Optional 之后，我们还可以将判断优雅化为如下形式：
 
 ```java
 @Mapper

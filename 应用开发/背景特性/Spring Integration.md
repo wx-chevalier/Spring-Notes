@@ -6,19 +6,19 @@ Spring Integration 提供了 Spring 编程模型的扩展用来支持企业集�
 
 消息的分割：
 
-![](https://s2.ax1x.com/2019/10/19/KnP3wt.png)
+![消息的分割](https://s2.ax1x.com/2019/10/19/KnP3wt.png)
 
 消息的聚合：
 
-![](https://s2.ax1x.com/2019/10/19/KnPUSg.png)
+![消息的聚合](https://s2.ax1x.com/2019/10/19/KnPUSg.png)
 
 消息的过滤：
 
-![](https://s2.ax1x.com/2019/10/19/KnPDwq.png)
+![消息的过滤](https://s2.ax1x.com/2019/10/19/KnPDwq.png)
 
 消息的分发：
 
-![](https://s2.ax1x.com/2019/10/19/KnPrT0.png)
+![消息的分发](https://s2.ax1x.com/2019/10/19/KnPrT0.png)
 
 # 简单实例
 
