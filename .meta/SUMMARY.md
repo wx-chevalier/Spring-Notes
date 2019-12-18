@@ -141,6 +141,7 @@
 - [ORM](../数据访问/ORM/README.md) 
   - [Hibernate](../数据访问/ORM/Hibernate/README.md) 
   - [JPA](../数据访问/ORM/JPA/README.md) 
+  - [Spring Data](../数据访问/ORM/Spring Data/README.md) 
 - [Redis](../数据访问/Redis/README.md) 
 - [Spring JDBC](../数据访问/Spring JDBC/README.md) 
   - [JdbcTemplate](../数据访问/Spring JDBC/JdbcTemplate.md) 
