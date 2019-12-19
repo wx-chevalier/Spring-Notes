@@ -8,15 +8,9 @@ Spring 的设计目标是为我们提供一个一站式的轻量级应用开发�
 
 ![Spring](https://s2.ax1x.com/2019/09/03/nkYetx.png)
 
-本篇是《[服务端开发实践与工程架构](https://ngte-be.gitbook.io/i/)》系列文章的一部分，关联的示例代码请参考 [java-snippets](https://github.com/wx-chevalier/java-snippets)，[spring-snippets](https://github.com/wx-chevalier/spring-snippets)。
+本篇是《[服务端开发实践与工程架构](https://ngte-be.gitbook.io/i/)》系列文章的一部分，关联的示例代码请参考 [java-snippets](https://github.com/Dev-Snippets/java-snippets)，[spring-examples](https://github.com/BE-Kits/spring-snippets)。
 
-## RoadMap
-
-- 如果你是才入门的新手，
-
-- 如果你已经有了一定的经验，想了解更多工程架构方面的知识，
-
-- 如果你想寻求分布式系统的解决方案，
+> 如果你是才入门的新手，那么建议首先阅读 《[Java Series]()》、《[数据结构与算法]()》。如果你已经有了一定的经验，想了解更多工程架构方面的知识，那么建议阅读 []()。如果你想寻求分布式系统的解决方案，那么建议阅读 []()。
 
 # About
 
