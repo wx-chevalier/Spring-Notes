@@ -33,6 +33,8 @@ testRuntime("org.junit.jupiter:junit-jupiter-engine:5.0.0-M4")
 testRuntime("org.junit.platform:junit-platform-runner:1.0.0-M4")
 ```
 
+> Tips: 无论是单元测试，还是集成测试，我们都必须小心地控制代码的边界，避免耦合带来的意外失败，并提高用例地运行效率。
+
 # 链接
 
 - https://www.baeldung.com/spring-boot-testing
