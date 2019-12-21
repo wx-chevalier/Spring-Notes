@@ -62,6 +62,35 @@ Redisson 常用的配置如下：
 }
 ```
 
+其对应的 YML 配置如下：
+
+```yml
+singleServerConfig:
+  idleConnectionTimeout: 10000
+  pingTimeout: 1000
+  connectTimeout: 10000
+  timeout: 3000
+  retryAttempts: 3
+  retryInterval: 1500
+  reconnectionTimeout: 3000
+  failedAttempts: 3
+  password: null
+  subscriptionsPerConnection: 5
+  clientName: null
+  address: "redis://127.0.0.1:6379"
+  subscriptionConnectionMinimumIdleSize: 1
+  subscriptionConnectionPoolSize: 50
+  connectionMinimumIdleSize: 10
+  connectionPoolSize: 64
+  database: 0
+  dnsMonitoring: false
+  dnsMonitoringInterval: 5000
+threads: 0
+nettyThreads: 0
+codec: !<org.redisson.codec.JsonJacksonCodec> {}
+useLinuxNativeEpoll: false
+```
+
 ## redisson-spring-boot-starter
 
 - 添加 `redisson-spring-boot-starter` 到依赖中:
@@ -103,7 +132,25 @@ spring.redis.sentinel.nodes=
 spring.redis.redisson.config=classpath:redisson.yaml
 ```
 
-然后我们可以使用 RedissonClient。
+然后我们可以注册 RedissonClient 的 Bean：
+
+```java
+ @Configuration
+ public class RedissonSpringDataConfig {
+
+    @Bean
+    public RedissonConnectionFactory redissonConnectionFactory(RedissonClient redisson) {
+        return new RedissonConnectionFactory(redisson);
+    }
+
+    @Bean(destroyMethod = "shutdown")
+    public RedissonClient redisson(@Value("classpath:/redisson.yaml") Resource configFile) throws IOException {
+        Config config = Config.fromYAML(configFile.getInputStream());
+        return Redisson.create(config);
+    }
+
+ }
+```
 
 # 基础操作
 
