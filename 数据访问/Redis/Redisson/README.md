@@ -129,7 +129,7 @@ spring.redis.sentinel.nodes=
 # Redisson settings
 
 #path to config - redisson.yaml
-spring.redis.redisson.config=classpath:redisson.yaml
+spring.redis.redisson.config=classpath:/redisson.yaml
 ```
 
 然后我们可以注册 RedissonClient 的 Bean：
