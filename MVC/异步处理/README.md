@@ -17,7 +17,7 @@ public DeferredResult<String> quotes() {
 deferredResult.setResult(data);
 ```
 
-控制器可以从不同的线程异步生成返回值 - 例如，响应外部事件（JMS 消息），计划任务或其他事件等。
+控制器可以从不同的线程异步生成返回值，例如，响应外部事件（JMS 消息），计划任务或其他事件等。
 
 ```java
 @RequestMapping("/getAMessageFutureAsync")
