@@ -21,6 +21,7 @@
   - [DevTools](../MVC/开发环境/DevTools.md) 
 - [异步处理](../MVC/异步处理/README.md) 
   - [DeferredResult](../MVC/异步处理/DeferredResult.md) 
+  - [WebAsyncTask](../MVC/异步处理/WebAsyncTask.md) 
 - [快速开始](../MVC/快速开始/README.md) 
   - [常用注解](../MVC/快速开始/常用注解.md) 
   - [简单全链路应用](../MVC/快速开始/简单全链路应用.md) 
