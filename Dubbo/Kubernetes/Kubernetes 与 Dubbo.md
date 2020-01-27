@@ -30,7 +30,7 @@ Kubernetes 体系下，RPC 服务发现有几种方式：
 
 - 利用 Headless Service（DNS）：Headless Service 和上面的 Service 的区别是，它不提供集群 IP，通过主机名的形式获取一组 IP 列表，Client 端自己决定访问哪个 Pod。
 
-- API Server ：Client 端直接请求 API Server，获取到 Pod 的列表， Client 自己决定访问 Pod 的逻辑。同时获取的时候增加 watch，API Server 会将 Pod 的变化信息同步 Client。
+- API Server ：Client 端直接请求 API Server，获取到 Pod 的列表，Client 自己决定访问 Pod 的逻辑。同时获取的时候增加 watch，API Server 会将 Pod 的变化信息同步 Client。
 
 通过拿到 Server 端的 IP 或者 host ，Client 端就可以发起 http 或者其他协议的请求。
 

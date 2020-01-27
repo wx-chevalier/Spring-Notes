@@ -1,6 +1,6 @@
 # SpotBugs
 
-SpotBugs 是 Findbugs 的继任者，（Findbugs 已经于 2016 年后不再维护），用于对代码进行静态分析，查找相关的漏洞。目前 SpotBugs 3.1.3 自带检测器，其中有 90 余种 Bad practice，155 余种 Correctness，9 种 Experimental， 2 种 Internationalization，17 种 Malicious code vulnerability，46 种 Multithreaded correctness,4 种 Bogus random noise，37 种 Performance，11 种 Security,87 种 Dodgy。
+SpotBugs 是 Findbugs 的继任者，（Findbugs 已经于 2016 年后不再维护），用于对代码进行静态分析，查找相关的漏洞。目前 SpotBugs 3.1.3 自带检测器，其中有 90 余种 Bad practice，155 余种 Correctness，9 种 Experimental，2 种 Internationalization，17 种 Malicious code vulnerability，46 种 Multithreaded correctness,4 种 Bogus random noise，37 种 Performance，11 种 Security,87 种 Dodgy。
 
 - Bad practice 不佳实践：常见代码错误，用于静态代码检查时进行缺陷模式匹配(如重写 equals 但没重写 hashCode，或相反情况等)
 - Correctness 可能导致错误的代码(如空指针引用、无限循环等)

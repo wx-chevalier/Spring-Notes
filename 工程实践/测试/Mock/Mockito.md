@@ -14,7 +14,7 @@ assertEquals( "预期返回1", 1, mock.get( 0 ) );// mock.get(0) 返回 1
 
 打桩需要[注意以下几点](http://qiuguo0205.iteye.com/blog/1443344)：
 
-- 对于 static 和 final 方法， Mockito 无法对其 when(…).thenReturn(…) 操作。
+- 对于 static 和 final 方法，Mockito 无法对其 when(…).thenReturn(…) 操作。
 - 当我们连续两次为同一个方法使用 stub 的时候，他只会只用最新的一次。
 
 mock 对象会覆盖整个被 mock 的对象，因此没有 stub 的方法只能返回默认值。又因为，我们 mock 一个接口的时候，很多成员方法只是一个签名，并没有实现，这就要我们手动写出这些实现方法啦。典型地，我们模拟一个 request 请求对象，你被测试的代码中使用了 HttpSerevletRequest 什么方法，就要写出相应的实现方法！
