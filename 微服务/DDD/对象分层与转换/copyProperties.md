@@ -7,62 +7,54 @@ package com.abc.demo;
 
 import java.util.Arrays;
 import java.util.List;
-
 import org.springframework.beans.BeanUtils;
 
 public class Main {
 
-    public static void main(String[] args) {
+  public static void main(String[] args) {
+    List<Article> articleList = Arrays.asList(new Article(1L, "hello world"));
 
-        List<Article> articleList = Arrays.asList(new Article(1L, "hello world"));
+    Member m1 = new Member("Eddy", articleList);
+    Member m2 = new Member();
+    BeanUtils.copyProperties(m1, m2);
 
-        Member m1 = new Member("Eddy", articleList);
-        Member m2 = new Member();
-        BeanUtils.copyProperties(m1, m2);
-
-        System.out.println("m1:" + m1); // m1:name:Eddy, articleList:[id:1, content:hello world]
-        System.out.println("m2:" + m2); // m2:name:Eddy, articleList:[id:1, content:hello world]
-
-    }
-
+    System.out.println("m1:" + m1); // m1:name:Eddy, articleList:[id:1, content:hello world]
+    System.out.println("m2:" + m2); // m2:name:Eddy, articleList:[id:1, content:hello world]
+  }
 }
 
 class Member {
+  private String name;
+  private List<Article> articleList;
 
-    private String name;
-    private List<Article> articleList;
+  public Member() {}
 
-    public Member() {
-    }
+  public Member(String name, List<Article> articleList) {
+    this.name = name;
+    this.articleList = articleList;
+  }
 
-    public Member(String name, List<Article> articleList) {
-        this.name = name;
-        this.articleList = articleList;
-    }
-
-    @Override
-    public String toString() {
-        return "name:" + name + ", " + "articleList:" + articleList;
-    }
-
-    // getters and setters
+  @Override
+  public String toString() {
+    return "name:" + name + ", " + "articleList:" + articleList;
+  }
+// getters and setters
 }
 
 class Article {
-    private Long id;
-    private String content;
+  private Long id;
+  private String content;
 
-    public Article(Long id, String content) {
-        this.id = id;
-        this.content = content;
-    }
+  public Article(Long id, String content) {
+    this.id = id;
+    this.content = content;
+  }
 
-    @Override
-    public String toString() {
-        return "id:" + id + ", content:" + content;
-    }
-
-    // getters and setters
+  @Override
+  public String toString() {
+    return "id:" + id + ", content:" + content;
+  }
+// getters and setters
 }
 ```
 
@@ -73,82 +65,71 @@ package com.abc.demo;
 
 import java.util.Arrays;
 import java.util.List;
-
 import org.springframework.beans.BeanUtils;
 
 public class Main {
 
-    public static void main(String[] args) {
+  public static void main(String[] args) {
+    List<Article> articleList = Arrays.asList(new Article(1L, "hello world"));
 
-        List<Article> articleList = Arrays.asList(new Article(1L, "hello world"));
+    Member m1 = new Member("Eddy", articleList);
 
-        Member m1 = new Member("Eddy", articleList);
+    User u1 = new User();
+    BeanUtils.copyProperties(m1, u1);
 
-        User u1 = new User();
-        BeanUtils.copyProperties(m1, u1);
-
-        System.out.println("m1:" + m1); // m1:name:Eddy, articleList:[id:1, content:hello world]
-        System.out.println("u1:" + u1); // u1:name:Eddy, articlelist:null
-
-    }
-
+    System.out.println("m1:" + m1); // m1:name:Eddy, articleList:[id:1, content:hello world]
+    System.out.println("u1:" + u1); // u1:name:Eddy, articlelist:null
+  }
 }
 
 class Member {
+  private String name;
+  private List<Article> articleList; // <-- small camel case
 
-    private String name;
-    private List<Article> articleList; // <-- small camel case
+  public Member() {}
 
-    public Member() {
-    }
+  public Member(String name, List<Article> articleList) {
+    this.name = name;
+    this.articleList = articleList;
+  }
 
-    public Member(String name, List<Article> articleList) {
-        this.name = name;
-        this.articleList = articleList;
-    }
-
-    @Override
-    public String toString() {
-        return "name:" + name + ", " + "articleList:" + articleList;
-    }
-
-    // getters and setters
+  @Override
+  public String toString() {
+    return "name:" + name + ", " + "articleList:" + articleList;
+  }
+// getters and setters
 }
 
 class Article {
-    private Long id;
-    private String content;
+  private Long id;
+  private String content;
 
-    public Article(Long id, String content) {
-        this.id = id;
-        this.content = content;
-    }
+  public Article(Long id, String content) {
+    this.id = id;
+    this.content = content;
+  }
 
-    @Override
-    public String toString() {
-        return "id:" + id + ", content:" + content;
-    }
-
-    // getters and setters
+  @Override
+  public String toString() {
+    return "id:" + id + ", content:" + content;
+  }
+// getters and setters
 }
 
 class User {
+  private String name;
+  private String articlelist; // <-- all lowercase
 
-    private String name;
-    private String articlelist; // <-- all lowercase
+  public String getName() {
+    return name;
+  }
 
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public String toString() {
-        return "name:" + name + ", " + "articleList:" + articlelist;
-    }
-
-    // getters and setters
+  @Override
+  public String toString() {
+    return "name:" + name + ", " + "articleList:" + articlelist;
+  }
+// getters and setters
 }
-
 ```
 
 此时 u1.articlelist 的内容却是 null，由此可知 BeanUtils.copyProperties()只会复制属性名称相同的属性值，若属性名称不同则被忽略。

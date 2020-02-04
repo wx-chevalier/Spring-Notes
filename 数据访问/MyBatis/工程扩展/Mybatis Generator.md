@@ -335,34 +335,56 @@ import org.dev.repo.dto.OrderDTO;
 import org.dev.repo.dto.OrderDTOExample;
 
 public interface OrderDTOMapper {
-    //通过条件计数
-    int countByExample(OrderDTOExample example);
-    //通过条件删除
-    int deleteByExample(OrderDTOExample example);
-    //通过主键删除
-    int deleteByPrimaryKey(Long id);
-    //插入DTO
-    int insert(OrderDTO record);
-    //dto非空字段插入
-    int insertSelective(OrderDTO record);
-    //条件查询,返回结果包括text等大字段
-    List<OrderDTO> selectByExampleWithBLOBs(OrderDTOExample example);
-    //条件查询,返回结果不包括text等大字段
-    List<OrderDTO> selectByExample(OrderDTOExample example);
-    //通过主键查询
-    OrderDTO selectByPrimaryKey(Long id);
-    //条件更新,只更新dto中非空字段的值
-    int updateByExampleSelective(@Param("record") OrderDTO record, @Param("example") OrderDTOExample example);
-    //条件更新全部字段,并包含text等大字段
-    int updateByExampleWithBLOBs(@Param("record") OrderDTO record, @Param("example") OrderDTOExample example);
-    //条件更新dto全部字段
-    int updateByExample(@Param("record") OrderDTO record, @Param("example") OrderDTOExample example);
-    //通过主键更新,dto非空字段
-    int updateByPrimaryKeySelective(OrderDTO record);
-    //通过主键更新,dto全部字段,包含text等大字段
-    int updateByPrimaryKeyWithBLOBs(OrderDTO record);
-    //通过主键更新,dto全部字段,不包含text等大字段
-    int updateByPrimaryKey(OrderDTO record);
+  //通过条件计数
+  int countByExample(OrderDTOExample example);
+
+  //通过条件删除
+  int deleteByExample(OrderDTOExample example);
+
+  //通过主键删除
+  int deleteByPrimaryKey(Long id);
+
+  //插入DTO
+  int insert(OrderDTO record);
+
+  //dto非空字段插入
+  int insertSelective(OrderDTO record);
+
+  //条件查询,返回结果包括text等大字段
+  List<OrderDTO> selectByExampleWithBLOBs(OrderDTOExample example);
+
+  //条件查询,返回结果不包括text等大字段
+  List<OrderDTO> selectByExample(OrderDTOExample example);
+
+  //通过主键查询
+  OrderDTO selectByPrimaryKey(Long id);
+
+  //条件更新,只更新dto中非空字段的值
+  int updateByExampleSelective(
+    @Param("record") OrderDTO record,
+    @Param("example") OrderDTOExample example
+  );
+
+  //条件更新全部字段,并包含text等大字段
+  int updateByExampleWithBLOBs(
+    @Param("record") OrderDTO record,
+    @Param("example") OrderDTOExample example
+  );
+
+  //条件更新dto全部字段
+  int updateByExample(
+    @Param("record") OrderDTO record,
+    @Param("example") OrderDTOExample example
+  );
+
+  //通过主键更新,dto非空字段
+  int updateByPrimaryKeySelective(OrderDTO record);
+
+  //通过主键更新,dto全部字段,包含text等大字段
+  int updateByPrimaryKeyWithBLOBs(OrderDTO record);
+
+  //通过主键更新,dto全部字段,不包含text等大字段
+  int updateByPrimaryKey(OrderDTO record);
 }
 ```
 

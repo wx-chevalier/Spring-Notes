@@ -44,16 +44,14 @@ spring.jpa.hibernate.ddl-auto=create
 @Entity
 @Table(name = "customers")
 public class Customer {
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private long id;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+  private String name;
 
-    private String name;
-
-    private String email;
-
-    // standard constructors / setters / getters / toString
+  private String email;
+// standard constructors / setters / getters / toString
 }
 
 @Repository
@@ -66,29 +64,29 @@ public interface CustomerRepository extends CrudRepository<Customer, Long> {}
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class CustomerRepositoryTest {
+  @Autowired
+  private CustomerRepository customerRepository;
 
-    @Autowired
-    private CustomerRepository customerRepository;
+  @Test
+  public void whenFindingCustomerById_thenCorrect() {
+    customerRepository.save(new Customer("John", "john@domain.com"));
+    assertThat(customerRepository.findById(1L)).isInstanceOf(Optional.class);
+  }
 
-    @Test
-    public void whenFindingCustomerById_thenCorrect() {
-        customerRepository.save(new Customer("John", "john@domain.com"));
-        assertThat(customerRepository.findById(1L)).isInstanceOf(Optional.class);
-    }
+  @Test
+  public void whenFindingAllCustomers_thenCorrect() {
+    customerRepository.save(new Customer("John", "john@domain.com"));
+    customerRepository.save(new Customer("Julie", "julie@domain.com"));
+    assertThat(customerRepository.findAll()).isInstanceOf(List.class);
+  }
 
-    @Test
-    public void whenFindingAllCustomers_thenCorrect() {
-        customerRepository.save(new Customer("John", "john@domain.com"));
-        customerRepository.save(new Customer("Julie", "julie@domain.com"));
-        assertThat(customerRepository.findAll()).isInstanceOf(List.class);
-    }
-
-    @Test
-    public void whenSavingCustomer_thenCorrect() {
-        customerRepository.save(new Customer("Bob", "bob@domain.com"));
-        Customer customer = customerRepository.findById(1L).orElseGet(()
-        -> new Customer("john", "john@domain.com"));
-        assertThat(customer.getName()).isEqualTo("Bob");
-    }
+  @Test
+  public void whenSavingCustomer_thenCorrect() {
+    customerRepository.save(new Customer("Bob", "bob@domain.com"));
+    Customer customer = customerRepository
+      .findById(1L)
+      .orElseGet(() -> new Customer("john", "john@domain.com"));
+    assertThat(customer.getName()).isEqualTo("Bob");
+  }
 }
 ```

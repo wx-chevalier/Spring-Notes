@@ -139,16 +139,20 @@ spring.redis.redisson.config=classpath:/redisson.yaml
 public class RedissonSpringDataConfig {
 
   @Bean
-  public RedissonConnectionFactory redissonConnectionFactory(RedissonClient redisson) {
-      return new RedissonConnectionFactory(redisson);
+  public RedissonConnectionFactory redissonConnectionFactory(
+    RedissonClient redisson
+  ) {
+    return new RedissonConnectionFactory(redisson);
   }
 
   @Bean(destroyMethod = "shutdown")
-  public RedissonClient redisson(@Value("classpath:/redisson.yaml") Resource configFile) throws IOException {
-      Config config = Config.fromYAML(configFile.getInputStream());
-      return Redisson.create(config);
+  public RedissonClient redisson(
+    @Value("classpath:/redisson.yaml") Resource configFile
+  )
+    throws IOException {
+    Config config = Config.fromYAML(configFile.getInputStream());
+    return Redisson.create(config);
   }
-
 }
 ```
 

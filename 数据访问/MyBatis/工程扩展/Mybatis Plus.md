@@ -68,13 +68,13 @@ SELECT * FROM user WHERE age >= 18
 @MapperScan("wx.mapper")
 public class MybatisPlusConfig {
 
-    /**
-     * 分页插件
-     */
-    @Bean
-    public PaginationInterceptor paginationInterceptor() {
-        return new PaginationInterceptor();
-    }
+  /**
+   * 分页插件
+   */
+  @Bean
+  public PaginationInterceptor paginationInterceptor() {
+    return new PaginationInterceptor();
+  }
 }
 ```
 
@@ -83,18 +83,17 @@ public class MybatisPlusConfig {
 ```java
 @Data
 public class User {
-    private Long id;
-    private String name;
-    private Integer age;
-    private String email;
+  private Long id;
+  private String name;
+  private Integer age;
+  private String email;
 }
 ```
 
 `@Data` 为 lombok 语法，自动注入 getter/setter 方法。接下来创建对象对于的 Mapper。
 
 ```java
-public interface UserMapper extends BaseMapper<User> {
-}
+public interface UserMapper extends BaseMapper<User> {}
 ```
 
 ## 测试
@@ -105,8 +104,8 @@ public interface UserMapper extends BaseMapper<User> {
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class MyBatisPlusTest {
-    @Autowired
-    private UserMapper userMapper;
+  @Autowired
+  private UserMapper userMapper;
 }
 ```
 

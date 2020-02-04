@@ -79,30 +79,31 @@ modelMapper.addMappings(mapper -> {
 
 ```java
 public class PostDto {
-    private static final SimpleDateFormat dateFormat
-      = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+  private static final SimpleDateFormat dateFormat = new SimpleDateFormat(
+    "yyyy-MM-dd HH:mm"
+  );
 
-    private Long id;
+  private Long id;
 
-    private String title;
+  private String title;
 
-    private String url;
+  private String url;
 
-    private String date;
+  private String date;
 
-    private UserDto user;
+  private UserDto user;
 
-    public Date getSubmissionDateConverted(String timezone) throws ParseException {
-        dateFormat.setTimeZone(TimeZone.getTimeZone(timezone));
-        return dateFormat.parse(this.date);
-    }
+  public Date getSubmissionDateConverted(String timezone)
+    throws ParseException {
+    dateFormat.setTimeZone(TimeZone.getTimeZone(timezone));
+    return dateFormat.parse(this.date);
+  }
 
-    public void setSubmissionDate(Date date, String timezone) {
-        dateFormat.setTimeZone(TimeZone.getTimeZone(timezone));
-        this.date = dateFormat.format(date);
-    }
-
-    // standard getters and setters
+  public void setSubmissionDate(Date date, String timezone) {
+    dateFormat.setTimeZone(TimeZone.getTimeZone(timezone));
+    this.date = dateFormat.format(date);
+  }
+// standard getters and setters
 }
 ```
 

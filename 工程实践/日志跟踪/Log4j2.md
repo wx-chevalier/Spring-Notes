@@ -58,20 +58,21 @@ private static final Logger log = LoggerFactory.getLogger(Test.class);
 如果是直接使用的 log4j2，则只要用 LogManager 的 getLogger 函数获取一个 logger，就可以使用 logger 记录日志，代码如下：
 
 ```java
-import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 public class HelloLog4j {
-    private static Logger logger = LogManager.getLogger("HelloLog4j");
-    public static void main(String[] args) {
-    MyApplication myApplication =  new MyApplication();
+  private static Logger logger = LogManager.getLogger("HelloLog4j");
+
+  public static void main(String[] args) {
+    MyApplication myApplication = new MyApplication();
 
     logger.entry();
     logger.info("Hello, World!");
     myApplication.doIt();
-            logger.error("Hello, World!");
-            logger.exit();
-    }
+    logger.error("Hello, World!");
+    logger.exit();
+  }
 }
 ```
 

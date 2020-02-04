@@ -320,9 +320,8 @@ public class User {
   private int id;
   private String username;
   private String hashedPassword;
-  // ... Getter & Setter
+// ... Getter & Setter
 }
-
 // <select id="selectUsers" resultType="com.someapp.model.User">
 // ...
 ```
@@ -342,9 +341,10 @@ id 和 result 元素都将一个列的值映射到一个简单数据类型（Str
 
 ```java
 public class User {
-   //...
-   public User(Integer id, String username, int age) {
-     //...
+
+  //...
+  public User(Integer id, String username, int age) {
+    //...
   }
 //...
 }

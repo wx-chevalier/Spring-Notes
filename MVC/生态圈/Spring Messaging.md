@@ -8,8 +8,8 @@ Spring Messaging 是 Spring Framework 中的一个模块，其作用就是统一
 package org.springframework.messaging;
 
 public interface Message<T> {
-    T getPayload();
-    MessageHeaders getHeaders();
+  T getPayload();
+  MessageHeaders getHeaders();
 }
 ```
 
@@ -20,13 +20,11 @@ public interface Message<T> {
 ```java
 @FunctionalInterface
 public interface MessageChannel {
-    long INDEFINITE_TIMEOUT = -1;
-    default boolean send(Message<?> message) {
-
-         return send(message, INDEFINITE_TIMEOUT);
-
-     }
-     boolean send(Message<?> message, long timeout);
+  long INDEFINITE_TIMEOUT = -1;
+  default boolean send(Message<?> message) {
+    return send(message, INDEFINITE_TIMEOUT);
+  }
+  boolean send(Message<?> message, long timeout);
 }
 ```
 
@@ -36,8 +34,8 @@ public interface MessageChannel {
 
 ```java
 public interface SubscribableChannel extends MessageChannel {
-    boolean subscribe(MessageHandler handler);
-    boolean unsubscribe(MessageHandler handler);
+  boolean subscribe(MessageHandler handler);
+  boolean unsubscribe(MessageHandler handler);
 }
 ```
 
@@ -46,7 +44,7 @@ public interface SubscribableChannel extends MessageChannel {
 ```java
 @FunctionalInterface
 public interface MessageHandler {
-    void handleMessage(Message<?> message) throws MessagingException;
+  void handleMessage(Message<?> message) throws MessagingException;
 }
 ```
 

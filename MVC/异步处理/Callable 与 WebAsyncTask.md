@@ -147,21 +147,22 @@ WebAsyncTask 的异步编程 API，相比于 @Async 注解，WebAsyncTask 提供
 ```java
 @Configuration
 public class RequestAsyncPoolConfig extends WebMvcConfigurerAdapter {
+  @Resource
+  private ThreadPoolTaskExecutor myThreadPoolTaskExecutor;
 
-	@Resource
-	private ThreadPoolTaskExecutor myThreadPoolTaskExecutor;
+  @Override
+  public void configureAsyncSupport(final AsyncSupportConfigurer configurer) {
+    //处理 callable超时
+    configurer.setDefaultTimeout(60 * 1000);
+    configurer.setTaskExecutor(myThreadPoolTaskExecutor);
+    configurer.registerCallableInterceptors(
+      timeoutCallableProcessingInterceptor()
+    );
+  }
 
-	@Override
-	public void configureAsyncSupport(final AsyncSupportConfigurer configurer) {
-		//处理 callable超时
-		configurer.setDefaultTimeout(60*1000);
-		configurer.setTaskExecutor(myThreadPoolTaskExecutor);
-		configurer.registerCallableInterceptors(timeoutCallableProcessingInterceptor());
-	}
-
-	@Bean
-	public TimeoutCallableProcessingInterceptor timeoutCallableProcessingInterceptor() {
-		return new TimeoutCallableProcessingInterceptor();
-	}
+  @Bean
+  public TimeoutCallableProcessingInterceptor timeoutCallableProcessingInterceptor() {
+    return new TimeoutCallableProcessingInterceptor();
+  }
 }
 ```

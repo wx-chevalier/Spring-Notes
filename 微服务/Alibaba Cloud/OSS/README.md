@@ -9,7 +9,7 @@
 首先从服务端获取 OSS 令牌，用的 browser 版本 sdk 的 ali-oss，根据 OSS 相关信息创建 ossClient，然后使用类似 `ossClient.put(path, file)` 的方法上传，并更新 Upload 里的 fileList。首先构建 ossClientCreator：
 
 ```js
-const OSS = require('ali-oss');
+const OSS = require("ali-oss");
 
 export interface IOssConfig {
   accessKeyId: string;
@@ -112,9 +112,9 @@ async componentDidMount() {
     ossService
       .put(
         this.client,
-        'upload/' +
-          e.file.uid.replace(/-/g, '') +
-          '.' +
+        "upload/" +
+          e.file.uid.replace(/-/g, "") +
+          "." +
           e.file.type.match(/image\/(\w*)/)[1],
         e.file
       )
@@ -124,11 +124,11 @@ async componentDidMount() {
         );
         if (index > -1) {
           this.state.fileList[index].url = url;
-          this.state.fileList[index].status = 'done';
+          this.state.fileList[index].status = "done";
         } else {
           this.state.fileList.push({
             ...e.file,
-            status: 'done',
+            status: "done",
             url: url
           });
         }

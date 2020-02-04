@@ -8,15 +8,14 @@
 
 ```java
 public class UserThreadTask implements Runnable {
-    @Autowired
-    private UserThreadService userThreadService;
+  @Autowired
+  private UserThreadService userThreadService;
 
-    @Override
-    public void run() {
-        AdeUser user = userThreadService.get("0");
-        System.out.println(user);
-    }
-
+  @Override
+  public void run() {
+    AdeUser user = userThreadService.get("0");
+    System.out.println(user);
+  }
 }
 ```
 
@@ -24,17 +23,17 @@ public class UserThreadTask implements Runnable {
 
 ```java
 public class UserThreadTask implements Runnable {
-    private UserThreadService userThreadService;
+  private UserThreadService userThreadService;
 
-    public UserThreadTask(UserThreadService userThreadService) {
-        this.userThreadService = userThreadService;
-    }
+  public UserThreadTask(UserThreadService userThreadService) {
+    this.userThreadService = userThreadService;
+  }
 
-    @Override
-    public void run() {
-        AdeUser user = userThreadService.get("0");
-        System.out.println(user);
-    }
+  @Override
+  public void run() {
+    AdeUser user = userThreadService.get("0");
+    System.out.println(user);
+  }
 }
 ```
 
@@ -53,28 +52,33 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
 public class ApplicationContextHolder implements ApplicationContextAware {
-    private static ApplicationContext context;
-    @Override
-    public void setApplicationContext(ApplicationContext context) throws BeansException {
-        ApplicationContextHolder.context = context;
+  private static ApplicationContext context;
+
+  @Override
+  public void setApplicationContext(ApplicationContext context)
+    throws BeansException {
+    ApplicationContextHolder.context = context;
+  }
+
+  // 根据 Bean name 获取实例
+  public static Object getBeanByName(String beanName) {
+    if (beanName == null || context == null) {
+      return null;
     }
-    // 根据 Bean name 获取实例
-    public static Object getBeanByName(String beanName) {
-        if (beanName == null || context == null) {
-            return null;
-        }
-        return context.getBean(beanName);
+    return context.getBean(beanName);
+  }
+
+  // 只适合一个 class 只被定义一次的 bean（也就是说，根据 class 不能匹配出多个该 class 的实例）
+  public static Object getBeanByType(Class clazz) {
+    if (clazz == null || context == null) {
+      return null;
     }
-    // 只适合一个 class 只被定义一次的 bean（也就是说，根据 class 不能匹配出多个该 class 的实例）
-    public static Object getBeanByType(Class clazz) {
-        if (clazz == null || context == null) {
-            return null;
-        }
-        return context.getBean(clazz);
-    }
-    public static String[] getBeanDefinitionNames() {
-        return context.getBeanDefinitionNames();
-    }
+    return context.getBean(clazz);
+  }
+
+  public static String[] getBeanDefinitionNames() {
+    return context.getBeanDefinitionNames();
+  }
 }
 ```
 

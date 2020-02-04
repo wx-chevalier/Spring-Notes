@@ -10,16 +10,16 @@
 @RequestMapping("/account")
 public class AccountController {
 
-    @CrossOrigin("http://domain2.com")
-    @GetMapping("/{id}")
-    public Account retrieve(@PathVariable Long id) {
-        // ...
-    }
+  @CrossOrigin("http://domain2.com")
+  @GetMapping("/{id}")
+  public Account retrieve(@PathVariable Long id) {
+    // ...
+  }
 
-    @DeleteMapping("/{id}")
-    public void remove(@PathVariable Long id) {
-        // ...
-    }
+  @DeleteMapping("/{id}")
+  public void remove(@PathVariable Long id) {
+    // ...
+  }
 }
 ```
 
@@ -30,17 +30,17 @@ public class AccountController {
 @EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
 
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-
-        registry.addMapping("/api/**")
-            .allowedOrigins("http://domain2.com")
-            .allowedMethods("PUT", "DELETE")
-            .allowedHeaders("header1", "header2", "header3")
-            .exposedHeaders("header1", "header2")
-            .allowCredentials(true).maxAge(3600);
-
-        // Add more mappings...
-    }
+  @Override
+  public void addCorsMappings(CorsRegistry registry) {
+    registry
+      .addMapping("/api/**")
+      .allowedOrigins("http://domain2.com")
+      .allowedMethods("PUT", "DELETE")
+      .allowedHeaders("header1", "header2", "header3")
+      .exposedHeaders("header1", "header2")
+      .allowCredentials(true)
+      .maxAge(3600);
+  // Add more mappings...
+  }
 }
 ```

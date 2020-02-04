@@ -9,15 +9,21 @@ public class Ticker {
   private final Long monitorMeasurementIntervalMS;
   private final List<TickListener> listeners = new ArrayList<>();
 
-  public Ticker(TaskScheduler taskScheduler, ApplicationProperty applicationProperty) {
+  public Ticker(
+    TaskScheduler taskScheduler,
+    ApplicationProperty applicationProperty
+  ) {
     this.taskScheduler = taskScheduler;
-    this.monitorMeasurementIntervalMS = applicationProperty.getMonitorMeasurementIntervalMS();
+    this.monitorMeasurementIntervalMS =
+      applicationProperty.getMonitorMeasurementIntervalMS();
   }
 
   @PostConstruct
   public void init() {
     this.taskScheduler.scheduleAtFixedRate(
-        this::execute, Duration.ofMillis(monitorMeasurementIntervalMS));
+        this::execute,
+        Duration.ofMillis(monitorMeasurementIntervalMS)
+      );
   }
 
   @PreDestroy

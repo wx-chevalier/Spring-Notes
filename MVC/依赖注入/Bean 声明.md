@@ -1017,7 +1017,7 @@ Class conditions allow us to specify that a configuration bean will be included 
 @Configuration
 @ConditionalOnClass(DataSource.class)
 public class MySQLAutoconfiguration {
-    //...
+  //...
 }
 ```
 

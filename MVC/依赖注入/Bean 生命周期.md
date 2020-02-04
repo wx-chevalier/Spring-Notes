@@ -8,10 +8,13 @@
 @Configuration
 public class SelfBeanFactoryLoader implements BeanFactoryPostProcessor {
 
-	@Override
-	public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-		beanFactory.registerSingleton("windowQpsControl", new WindowQpsControl( ));
-	}
+  @Override
+  public void postProcessBeanFactory(
+    ConfigurableListableBeanFactory beanFactory
+  )
+    throws BeansException {
+    beanFactory.registerSingleton("windowQpsControl", new WindowQpsControl());
+  }
 }
 ```
 
@@ -22,16 +25,23 @@ public class SelfBeanFactoryLoader implements BeanFactoryPostProcessor {
 ```java
 @Configuration
 public class SelfBeanLoader implements BeanDefinitionRegistryPostProcessor {
-	@Override
-	public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-	}
 
-	@Override
-	public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
-		AnnotatedGenericBeanDefinition cacheHelper = new AnnotatedGenericBeanDefinition(CacheHelper.class);
-		registry.registerBeanDefinition("cacheHelper", cacheHelper);
-	}
+  @Override
+  public void postProcessBeanFactory(
+    ConfigurableListableBeanFactory beanFactory
+  )
+    throws BeansException {}
 
+  @Override
+  public void postProcessBeanDefinitionRegistry(
+    BeanDefinitionRegistry registry
+  )
+    throws BeansException {
+    AnnotatedGenericBeanDefinition cacheHelper = new AnnotatedGenericBeanDefinition(
+      CacheHelper.class
+    );
+    registry.registerBeanDefinition("cacheHelper", cacheHelper);
+  }
 }
 ```
 
@@ -42,37 +52,37 @@ public class SelfBeanLoader implements BeanDefinitionRegistryPostProcessor {
 ```java
 @Configuration
 public class SelfContextLoader implements ApplicationContextAware {
+  private ApplicationContext context;
 
-	private ApplicationContext context;
+  @Override
+  public void setApplicationContext(ApplicationContext applicationContext)
+    throws BeansException {
+    this.context = applicationContext;
+    addBeans();
+  }
 
-	@Override
-	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-		this.context = applicationContext;
-		addBeans();
-	}
+  private void addBeans() {
+    if (this.context instanceof ConfigurableApplicationContext) {
+      ConfigurableListableBeanFactory factory =
+        ((ConfigurableApplicationContext) this.context).getBeanFactory();
+      Environment environment = context.getEnvironment();
+      System.out.println("......environment :" + environment);
+      factory.registerSingleton("client", new Client());
+      try {
+        if (factory instanceof BeanDefinitionRegistry) {
+          // 加载XML
+          ResourcePatternResolver rp = new PathMatchingResourcePatternResolver();
 
-	private void addBeans() {
-		if (this.context instanceof ConfigurableApplicationContext) {
-			ConfigurableListableBeanFactory factory = ((ConfigurableApplicationContext) this.context).getBeanFactory();
-			Environment environment = context.getEnvironment();
-			System.out.println("......environment :" + environment);
-			factory.registerSingleton("client", new Client());
-			try {
-				if (factory instanceof BeanDefinitionRegistry) {
-					// 加载XML
-					ResourcePatternResolver rp = new PathMatchingResourcePatternResolver();
-
-					Resource[] resources = rp.getResources("classpath*:inner.xml"); // 加载A
-					new XmlBeanDefinitionReader((DefaultListableBeanFactory) factory).loadBeanDefinitions(resources);
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-		} else {
-			throw new RuntimeException(" the environment is wrong !!!");
-		}
-	}
-
+          Resource[] resources = rp.getResources("classpath*:inner.xml"); // 加载A
+          new XmlBeanDefinitionReader((DefaultListableBeanFactory) factory)
+          .loadBeanDefinitions(resources);
+        }
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    } else {
+      throw new RuntimeException(" the environment is wrong !!!");
+    }
+  }
 }
 ```
