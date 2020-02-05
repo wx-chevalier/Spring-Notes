@@ -38,7 +38,7 @@
                 </configuration>
             </plugin>
 
-            <!-- 编码规约扫描命令： mvn pmd:pmd-->
+            <!-- 编码规约扫描命令：mvn pmd:pmd-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
