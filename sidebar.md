@@ -1,9 +1,3 @@
-  - [Dubbo](/Dubbo/README.md)
-    - [Kubernetes](/Dubbo/Kubernetes/README.md)
-      - [Kubernetes 与 Dubbo](/Dubbo/Kubernetes/Kubernetes%20与%20Dubbo.md)
-    - [架构机制](/Dubbo/架构机制/README.md)
-      
-    - [踩坑汇总](/Dubbo/踩坑汇总.md)
   - MVC
     - [Servlet](/MVC/Servlet/README.md)
       - [请求处理](/MVC/Servlet/请求处理.md)
