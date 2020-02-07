@@ -50,7 +50,7 @@ public class DeferredResult<T> {
 	private static final Object RESULT_NONE = new Object()
 
 
-	// 超时时间（ms） 可以不配置
+	// 超时时间（ms）可以不配置
 	@Nullable
 	private final Long timeout;
 	// 相当于超时的话的，传给回调函数的值
