@@ -1,6 +1,6 @@
 # 基于 Logback 的 Java 日志处理
 
-Logback 是一个日志框架，它与 Log4j 可以说是同出一源，都出自 Ceki Gülcü 之手。Slf4j 的全称是 Simple Logging Facade for Java ，即简单日志门面；实现了日志框架一些通用的接口，结合日志框架一起使用，最终日志的格式、记录级别、输出方式等都是通过绑定具体的日志框架实现的。
+Logback 是一个日志框架，它与 Log4j 可以说是同出一源，都出自 Ceki Gülcü 之手。Slf4j 的全称是 Simple Logging Facade for Java，即简单日志门面；实现了日志框架一些通用的接口，结合日志框架一起使用，最终日志的格式、记录级别、输出方式等都是通过绑定具体的日志框架实现的。
 
 Logback 主要由 logback-core, logback-classic, logback-access 三个模块组成，logback-core 是其它模块的基础设施，提供了一些关键的通用机制。logback-classic 的地位和作用等同于 Log4J，它也被认为是 Log4J 的一个改进版，并且它实现了简单日志门面 Slf4j；而 logback-access 主要作为一个与 Servlet 容器交互的模块，比如说 tomcat 或者 jetty，提供一些与 HTTP 访问相关的功能。
 
