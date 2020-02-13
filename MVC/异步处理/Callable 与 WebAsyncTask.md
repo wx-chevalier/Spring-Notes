@@ -79,7 +79,7 @@ public class WebAsyncTask<V> implements BeanFactoryAware {
 	private Long timeout;
 	// 执行任务的执行器。可以构造函数设置进来，手动指定。
 	private AsyncTaskExecutor executor;
-	// 若设置了，会根据此名称去IoC容器里找这个Bean （和上面二选一）
+	// 若设置了，会根据此名称去IoC容器里找这个Bean（和上面二选一）
 	// 若传了executorName,请务必调用set方法设置beanFactory
 	private String executorName;
 	private BeanFactory beanFactory;

@@ -208,7 +208,7 @@ public interface BlogMapper 
 <selectKey
   keyProperty="id"
   resultType="int"
-  <!-- 这可以被设置为 BEFORE 或 AFTER。如果设置为 BEFORE，那么它会首先生成主键，设置 keyProperty 然后执行插入语句。如果设置为 AFTER，那么先执行插入语句，然后是 selectKey 中的语句 - 这和 Oracle 数据库的行为相似，在插入语句内部可能有嵌入索引调用。-->
+  <!-- 这可以被设置为 BEFORE或AFTER。如果设置为 BEFORE，那么它会首先生成主键，设置 keyProperty 然后执行插入语句。如果设置为 AFTER，那么先执行插入语句，然后是 selectKey 中的语句 - 这和 Oracle 数据库的行为相似，在插入语句内部可能有嵌入索引调用。-->
   order="BEFORE"
   statementType="PREPARED">
 ```
