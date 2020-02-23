@@ -99,5 +99,4 @@ spotless {
   <Match>
   </Match>
 </FindBugsFilter>
-
 ```
