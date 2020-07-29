@@ -134,6 +134,8 @@
     - Spring JDBC
       - [JdbcTemplate](/数据访问/Spring%20JDBC/JdbcTemplate.md)
       - [事务](/数据访问/Spring%20JDBC/事务/README.md)
+        - [Transactonal](/数据访问/Spring%20JDBC/事务/Transactonal.md)
+        - [事务回滚](/数据访问/Spring%20JDBC/事务/事务回滚.md)
         - [事务处理](/数据访问/Spring%20JDBC/事务/事务处理.md)
       - [性能优化](/数据访问/Spring%20JDBC/性能优化.md)
       - [数据库迁移](/数据访问/Spring%20JDBC/数据库迁移.md)
