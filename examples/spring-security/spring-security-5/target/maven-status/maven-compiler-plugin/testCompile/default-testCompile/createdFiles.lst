@@ -1,0 +1,6 @@
+org/baeldung/SpringContextIntegrationTest.class
+wx/inmemory/InMemoryAuthControllerIntegrationTest.class
+wx/loginextrafields/LoginFieldsSimpleIntegrationTest.class
+wx/loginextrafields/LoginFieldsFullIntegrationTest.class
+wx/loginextrafields/AbstractExtraLoginFieldsIntegrationTest.class
+wx/oauth2extractors/ExtractorsUnitTest.class

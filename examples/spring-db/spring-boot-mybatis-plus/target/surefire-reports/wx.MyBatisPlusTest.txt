@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: wx.MyBatisPlusTest
+-------------------------------------------------------------------------------
+Tests run: 7, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 3.423 s <<< FAILURE! - in wx.MyBatisPlusTest
+testSelect(wx.MyBatisPlusTest)  Time elapsed: 0.008 s  <<< FAILURE!
+java.lang.AssertionError: expected:<5> but was:<4>
+	at wx.MyBatisPlusTest.testSelect(MyBatisPlusTest.java:69)
+
