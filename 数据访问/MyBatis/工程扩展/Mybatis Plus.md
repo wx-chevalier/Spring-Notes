@@ -18,10 +18,10 @@ MyBatis-Plus（简称 MP）是一个 MyBatis 的增强工具，在 MyBatis 的�
 - 支持 ActiveRecord 模式：支持 ActiveRecord 形式调用，实体类只需继承 Model 类即可进行强大的 CRUD 操作
 - 支持自定义全局通用操作：支持全局通用方法注入（Write once, use anywhere）
 - 支持关键词自动转义：支持数据库关键词（order、key……）自动转义，还可自定义关键词
-- 内置代码生成器：采用代码或者 Maven 插件可快速生成 Mapper 、Model 、Service 、Controller 层代码，支持模板引擎，有超多自定义配置等
+- 内置代码生成器：采用代码或者 Maven 插件可快速生成 Mapper、Model、Service、Controller 层代码，支持模板引擎，有超多自定义配置等
 - 内置分页插件：基于 MyBatis 物理分页，开发者无需关心具体操作，配置好插件之后，写分页等同于普通 List 查询
 - 内置性能分析插件：可输出 Sql 语句以及其执行时间，建议开发测试时启用该功能，能快速揪出慢查询
-- 内置全局拦截插件：提供全表 delete 、update 操作智能分析阻断，也可自定义拦截规则，预防误操作
+- 内置全局拦截插件：提供全表 delete、update 操作智能分析阻断，也可自定义拦截规则，预防误操作
 - 内置 Sql 注入剥离器：支持 Sql 注入剥离，有效预防 Sql 注入攻击
 
 # 快速开始
