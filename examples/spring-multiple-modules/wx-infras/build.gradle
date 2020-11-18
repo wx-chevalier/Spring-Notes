@@ -1,0 +1,33 @@
+description = 'WX Infrastructure'
+
+dependencies {
+
+    implementation "com.sun.mail:javax.mail:${javaxMailVersion}"
+    implementation "org.springframework.boot:spring-boot-starter-freemarker:${springBootVersion}"
+    api "com.aliyun.oss:aliyun-sdk-oss:${aliyunSdkOssVersion}"
+    api "com.aliyun:aliyun-java-sdk-core:${aliyunJavaSdkCoreVersion}"
+    api files('lib/taobao-sdk-java-auto_1479188381469-20191030.jar')
+
+    api project(':wx-domain')
+    api "org.springframework.boot:spring-boot-starter:${springBootVersion}"
+    api "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
+    api "com.baomidou:mybatis-plus-boot-starter:${mybatisPlusBootStarterVersion}"
+    api "mysql:mysql-connector-java:${mysqlConnectorJavaVersion}"
+
+    api "org.apache.poi:poi:${apachePoiVersion}"
+    api "org.apache.poi:poi-ooxml:${apachePoiVersion}"
+    api "org.apache.poi:poi-ooxml-schemas:${apachePoiVersion}"
+    api "org.apache.poi:poi-scratchpad:${apachePoiVersion}"
+
+    api "org.springframework.data:spring-data-commons:${springBootVersion}"
+
+    testImplementation "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
+    testImplementation "org.hsqldb:hsqldb:${hsqldbVersion}"
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}

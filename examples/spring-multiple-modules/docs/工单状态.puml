@@ -1,0 +1,29 @@
+@startuml
+title __**工单状态**__
+
+(*) -down-> WAIT_SUBMIT
+
+WAIT_SUBMIT -down-> WAIT_SCHEDULE
+
+WAIT_SCHEDULE -right-> SCHEDULED
+
+SCHEDULED -left-> WAIT_SCHEDULE
+SCHEDULED -down-> PRINTING
+
+PRINTING -right-> PRINT_PAUSED
+PRINTING -down-> WAIT_PICK_UP
+PRINTING -down-> ERROR
+
+PRINT_PAUSED -left-> PRINTING
+PRINT_PAUSED -down-> ERROR
+
+WAIT_PICK_UP -down-> PICKED_UP
+WAIT_PICK_UP -down-> ERROR
+
+PICKED_UP -down-> CLOSED
+PICKED_UP -down-> ERROR
+
+CLOSED -down-> (*)
+ERROR -down-> (*)
+@enduml
+

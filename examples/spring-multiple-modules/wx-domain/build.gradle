@@ -1,0 +1,16 @@
+dependencies {
+    api project(':wx-common-data')
+
+    api "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
+    implementation "com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}"
+
+    testImplementation "org.mockito:mockito-core:${mockitoVersion}"
+    testImplementation "org.slf4j:slf4j-simple:${slf4jSimpleVersion}"
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}

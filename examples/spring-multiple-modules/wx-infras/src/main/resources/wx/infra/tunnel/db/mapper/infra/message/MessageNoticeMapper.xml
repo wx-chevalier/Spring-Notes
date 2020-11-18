@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="wx.infra.tunnel.db.mapper.infra.message.MessageNoticeMapper">
+
+
+    <select id="groupStatistics" resultType="wx.infra.tunnel.db.shared.KvDO">
+        SELECT
+        is_read AS `key`,
+        COUNT(1) AS `value`
+        FROM infra_message_notice
+        <where>
+            send_channel = 'SITE'
+            <if test="kinds.size() > 0">
+                AND kind IN
+                <foreach collection="kinds" open="(" close=")" separator="," item="kind">
+                    #{kind}
+                </foreach>
+            </if>
+            <if test="appId">
+                AND app_id = #{appId}
+            </if>
+            AND user_id = #{userId}
+            AND deleted_at IS NULL
+        </where>
+        GROUP BY is_read
+    </select>
+</mapper>

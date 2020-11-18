@@ -1,0 +1,39 @@
+@startuml
+title __**本地文件异步压缩下载流程**__
+
+actor 用户 AS USER
+control 浏览器 AS  B #red
+entity 应用服务器 AS  S #green
+entity 消息队列 AS  MQ #0088EE
+
+hide footbox
+
+autonumber
+
+== 申请文件上传信息 ==
+USER ->B: 操作下载压缩文件
+B->S: 发送工单压缩文件下载请求
+S-> MQ: 发送压缩文件消息
+S->B: 通知用户正在处理，请等待
+B->USER: 展示给用户消息弹窗
+
+
+group 异步压缩文件
+
+MQ->S: 通知应用服务器处理消息
+S->S: 处理压缩文件并持久化
+S->MQ: 发送压缩完成消息
+
+end
+
+group 异步通知用户(可省略)
+MQ->S: 通知消息服务器发送通知
+S-->USER: 发送短信/站内信等通知
+end
+
+...用户接收到处理完成消息...
+USER-> B: 访问文件管理或者继续点击下载
+B->S: 到文件管理或者继续点击下载压缩文件
+
+
+@enduml

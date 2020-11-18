@@ -1,0 +1,48 @@
+@startuml
+title __**阿里云OSS上传流程图**__
+
+control 浏览器 AS  B #red
+entity 应用服务器 AS  S #green
+entity OSS服务器 AS OSS #yellow
+collections 消息队列 AS MQ #0088EE
+
+hide footbox
+
+autonumber
+
+== 申请文件上传信息 ==
+B->S: 发送申请临时授权
+activate S
+S->OSS: 申请授权信息
+activate OSS
+OSS--> S: 返回授权信息
+deactivate OSS
+S--> B: 返回授权信息
+deactivate S
+
+|||
+
+== Web 上传文件 ==
+B->OSS: 使用授权信息直连OSS上传文件
+activate OSS
+OSS-->B: 返回上传文件URL
+deactivate OSS
+
+
+
+|||
+== 交换URL ==
+B->S: 根据URL换取文件ID
+activate S
+S->S: 保存数据到DB
+S-> MQ: 发送MQ，异步获取文件信息
+S-->B: 返回文件ID，前端使用文件ID进行业务处理
+deactivate S
+
+
+group 异步任务
+MQ->OSS : 获取文件Object信息
+OSS->MQ: 返回文件信息
+MQ->S: 保存文件的属性信息
+end
+@enduml

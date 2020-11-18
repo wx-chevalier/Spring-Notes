@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="wx.infra.tunnel.db.mapper.account.UserMapper">
+
+    <select id="find" resultType="wx.infra.tunnel.db.account.UserDO">
+        SELECT *
+        FROM u_user user
+        <where>
+            <if test="tenantId">
+                AND user.tenant_id = #{tenantId}
+            </if>
+
+            <if test="authority">
+                AND user.authority = #{authority}
+            </if>
+
+            <if test="key">
+                AND (
+                user.username LIKE CONCAT('%',#{key},'%')
+                OR user.nick_name LIKE CONCAT('%',#{key},'%')
+                )
+            </if>
+            <if test="roleId">
+                AND EXISTS(
+                SELECT id FROM u_user_role_relation urr
+                <where>
+                        urr.user_id = user.id
+                    AND urr.role_id = #{roleId}
+                    AND deleted_at is NULL
+                </where>
+                )
+            </if>
+            AND deleted_at is NULL
+        </where>
+        ORDER BY id DESC
+    </select>
+</mapper>

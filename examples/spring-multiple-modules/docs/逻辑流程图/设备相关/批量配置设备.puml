@@ -1,0 +1,56 @@
+@startuml
+autonumber
+
+control 浏览器 AS  B #red
+entity 应用服务器 AS  S #green
+entity OSS
+database DB
+
+== 下载模板文件 ==
+
+B<->OSS: 下载模板文件
+
+
+
+== Excel文件编辑后上传 ==
+
+
+B->S: 获取文件临时上传授权
+B->OSS: 配置文件上传到OSS
+return 返回文件URL
+
+
+
+B->S: URL兑换文件ID
+return: 返回文件ID
+
+
+== 解析配置文件信息 ==
+B->S: 发送批量配置请求
+note right:  携带文件ID
+
+S<->OSS: 获取文件内容
+
+S->S: 校验Excel,解析数据
+
+alt Excel校验失败
+    S->B: 返回错误信息
+
+else Excel校验成功
+     S<->DB: 校验设备状态是否可配置
+     S->S: 更新设备的配置
+     S<-[#red]>B: 返回配置完成
+end
+
+
+== 开始批量配置 ==
+B->S: 携带文件ID
+S <-->OSS: 重新请求数据解析
+S <-> DB: 更新设备表
+S<-> DB: 更新配置变动记录表
+
+S->B: 返回配置更新完成
+
+
+
+@enduml

@@ -1,0 +1,15 @@
+rootProject.name = 'spring-boilerplate-production-multiple-modules'
+
+// WX Modules
+include ':wx-infras'
+include ':wx-application'
+include ':wx-api'
+include ':wx-domain'
+include ':wx-common-data'
+
+project(':wx-common-data').projectDir = "$rootDir/wx-common-data" as File
+project(':wx-infras').projectDir = "$rootDir/wx-infras" as File
+project(':wx-application').projectDir = "$rootDir/wx-application" as File
+project(':wx-api').projectDir = "$rootDir/wx-api" as File
+project(':wx-domain').projectDir = "$rootDir/wx-domain" as File
+

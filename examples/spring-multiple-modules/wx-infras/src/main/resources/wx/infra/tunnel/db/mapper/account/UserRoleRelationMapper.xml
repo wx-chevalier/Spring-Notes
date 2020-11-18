@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="wx.infra.tunnel.db.mapper.account.UserRoleRelationMapper">
+
+
+    <select id="getRoleByUserId"
+            resultType="wx.infra.tunnel.db.account.RoleDO">
+        SELECT role.*
+        FROM u_user_role_relation relation
+        INNER JOIN u_role role ON relation.role_id = role.id
+        <where>
+            AND relation.user_id = #{userId}
+            AND relation.deleted_at IS NULL
+        </where>
+
+    </select>
+</mapper>

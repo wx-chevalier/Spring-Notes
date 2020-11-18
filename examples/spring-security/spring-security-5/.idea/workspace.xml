@@ -1,0 +1,947 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="8505a78c-7ad0-4b69-aebd-90839d7d52c1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/caddy/gateway/Caddyfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/caddy/gateway/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/caddy/gateway/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/caddy/gateway/run.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/caddy/gateway/scripts/build.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/caddy/gateway/scripts/push.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/caddy/gateway/scripts/start.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/caddy/gateway/transparentProxy.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/caddy/gateway/vhosts/manual" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/caddy/gateway/vhosts/transparentProxies" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/caddy/static-curl/Caddyfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/caddy/static-curl/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/caddy/static-curl/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/caddy/static-curl/run.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/caddy/static-with-build/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/caddy/static-with-build/deploy.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/compose/python-redis/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/compose/python-redis/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/compose/python-redis/app.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/compose/python-redis/docker-compose.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/compose/python-redis/requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/elk/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/elk/filebeat/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/elk/filebeat/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/elk/filebeat/docker-compose.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/elk/filebeat/docker-entrypoint.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/elk/filebeat/filebeat.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/elk/ha/docker-compose.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/elk/local/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/elk/swarm-ha/docker-compose.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/elk/swarm-ha/logstash/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/elk/swarm-ha/logstash/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/elk/swarm-ha/logstash/docker-compose.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/elk/swarm-ha/logstash/logstash.conf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/go/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/go/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/go/run.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/java/jar/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/java/jar/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/java/jar/run.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/java/maven/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/java/maven/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/mysql/mysql-backup/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/mysql/mysql-backup/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/mysql/mysql-backup/init.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/node/pm2/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/node/pm2/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/node/pm2/run.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/presto/presto-launcher/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/presto/presto-launcher/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/presto/presto-launcher/presto-launcher.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/presto/presto-launcher/scripts/build.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/presto/presto-launcher/scripts/push.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/presto/presto-launcher/scripts/start.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/presto/presto-server/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/presto/presto-server/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/presto/presto-server/scripts/build.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/presto/presto-server/scripts/push.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/presto/presto-server/scripts/start.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/prometheus/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/prometheus/local/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/prometheus/swarm/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/python/basic/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/python/basic/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/python/basic/run.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/python/pipenv/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/python/pipenv/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/python/pipenv/Pipfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/python/pipenv/Pipfile.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/python/pipenv/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/python/pipenv/app.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/redis/local/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/sentry/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/sentry/demo.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/sentry/docker-compose.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/serverless/faas/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/docker/serverless/faas/docker-compose.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/k8s/offline-install.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/linux-scripts/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/linux-scripts/cleanup/clear-log.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../devops/linux-scripts/security/basic.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-minimal/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/addon/weixin/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/addon/weixin/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/addon/weixin/src/main/java/wx/wechat/api/API.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/addon/weixin/src/main/java/wx/wechat/api/MPAPI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/addon/weixin/src/main/java/wx/wechat/api/PayAPI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/addon/weixin/src/main/java/wx/wechat/common/Configure.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/addon/weixin/src/main/java/wx/wechat/common/signature/Signature.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/addon/weixin/src/main/java/wx/wechat/service/WXService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/addon/weixin/src/main/java/wx/wechat/service/mp/MPService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/addon/weixin/src/main/java/wx/wechat/service/mp/MessageService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/addon/weixin/src/main/java/wx/wechat/service/pay/PayedOrderService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/addon/weixin/src/main/java/wx/wechat/service/pay/UnifiedOrderService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/addon/weixin/src/main/java/wx/wechat/utils/XMLUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/addon/weixin/src/main/resources/dev-config/.babelrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/addon/weixin/src/main/resources/dev-config/.eslintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/addon/weixin/src/main/resources/dev-config/apps.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/addon/weixin/src/main/resources/dev-config/dev.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/addon/weixin/src/main/resources/dev-config/devServer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/addon/weixin/src/main/resources/dev-config/template.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/addon/weixin/src/main/resources/dev-config/webpack.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/addon/weixin/src/main/resources/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/addon/weixin/src/main/resources/service/model.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/addon/weixin/src/main/resources/service/wx.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/addon/weixin/src/main/resources/service/wxpay.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/addon/weixin/src/main/resources/vendors.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/addon/weixin/src/test/java/wx/wechat/api/PayAPITest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/addon/weixin/src/test/java/wx/wechat/common/signature/SignatureTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/addon/weixin/src/test/java/wx/wechat/service/WXServiceTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/addon/weixin/src/test/java/wx/wechat/service/mp/MessageServiceTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/addon/weixin/src/test/java/wx/wechat/service/pay/PayedOrderServiceTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/addon/weixin/src/test/java/wx/wechat/service/pay/UnifiedOrderServiceTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/addon/weixin/src/test/java/wx/wechat/utils/XMLUtilsTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/dependencies.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/module/model/model.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/module/sdk/sdk.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/module/shared/shared.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/module/shared/src/main/java/wx/csba/model/rds/DAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/module/shared/src/main/java/wx/csba/shared/entity/Greeting.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/module/shared/src/main/java/wx/csba/shared/logic/Logic.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/module/shared/src/main/java/wx/csba/shared/util/codec/MD5.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/module/shared/src/main/java/wx/csba/shared/util/codec/SHA1.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/module/shared/src/main/java/wx/csba/shared/util/string/RandomStringGenerator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/module/start/src/main/java/wx/spring/Application.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/module/start/src/main/java/wx/spring/controller/IndexController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/module/start/src/main/resources/config/application-dev.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/module/start/src/main/resources/config/application-prod.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/module/start/src/main/resources/config/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/module/start/src/test/java/wx/csba/api/controller/IndexControllerTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/module/start/src/test/java/wx/csba/api/controller/TestApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/gradle-multiple-modules/task.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/grpc/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/maven-minimal/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/maven-minimal/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/maven-minimal/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/maven-minimal/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/maven-minimal/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/maven-minimal/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/maven-minimal/src/main/java/wx/spring/Application.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/maven-minimal/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/maven-minimal/src/test/java/wx/spring/ApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/maven-multiple-modules/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/SpringMVC-Boilerplate.ipr" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/doc/springmvc/rarf/redux-inspired-springmvc-controller-coding-style-with-rxjava.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/libs/mybatis-generator-core-1.3.2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/libs/mysql-connector-java-5.1.38.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/src/main/java/wx/application/Application.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/src/main/java/wx/application/Application4Deploy.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/src/main/java/wx/application/SwaggerConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/src/main/java/wx/application/aop/AuthAspect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/src/main/java/wx/application/filter/SystemFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/src/main/java/wx/application/utils/JSONResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/src/main/java/wx/application/utils/StatusCode.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/src/main/java/wx/controller/AppErrorController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/src/main/java/wx/controller/BasicController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/src/main/java/wx/controller/DispatcherController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/src/main/java/wx/controller/template/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/src/main/java/wx/controller/user/LoginController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/src/main/java/wx/rarf/context/Action.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/src/main/java/wx/rarf/context/InjectableWorkerWithUniResourceBag.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/src/main/java/wx/rarf/context/StepSession.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/src/main/java/wx/rarf/context/SyncContext.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/src/main/java/wx/rarf/handler/AbstractHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/src/main/java/wx/rarf/reducer/Reducer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/src/main/java/wx/rarf/resource/Resource.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/src/main/java/wx/rarf/resource/bag/ResourceBag.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/src/main/java/wx/rarf/resource/bag/ResourceBagBuilder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/src/main/java/wx/rarf/resource/bag/ResultUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/src/main/java/wx/rarf/resource/bag/URFPUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/src/main/java/wx/rarf/resource/bag/UniResourceBag.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/src/main/java/wx/rarf/resource/entity/Entity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/src/main/java/wx/rarf/resource/entity/annotation/Attribute.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/src/main/java/wx/rarf/resource/model/ResourceModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/src/main/java/wx/rarf/utils/ErrorConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/src/main/java/wx/rarf/utils/HJSONObject.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/src/main/java/wx/rarf/utils/InjectableWorker.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/src/main/java/wx/rarf/utils/ResponseData.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/src/main/java/wx/rarf/utils/StatusCode.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/src/main/java/wx/rarf/utils/throwable/RARFThrowable.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/src/main/java/wx/rarf/utils/throwable/RequestException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/src/main/java/wx/service/user/UserService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/src/main/java/wx/webservice/hessian/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/src/main/java/wx/webservice/hessian/client/ApplicationTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/src/main/java/wx/webservice/hessian/client/TestConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/src/main/java/wx/webservice/hessian/server/Foo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/src/main/java/wx/webservice/hessian/server/HelloService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/src/main/java/wx/webservice/hessian/server/HelloServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/src/main/java/wx/webservice/hessian/server/HessianConfiguration.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/src/test/java/wx/AbstractTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/src/test/java/wx/basic/BasicControllerTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/src/test/java/wx/user/LoginControllerIntegrationTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/api/src/test/java/wx/user/LoginControllerTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/configuration/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/configuration/src/main/resources/config/application-deploy.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/configuration/src/main/resources/config/application-dev.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/configuration/src/main/resources/config/application-prod.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/configuration/src/main/resources/log4j2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/configuration/src/main/resources/mybatis-config.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/configuration/src/main/resources/mybatis/generatorConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/configuration/src/main/resources/spring/applicationContext.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/configuration/src/main/resources/spring/database.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/configuration/src/main/resources/spring/hessian.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/configuration/src/main/resources/spring/redis.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/configuration/src/main/resources/static/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/external/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/external/src/main/java/wx/externalservice/HelloWorld.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/gradle-app.setting" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/pom.xml.deprecated" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/rarf/src/main/java/rarf/handler/AbstractHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/rarf/src/main/java/rarf/reducer/AbstractReducer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/rarf/src/main/java/rarf/resource/Resource.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/rarf/src/main/java/rarf/resource/annotation/Attribute.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/rarf/src/main/java/rarf/resource/bag/ResourceBag.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/rarf/src/main/java/rarf/resource/bag/ResourceBagBuilder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/rarf/src/main/java/rarf/resource/entity/Entity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/rarf/src/main/java/rarf/resource/model/ResourceModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/rarf/src/main/java/rarf/utils/ErrorConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/rarf/src/main/java/rarf/utils/HJSONObject.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/rarf/src/main/java/rarf/utils/throwable/LFThrowable.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/rarf/src/main/java/resource/applicationContext.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/rarf/src/main/java/resource/log4j2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/rarf/src/main/java/resource/spring/aop.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/rarf/src/main/java/resource/spring/database.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/rarf/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/spring-boot/test/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node/egg/ts-production/Architecture" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node/egg/ts-production/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node/egg/ts-production/Untitled Diagram.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node/egg/ts-production/package.json" beforeDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="-1049451354">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.open.time.4" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="java" value="1" />
+          <entry key="md" value="1" />
+          <entry key="xml" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="JAVA" value="1" />
+          <entry key="Markdown" value="1" />
+          <entry key="XML" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="xml" value="7" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="XML" value="7" />
+        </counts>
+      </usages-collector>
+    </session>
+    <session id="166614578">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.open.time.0" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="java" value="2" />
+          <entry key="md" value="22" />
+          <entry key="xml" value="27" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="JAVA" value="2" />
+          <entry key="Markdown" value="22" />
+          <entry key="XML" value="27" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="class" value="2" />
+          <entry key="html" value="3" />
+          <entry key="java" value="15" />
+          <entry key="properties" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="CLASS" value="2" />
+          <entry key="HTML" value="3" />
+          <entry key="JAVA" value="15" />
+          <entry key="Properties" value="1" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/wx/loginextrafieldscustom/WebController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/wx/loginextrafieldscustom/UserRepository.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/wx/loginextrafieldscustom/User.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/wx/loginextrafieldscustom/ExtraLoginFieldsApplication.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/wx/loginextrafieldscustom/CustomUserRepository.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/wx/loginextrafieldscustom/CustomUserDetailsServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/wx/loginextrafieldscustom/CustomUserDetailsService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/wx/loginextrafieldscustom/CustomUserDetailsAuthenticationProvider.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/wx/loginextrafieldscustom/CustomAuthenticationToken.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/wx/loginextrafieldscustom/CustomAuthenticationFilter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>start-class</find>
+      <find>rest-assured.version</find>
+      <find>5</find>
+      <find>authenticationManagerBean</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="GradleLocalSettings">
+    <option name="projectSyncType">
+      <map>
+        <entry key="$USER_HOME$/Workspace/Repos/Work/cncs-cluster/daemon/server" value="PREVIEW" />
+      </map>
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/wx/loginextrafieldssimple/WebController.java" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsFlowSettings">
+    <service-enabled>false</service-enabled>
+    <exe-path />
+    <annotation-enable>false</annotation-enable>
+    <other-services-enabled>false</other-services-enabled>
+  </component>
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-1583" />
+    <option name="y" value="66" />
+    <option name="width" value="1440" />
+    <option name="height" value="877" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="spring-security-5" type="b2602c69:ProjectViewProjectNode" />
+              <item name="spring-security-5" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="spring-security-5" type="b2602c69:ProjectViewProjectNode" />
+              <item name="spring-security-5" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="spring-security-5" type="b2602c69:ProjectViewProjectNode" />
+              <item name="spring-security-5" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="spring-security-5" type="b2602c69:ProjectViewProjectNode" />
+              <item name="spring-security-5" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="spring-security-5" type="b2602c69:ProjectViewProjectNode" />
+              <item name="spring-security-5" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="wx" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="spring-security-5" type="b2602c69:ProjectViewProjectNode" />
+              <item name="spring-security-5" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="wx" type="462c0819:PsiDirectoryNode" />
+              <item name="loginextrafieldscustom" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="spring-security-5" type="b2602c69:ProjectViewProjectNode" />
+              <item name="spring-security-5" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="wx" type="462c0819:PsiDirectoryNode" />
+              <item name="loginextrafieldssimple" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="spring-security-5" type="b2602c69:ProjectViewProjectNode" />
+              <item name="spring-security-5" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="spring-security-5" type="b2602c69:ProjectViewProjectNode" />
+              <item name="spring-security-5" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="spring-security-5" type="b2602c69:ProjectViewProjectNode" />
+              <item name="spring-security-5" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="spring-security-5" type="b2602c69:ProjectViewProjectNode" />
+              <item name="spring-security-5" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="templatesextrafields" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="spring-security-5" type="b2602c69:ProjectViewProjectNode" />
+              <item name="spring-security-5" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="templatesextrafields" type="462c0819:PsiDirectoryNode" />
+              <item name="user" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542437803583" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ExtraLoginFieldsApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="spring-security-5" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="wx.loginextrafieldssimple.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="wx.loginextrafieldssimple.ExtraLoginFieldsApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
+      <predefined_log_file id="idea.log" enabled="true" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.ExtraLoginFieldsApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8505a78c-7ad0-4b69-aebd-90839d7d52c1" name="Default Changelist" comment="" />
+      <created>1542435569660</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1542435569660</updated>
+      <workItem from="1542435574646" duration="258000" />
+      <workItem from="1542436446069" duration="1349000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="1607000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-1583" y="66" width="1440" height="877" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Web" side_tool="true" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2532189" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Spring" />
+      <window_info anchor="bottom" id="Messages" weight="0.3299363" />
+      <window_info anchor="bottom" id="Java Enterprise" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3299363" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.3299363" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="10" show_stripe_button="false" />
+      <window_info anchor="right" id="Bean Validation" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Cargo" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="right" id="Database" order="8" />
+      <window_info anchor="right" id="Maven Projects" order="9" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/../../.." />
+    </ignored-roots>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor>
+            <caret column="19" selection-start-column="19" selection-end-column="19" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="825">
+          <caret line="55" column="52" selection-start-line="55" selection-start-column="52" selection-end-line="55" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application-extrafields.properties">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templatesextrafields/user/index.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templatesextrafields/index.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templatesextrafields/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="59" selection-start-line="15" selection-start-column="59" selection-end-line="15" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/wx/loginextrafieldssimple/ExtraLoginFieldsApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/wx/loginextrafieldssimple/SimpleUserRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="24" lean-forward="true" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/wx/loginextrafieldssimple/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="17" lean-forward="true" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/wx/loginextrafieldssimple/WebController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="42" column="3" lean-forward="true" selection-start-line="42" selection-start-column="3" selection-end-line="42" selection-end-column="3" />
+          <folding>
+            <element signature="e#513#514#0" expanded="true" />
+            <element signature="e#547#548#0" expanded="true" />
+            <element signature="e#1032#1033#0" expanded="true" />
+            <element signature="e#1056#1057#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-web/5.1.1.RELEASE/spring-security-web-5.1.1.RELEASE.jar!/org/springframework/security/web/authentication/UsernamePasswordAuthenticationFilter.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="18" column="60" selection-start-line="18" selection-start-column="60" selection-end-line="18" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-config/5.1.1.RELEASE/spring-security-config-5.1.1.RELEASE.jar!/org/springframework/security/config/annotation/web/configuration/WebSecurityConfigurerAdapter.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="166">
+          <caret line="121" column="33" selection-start-line="121" selection-start-column="33" selection-end-line="121" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/wx/loginextrafieldssimple/SecurityConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="39" column="63" selection-start-line="39" selection-start-column="63" selection-end-line="39" selection-end-column="63" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/wx/loginextrafieldssimple/SimpleAuthenticationFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="355">
+          <caret line="47" column="79" selection-start-line="47" selection-start-column="71" selection-end-line="47" selection-end-column="79" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/wx/loginextrafieldscustom/WebController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/wx/loginextrafieldscustom/UserRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/wx/loginextrafieldscustom/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/wx/loginextrafieldscustom/ExtraLoginFieldsApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/wx/loginextrafieldscustom/CustomUserRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/wx/loginextrafieldscustom/CustomUserDetailsServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/wx/loginextrafieldscustom/CustomUserDetailsService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/wx/loginextrafieldscustom/CustomUserDetailsAuthenticationProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/wx/loginextrafieldscustom/CustomAuthenticationToken.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/wx/loginextrafieldscustom/CustomAuthenticationFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

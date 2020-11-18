@@ -1,0 +1,23 @@
+description = 'WX Application'
+
+dependencies {
+    api project(':wx-infras')
+    api project(':wx-domain')
+
+    api "io.netty:netty-codec-mqtt:${nettyVersion}"
+    api "io.netty:netty-handler:${nettyVersion}"
+    api "org.springframework.boot:spring-boot-starter:${springBootVersion}"
+    api "org.springframework.boot:spring-boot-starter-jdbc:${springBootVersion}"
+    api "org.springframework.boot:spring-boot-starter-aop:${springBootVersion}"
+    api "org.springframework.boot:spring-boot-starter-amqp:${springBootVersion}"
+
+    testImplementation "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
+    testImplementation "org.hsqldb:hsqldb:${hsqldbVersion}"
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}

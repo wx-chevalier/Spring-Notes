@@ -1,0 +1,20 @@
+@startuml
+title __**用户更换绑定邮箱操作**__
+
+autonumber
+
+control 用户 AS  USER #red
+entity 应用服务器 AS  APP #green
+database 数据库  AS DB
+
+USER->APP: 用户登录系统
+USER->APP: 用户绑定新的邮箱地址
+APP --> APP: 发送绑定邮件
+APP o<->o DB: 持久化链接地址信息
+
+...  用户接收到邮件之后 ...
+USER->APP: 用户点击邮箱地址访问之
+APP o<->o DB: 检查验证码是否有效
+APP-->USER: 根据验证结果进行提示
+
+@enduml

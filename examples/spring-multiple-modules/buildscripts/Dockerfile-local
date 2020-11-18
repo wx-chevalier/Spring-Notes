@@ -1,0 +1,6 @@
+FROM openjdk:8-jre-slim
+ENV TZ Asia/Shanghai
+EXPOSE 8080
+COPY wx-api/build/libs/wx-api-*.jar /app/wx-api.jar
+WORKDIR /app
+CMD java -jar wx-api.jar

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Gradle Imported" enabled="true">
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.4/7103ab519b1cdbb0642ad4eaf1db209d905d0f96/lombok-1.18.4.jar" />
+        </processorPath>
+        <module name="spring-boilerplate-minimal_main" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="1.8">
+      <module name="spring-boilerplate-minimal_main" target="1.8" />
+      <module name="spring-boilerplate-minimal_test" target="1.8" />
+      <module name="spring-boot-minimal_main" target="1.8" />
+      <module name="spring-boot-minimal_test" target="1.8" />
+      <module name="spring-boot-production" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="spring-boot-production" options="-parameters" />
+    </option>
+  </component>
+</project>

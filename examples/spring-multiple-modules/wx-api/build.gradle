@@ -1,0 +1,33 @@
+plugins {
+    id 'org.springframework.boot' version "2.1.7.RELEASE"
+}
+
+description = 'WX API'
+
+apply plugin: 'io.spring.dependency-management'
+
+configurations {
+    developmentOnly
+    runtimeClasspath {
+        extendsFrom developmentOnly
+    }
+}
+
+dependencies {
+    implementation project(':wx-application')
+
+    implementation "org.springframework.boot:spring-boot-starter:${springBootVersion}"
+    implementation "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
+    implementation "org.springframework.boot:spring-boot-starter-security:${springBootVersion}"
+    implementation "com.auth0:java-jwt:${javaJwtVersion}"
+    implementation "com.github.xiaoymin:swagger-bootstrap-ui:${swaggerBootstrapUiVersion}"
+    implementation "io.springfox:springfox-swagger-ui:${springfoxSwaggerVersion}"
+    implementation "io.springfox:springfox-swagger2:${springfoxSwaggerVersion}"
+    implementation "javax.validation:validation-api:${validationApiVersion}"
+    implementation "io.swagger:swagger-annotations:${swaggerVersion}"
+    implementation "io.swagger:swagger-models:${swaggerVersion}"
+
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+    testImplementation "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+}

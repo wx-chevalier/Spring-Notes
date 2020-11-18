@@ -1,0 +1,4 @@
+include ':sbp-start'
+include ':sbp-mbg'
+
+rootProject.name = 'spring-boot-production'

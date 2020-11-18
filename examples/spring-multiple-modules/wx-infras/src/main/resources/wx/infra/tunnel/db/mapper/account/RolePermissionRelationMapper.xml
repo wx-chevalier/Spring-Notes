@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper
+        namespace="wx.infra.tunnel.db.mapper.account.RolePermissionRelationMapper">
+
+
+    <select id="getPermissionByRoleId"
+            resultType="wx.infra.tunnel.db.account.PermissionDO">
+        SELECT u_permission.*
+        FROM u_role_permission_relation
+        INNER JOIN u_permission ON u_permission.id = u_role_permission_relation.permission_id
+        <where>
+            <if test="status">
+                AND u_permission.status = #{status}
+            </if>
+            <if test="roleId">
+                AND u_role_permission_relation.role_id = #{roleId}
+            </if>
+            <if test="tenantId">
+                AND u_role_permission_relation.tenant_id = #{tenantId}
+            </if>
+        </where>
+    </select>
+
+    <select id="getPermissionByRoleIds"
+            resultType="wx.infra.tunnel.db.account.PermissionDO">
+        SELECT u_permission.*
+        FROM u_role_permission_relation
+        INNER JOIN u_permission ON u_permission.id = u_role_permission_relation.permission_id
+        <where>
+            u_permission.status = 'ENABLE' AND
+            u_role_permission_relation.role_id IN
+            <foreach close=")" collection="roleIds" item="id" open="(" separator=",">
+                #{id}
+            </foreach>
+        </where>
+    </select>
+
+    <!--  查询指定角色的权限列表信息-->
+    <select id="findByRoleIds" resultType="wx.infra.tunnel.db.account.AppPermissionDO">
+        SELECT
+        DISTINCT u_permission.*,
+        admin_permission_setting.wx_application_id AS applicationId,
+        admin_permission_setting.directory
+        FROM u_permission
+        INNER JOIN admin_permission_setting ON u_permission.name = admin_permission_setting.permission_name
+        INNER JOIN u_role_permission_relation ON u_role_permission_relation.permission_id = u_permission.id
+        <where>
+            <if test="tenantId">
+                AND admin_permission_setting.tenant_id = #{tenantId}
+            </if>
+
+            <if test="roleIds != null and roleIds.size > 0">
+                AND role_id IN
+                <foreach collection="roleIds" item="roleId" separator="," open="(" close=")">
+                    #{roleId}
+                </foreach>
+            </if>
+        </where>
+        ORDER BY admin_permission_setting.wx_application_id
+    </select>
+</mapper>

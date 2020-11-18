@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="wx.infra.tunnel.db.mapper.infra.kv.TsKvMapper">
+
+  <select id="selectMaxString"
+    resultType="java.lang.String">
+    SELECT MAX(str_v) FROM infra_ts_kv tskv
+    WHERE tskv.str_v IS NOT NULL
+    AND tskv.entity_id = ${entityId} AND tskv.entity_type = ${entityType}
+    AND tskv.key = ${entityKey} AND tskv.ts > ${startTs} AND tskv.ts &lt;= ${endTs}
+  </select>
+
+
+  <select id="getMaxTs" resultType="java.lang.Long">
+    SELECT MAX(ts)
+      FROM infra_ts_kv
+        WHERE `key` = #{key}
+        AND entity_type = #{entityType}
+        AND entity_id = #{entityId}
+  </select>
+</mapper>

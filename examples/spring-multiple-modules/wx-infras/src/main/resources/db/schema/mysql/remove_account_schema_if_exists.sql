@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS u_user;
+DROP TABLE IF EXISTS u_role;
+DROP TABLE IF EXISTS u_permission;
+DROP TABLE IF EXISTS u_user_role_relation;
+DROP TABLE IF EXISTS u_user_permission_relation;
+DROP TABLE IF EXISTS u_role_permission_relation;
+DROP TABLE IF EXISTS u_user_credentials;
+DROP TABLE IF EXISTS u_tenant;
+DROP TABLE IF EXISTS u_user_tenant_relation;
+DROP TABLE IF EXISTS u_company;

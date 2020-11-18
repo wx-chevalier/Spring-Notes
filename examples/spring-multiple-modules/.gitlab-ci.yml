@@ -1,0 +1,41 @@
+image: docker:git
+
+variables:
+  IMAGE: ${DOCKER_REGISTRY_SERVER}/wx/wx-api
+  # https://docs.gitlab.com/ee/ci/large_repositories/#git-clean-flags
+  GIT_CLEAN_FLAGS: -ffdx -e /wx-api/build/libs/
+  DOCKER_DRIVER: overlay2
+
+stages:
+  - test
+  - deploy
+
+build & test:
+  stage: test
+  image: gradle:5.6
+  script:
+    - gradle build -x test
+    - gradle test
+  artifacts:
+    name: spotbugs result
+    when: on_failure
+    paths:
+      - ./*/build/reports/spotbugs/test.html
+      - ./*/build/reports/tests/test/index.html
+    expire_in: 3 days
+
+deploy:
+  stage: deploy
+  image: docker:git
+  services:
+    - name: docker:dind
+  before_script:
+    - docker info
+    - docker login ${DOCKER_REGISTRY_SERVER} -u ${DOCKER_REGISTRY_USER} -p ${DOCKER_REGISTRY_PASSWORD}
+  script:
+    - docker build -t $IMAGE:latest -t $IMAGE:$CI_COMMIT_SHA -f buildscripts/Dockerfile-local .
+    - docker push $IMAGE:$CI_COMMIT_SHA
+    - docker push $IMAGE:latest
+  only:
+    - dev
+    - master
