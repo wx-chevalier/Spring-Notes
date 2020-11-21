@@ -6,7 +6,7 @@ MyBatis-Plus（简称 MP）是一个 MyBatis 的增强工具，在 MyBatis 的�
 
 ![MyBatis Plus 架构](https://s2.ax1x.com/2019/12/16/Q4Ayvj.md.png)
 
-# 背景特性
+## 背景特性
 
 - 无侵入：只做增强不做改变，引入它不会对现有工程产生影响，如丝般顺滑
 - 损耗小：启动即会自动注入基本 CURD，性能基本无损耗，直接面向对象操作
