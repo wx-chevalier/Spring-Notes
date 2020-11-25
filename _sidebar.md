@@ -108,7 +108,8 @@
     - [5.1 MyBatis](/数据访问/MyBatis/README.md)
       - 5.1.1 工程扩展
         - [5.1.1.1 Mybatis Generator](/数据访问/MyBatis/工程扩展/Mybatis%20Generator.md)
-        - [5.1.1.2 Mybatis Plus](/数据访问/MyBatis/工程扩展/Mybatis%20Plus.md)
+        - [5.1.1.2 Mybatis Plus](/数据访问/MyBatis/工程扩展/Mybatis%20Plus/README.md)
+          - [5.1.1.2.1 快速开始](/数据访问/MyBatis/工程扩展/Mybatis%20Plus/快速开始.md)
         - [5.1.1.3 自定义插件](/数据访问/MyBatis/工程扩展/自定义插件.md)
       - [5.1.2 架构机制](/数据访问/MyBatis/架构机制/README.md)
         - [5.1.2.1 Mapper 与动态代理](/数据访问/MyBatis/架构机制/Mapper%20与动态代理.md)
