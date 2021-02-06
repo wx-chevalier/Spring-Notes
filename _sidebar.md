@@ -3,9 +3,8 @@
       - [1.1.1 Spring Integration](/Spring%20Core/生态圈/Spring%20Integration.md)
       - [1.1.2 Spring Messaging](/Spring%20Core/生态圈/Spring%20Messaging.md)
     - 1.2 背景特性
-      - [1.2.1 架构与生态圈](/Spring%20Core/背景特性/架构与生态圈.md)
-      - [1.2.2 框架对比](/Spring%20Core/背景特性/框架对比.md)
-      - [1.2.3 背景特性](/Spring%20Core/背景特性/背景特性.md)
+      - [1.2.1 框架对比](/Spring%20Core/背景特性/框架对比.md)
+      - [1.2.2 背景特性](/Spring%20Core/背景特性/背景特性.md)
   - [2 Spring Boot](/Spring%20Boot/README.md)
     - [2.1 依赖注入](/Spring%20Boot/依赖注入/README.md)
       - [2.1.1 事务源码分析](/Spring%20Boot/依赖注入/事务源码分析.md)

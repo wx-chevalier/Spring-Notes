@@ -51,9 +51,6 @@ public interface MessageHandler {
 Spring Messaging 内部在消息模型的基础上衍生出了其它的一些功能，如：
 
 - 消息接收参数及返回值处理：消息接收参数处理器 HandlerMethodArgumentResolver 配合 @Header, @Payload 等注解使用；消息接收后的返回值处理器 HandlerMethodReturnValueHandler 配合 @SendTo 注解使用；
-
 - 消息体内容转换器 MessageConverter；
-
 - 统一抽象的消息发送模板 AbstractMessageSendingTemplate；
-
 - 消息通道拦截器 ChannelInterceptor；
