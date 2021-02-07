@@ -80,3 +80,20 @@ public class JavaConfig {
 ```
 
 @Configuration 表示该类是个配置类，@Bean 表示该方法返回一个 Bean。这样就把 TestService 作为 Bean 让 Spring 去管理了，在其他地方，我们如果需要使用该 Bean，和原来一样，直接使用@Resource 注解注入进来即可使用，非常方便。
+
+```java
+@Resource
+private TestService testService;
+```
+
+另外，部署配置方面，原来 Spring 有多个 xml 和 properties 配置，在 Spring Boot 中只需要个 application.yml 即可。
+
+## 简化部署
+
+在使用 Spring 时，项目部署时需要我们在服务器上部署 tomcat，然后把项目打成 war 包扔到 tomcat 里，在使用 Spring Boot 后，我们不需要在服务器上去部署 tomcat，因为 Spring Boot 内嵌了 tomcat，我们只需要将项目打成 jar 包，使用 java -jar xxx.jar 一键式启动项目。
+
+另外，也降低对运行环境的基本要求，环境变量中有 JDK 即可。
+
+## 简化监控
+
+我们可以引入 spring-boot-start-actuator 依赖，直接使用 REST 方式来获取进程的运行期性能参数，从而达到监控的目的，比较方便。但是 Spring Boot 只是个微框架，没有提供相应的服务发现与注册的配套功能，没有外围监控集成方案，没有外围安全管理方案，所以在微服务架构中，还需要 Spring Cloud 来配合一起使用。
