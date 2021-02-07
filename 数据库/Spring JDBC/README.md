@@ -2,49 +2,24 @@
 
 对于信息的存储，现在已经有非常非常多的产品可以选择，其中不乏许多非常优秀的开源免费产品，比如：MySQL，Redis 等。接下来，我们将继续学习在使用 Spring Boot 开发服务端程序的时候，如何实现对各流行数据存储产品的增删改查操作。
 
-# 基础使用
+# 基本概念
 
-## 数据源配置
+## JDBC
 
-在我们访问数据库的时候，需要先配置一个数据源，下面分别介绍一下几种不同的数据库配置方式。首先，为了连接数据库需要引入 jdbc 支持，在 pom.xml 中引入如下配置：
+Java 数据库连接（Java Database Connectivity，简称 JDBC）是 Java 语言中用来规范客户端程序如何来访问数据库的应用程序接口，提供了诸如查询和更新数据库中数据的方法。JDBC 也是 Sun Microsystems 的商标。我们通常说的 JDBC 是面向关系型数据库的。JDBC API 主要位于 JDK 中的 java.sql 包中（之后扩展的内容位于 javax.sql 包中），主要包括（斜体代表接口，需驱动程序提供者来具体实现）：
 
-```xml
-<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-jdbc</artifactId>
-</dependency>
-```
+- DriverManager：负责加载各种不同驱动程序（Driver），并根据不同的请求，向调用者返回相应的数据库连接（Connection）。
+- Driver：驱动程序，会将自身加载到 DriverManager 中去，并处理相应的请求并返回相应的数据库连接（Connection）。
+- Connection：数据库连接，负责与进行数据库间通讯，SQL 执行以及事务处理都是在某个特定 Connection 环境中进行的。可以产生用以执行 SQL 的 Statement。
+- Statement：用以执行 SQL 查询和更新（针对静态 SQL 语句和单次执行）。PreparedStatement：用以执行包含动态参数的 SQL 查询和更新（在服务器端编译，允许重复执行以提高效率）。
+- CallableStatement：用以调用数据库中的存储过程。
+- SQLException：代表在数据库连接的建立和关闭和 SQL 语句的执行过程中发生了例外情况（即错误）。
 
-嵌入式数据库通常用于开发和测试环境，不推荐用于生产环境。Spring Boot 提供自动配置的嵌入式数据库有 H2、HSQL、Derby，你不需要提供任何连接配置就能使用。比如，我们可以在 pom.xml 中引入如下配置使用 HSQL：
+## 数据源
 
-```xml
-<dependency>
-    <groupId>org.hsqldb</groupId>
-    <artifactId>hsqldb</artifactId>
-    <scope>runtime</scope>
-</dependency>
-```
+可以看到，在 java.sql 中并没有数据源（Data Source）的概念。这是由于在 java.sql 中包含的是 JDBC 内核 API，另外还有个 javax.sql 包，其中包含了 JDBC 标准的扩展 API。而关于数据源（Data Source）的定义，就在 javax.sql 这个扩展包中。实际上，在 JDBC 内核 API 的实现下，就已经可以实现对数据库的访问了，那么我们为什么还需要数据源呢？主要出于以下几个目的：
 
-以 MySQL 数据库为例，先引入 MySQL 连接的依赖包，在 pom.xml 中加入：
+- 封装关于数据库访问的各种参数，实现统一管理
+- 通过对数据库的连接池管理，节省开销并提高效率
 
-```xml
-<dependency>
-    <groupId>mysql</groupId>
-    <artifactId>mysql-connector-java</artifactId>
-</dependency>
-```
-
-在 src/main/resources/application.properties 中配置数据源信息：
-
-```yml
-spring.datasource.url=jdbc:mysql://localhost:3306/test
-spring.datasource.username=dbuser
-spring.datasource.password=dbpass
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-```
-
-注意：因为 Spring Boot 2.1.x 默认使用了 MySQL 8.0 的驱动，所以这里采用 com.mysql.cj.jdbc.Driver，而不是老的 com.mysql.jdbc.Driver。
-
-## 使用 JdbcTemplate 操作数据库
-
-Spring 的 JdbcTemplate 是自动配置的，你可以直接使用@Autowired 或构造函数（推荐）来注入到你自己的 bean 中来使用。
+在 Java 这个自由开放的生态中，已经有非常多优秀的开源数据源可以供大家选择，比如：DBCP、C3P0、Druid、HikariCP 等。
