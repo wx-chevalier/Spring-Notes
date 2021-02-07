@@ -1,30 +1,30 @@
 ﻿# Spring JDBC
 
-Spring JDBC 框架提供了多种访问数据库的方法，其中最著名的就是使用`JdbcTemplate`这个类。这也是主要的用于管理数据库连接与异常处理的类。要使用 Spring JDBC 的话，首先需要在 pom.xml 文件中配置依赖项：
+Spring JDBC 框架提供了多种访问数据库的方法，其中最著名的就是使用`JdbcTemplate`这个类。这也是主要的用于管理数据库连接与异常处理的类。要使用 Spring JDBC 的话，首先需要在 pom.xml 文件中配置依赖项：
 
 ```xml
 <dependency>
-    <groupId>org.springframework</groupId>
-    <artifactId>spring-context</artifactId>
-    <version>${spring.version}</version>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-context</artifactId>
+    <version>${spring.version}</version>
 </dependency>
 <dependency>
-    <groupId>mysql</groupId>
-    <artifactId>mysql-connector-java</artifactId>
-    <version>5.1.26</version>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>5.1.26</version>
 </dependency>
 ```
 
 # 数据查询
 
 ```java
-@SuppressWarnings({ "unchecked", "rawtypes" })
-public Employee findById(int id){
-    String sql = "SELECT * FROM EMPLOYEE WHERE ID = ?";
-    jdbcTemplate = new JdbcTemplate(dataSource);
-    Employee employee = (Employee) jdbcTemplate.queryForObject(
-    sql, new Object[] { id }, new BeanPropertyRowMapper(Employee.class));
-    return employee;
+@SuppressWarnings({ "unchecked", "rawtypes" })
+public Employee findById(int id){
+    String sql = "SELECT * FROM EMPLOYEE WHERE ID = ?";
+    jdbcTemplate = new JdbcTemplate(dataSource);
+    Employee employee = (Employee) jdbcTemplate.queryForObject(
+    sql, new Object[] { id }, new BeanPropertyRowMapper(Employee.class));
+    return employee;
 }
 ```
 
@@ -32,13 +32,13 @@ public Employee findById(int id){
 
 ```java
 @SuppressWarnings("rawtypes")
-public class EmployeeRowMapper implements RowMapper	{
-    public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
-    Employee employee = new Employee();
+public class EmployeeRowMapper implements RowMapper	{
+    public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
+    Employee employee = new Employee();
     employee.setId(rs.getInt("ID"));
     employee.setName(rs.getString("NAME"));
     employee.setAge(rs.getInt("AGE"));
-    return employee;
+    return employee;
     }
 }
 ```
@@ -46,51 +46,52 @@ public class EmployeeRowMapper implements RowMapper	{
 最后在调用的时候，把映射器作为最后一个参数传入：
 
 ```java
-Employee employee = (Employee) jdbcTemplate.queryForObject(sql, new Object[] { id }, new EmployeeRowMapper());
+Employee employee = (Employee) jdbcTemplate.queryForObject(sql, new Object[] { id }, new EmployeeRowMapper());
 ```
 
-## Insert
+## Insert
 
 ```java
-public void insert(Employee employee){
+public void insert(Employee employee) {
 
-String sql = "INSERT INTO EMPLOYEE " +
-"(ID, NAME, AGE) VALUES (?, ?, ?)";
+    String sql = "INSERT INTO EMPLOYEE " +
+        "(ID, NAME, AGE) VALUES (?, ?, ?)";
 
-jdbcTemplate = new JdbcTemplate(dataSource);
+    jdbcTemplate = new JdbcTemplate(dataSource);
 
-jdbcTemplate.update(sql, new Object[] { employee.getId(),
-employee.getName(), employee.getAge()
-});
+    jdbcTemplate.update(sql, new Object[] {
+        employee.getId(),
+            employee.getName(), employee.getAge()
+    });
 }
 ```
 
 有时候需要在插入之后，将插入行自动生成的主键返回，可以使用 jdbcTemplate 中提供的 KeyHolder 来实现：
 
 ```java
-public class ExampleDao {
+public class ExampleDao {
 
-  @Autowired
-  private JdbcTemplate jdbcTemplate;
+  @Autowired
+  private JdbcTemplate jdbcTemplate;
 
-  public long addNew(final String name) {
-    final PreparedStatementCreator psc = new PreparedStatementCreator() {
-      @Override
-      public PreparedStatement createPreparedStatement(final Connection connection) throws SQLException {
-        final PreparedStatement ps = connection.prepareStatement("INSERT INTO `names` (`name`) VALUES (?)",
-            Statement.RETURN_GENERATED_KEYS);
-        ps.setString(1, name);
-        return ps;
-      }
-    };
+  public long addNew(final String name) {
+    final PreparedStatementCreator psc = new PreparedStatementCreator() {
+      @Override
+      public PreparedStatement createPreparedStatement(final Connection connection) throws SQLException {
+        final PreparedStatement ps = connection.prepareStatement("INSERT INTO `names` (`name`) VALUES (?)",
+            Statement.RETURN_GENERATED_KEYS);
+        ps.setString(1, name);
+        return ps;
+      }
+    };
 
-    // The newly generated key will be saved in this object
-    final KeyHolder holder = new GeneratedKeyHolder();
+    // The newly generated key will be saved in this object
+    final KeyHolder holder = new GeneratedKeyHolder();
 
-    jdbcTemplate.update(psc, holder);
+    jdbcTemplate.update(psc, holder);
 
-    final long newNameId = holder.getKey().longValue();
-    return newNameId;
-  }
+    final long newNameId = holder.getKey().longValue();
+    return newNameId;
+  }
 }
 ```
