@@ -6,7 +6,218 @@ MyBatis 允许将 SQL 写在 XML 中，便于统一的管理与优化，并且�
 
 # 快速开始
 
-## 数据类型
+新建 Spring Boot 项目，在 pom.xml 中引入 MyBatis 的 Starter 以及 MySQL Connector 依赖，具体如下：
+
+```xml
+<dependency>
+    <groupId>org.mybatis.spring.boot</groupId>
+    <artifactId>mybatis-spring-boot-starter</artifactId>
+    <version>2.1.1</version>
+</dependency>
+
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+</dependency>
+```
+
+关于 mybatis-spring-boot-starter 的版本需要注意：
+
+- `2.1.x`版本适用于：MyBatis 3.5+、Java 8+、Spring Boot 2.1+
+- `2.0.x`版本适用于：MyBatis 3.5+、Java 8+、Spring Boot 2.0/2.1
+- `1.3.x`版本适用于：MyBatis 3.4+、Java 6+、Spring Boot 1.5
+
+同之前介绍的使用 jdbc 模块和 jpa 模块连接数据库一样，在 application.properties 中配置 mysql 的连接配置：
+
+```yml
+spring.datasource.url=jdbc:mysql://localhost:3306/test
+spring.datasource.username=root
+spring.datasource.password=
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+```
+
+Mysql 中创建一张用来测试的表，比如：User 表，其中包含 id(BIGINT)、age(INT)、name(VARCHAR)字段。
+
+```sql
+CREATE TABLE `User` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `age` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
+```
+
+创建 User 表的映射对象 User：
+
+```java
+@Data
+@NoArgsConstructor
+public class User {
+
+    private Long id;
+
+    private String name;
+    private Integer age;
+
+    public User(String name, Integer age) {
+        this.name = name;
+        this.age = age;
+    }
+}
+```
+
+创建 User 表的操作接口：UserMapper。在接口中定义两个数据操作，一个插入，一个查询，用于后续单元测试验证。
+
+```java
+@Mapper
+public interface UserMapper {
+
+    @Select("SELECT * FROM USER WHERE NAME = #{name}")
+    User findByName(@Param("name") String name);
+
+    @Insert("INSERT INTO USER(NAME, AGE) VALUES(#{name}, #{age})")
+    int insert(@Param("name") String name, @Param("age") Integer age);
+
+}
+```
+
+创建 Spring Boot 主类：
+
+```java
+@SpringBootApplication
+public class Application {
+
+	public static void main(String[] args) {
+		SpringApplication.run(Application.class, args);
+	}
+
+}
+```
+
+创建单元测试。具体测试逻辑如下：
+
+- 插入一条 name=AAA，age=20 的记录，然后根据 name=AAA 查询，并判断 age 是否为 20
+- 测试结束回滚数据，保证测试单元每次运行的数据环境独立
+
+```java
+@Slf4j
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class ApplicationTests {
+
+    @Autowired
+    private UserMapper userMapper;
+
+    @Test
+    @Rollback
+    public void test() throws Exception {
+        userMapper.insert("AAA", 20);
+        User u = userMapper.findByName("AAA");
+        Assert.assertEquals(20, u.getAge().intValue());
+    }
+
+}
+```
+
+## 注解配置说明
+
+下面通过几种不同传参方式来实现前文中实现的插入操作，来学习一下 MyBatis 中常用的一些注解。
+
+- 使用 @Param
+
+在之前的整合示例中我们已经使用了这种最简单的传参方式，如下：
+
+```java
+@Insert("INSERT INTO USER(NAME, AGE) VALUES(#{name}, #{age})")
+int insert(@Param("name") String name, @Param("age") Integer age);
+```
+
+这种方式很好理解，@Param 中定义的 name 对应了 SQL 中的#{name}，age 对应了 SQL 中的#{age}。
+
+- 使用 Map
+
+如下代码，通过 `Map<String, Object>` 对象来作为传递参数的容器：
+
+```java
+@Insert("INSERT INTO USER(NAME, AGE) VALUES(#{name,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER})")
+int insertByMap(Map<String, Object> map);
+```
+
+对于 Insert 语句中需要的参数，我们只需要在 map 中填入同名的内容即可，具体如下面代码所示：
+
+```java
+Map<String, Object> map = new HashMap<>();
+map.put("name", "CCC");
+map.put("age", 40);
+userMapper.insertByMap(map);
+```
+
+- 使用对象
+
+除了 Map 对象，我们也可直接使用普通的 Java 对象来作为查询条件的传参，比如我们可以直接使用 User 对象:
+
+```java
+@Insert("INSERT INTO USER(NAME, AGE) VALUES(#{name}, #{age})")
+int insertByUser(User user);
+```
+
+这样语句中的#{name}、#{age}就分别对应了 User 对象中的 name 和 age 属性。
+
+## 增删改查
+
+MyBatis 针对不同的数据库操作分别提供了不同的注解来进行配置，在之前的示例中演示了@Insert，下面针对 User 表做一组最基本的增删改查作为示例：
+
+```java
+public interface UserMapper {
+
+    @Select("SELECT * FROM user WHERE name = #{name}")
+    User findByName(@Param("name") String name);
+
+    @Insert("INSERT INTO user(name, age) VALUES(#{name}, #{age})")
+    int insert(@Param("name") String name, @Param("age") Integer age);
+
+    @Update("UPDATE user SET age=#{age} WHERE name=#{name}")
+    void update(User user);
+
+    @Delete("DELETE FROM user WHERE id =#{id}")
+    void delete(Long id);
+}
+```
+
+在完成了一套增删改查后，不妨我们试试下面的单元测试来验证上面操作的正确性：
+
+```java
+@Transactional
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class ApplicationTests {
+
+	@Autowired
+	private UserMapper userMapper;
+
+	@Test
+	@Rollback
+	public void testUserMapper() throws Exception {
+		// insert一条数据，并select出来验证
+		userMapper.insert("AAA", 20);
+		User u = userMapper.findByName("AAA");
+		Assert.assertEquals(20, u.getAge().intValue());
+		// update一条数据，并select出来验证
+		u.setAge(30);
+		userMapper.update(u);
+		u = userMapper.findByName("AAA");
+		Assert.assertEquals(30, u.getAge().intValue());
+		// 删除这条数据，并select验证
+		userMapper.delete(u.getId());
+		u = userMapper.findByName("AAA");
+		Assert.assertEquals(null, u);
+	}
+}
+```
+
+## 返回结果绑定
+
+### 数据类型
 
 无论是 MyBatis 在预处理语句（PreparedStatement）中设置一个参数时，还是从结果集中取出一个值时，都会用类型处理器将获取的值以合适的方式转换成 Java 类型。从 3.4.5 开始，MyBatis 默认支持 JSR-310(日期和时间 API)。
 

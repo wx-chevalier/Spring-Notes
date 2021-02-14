@@ -151,3 +151,108 @@ public class SampleTest {
 ```
 
 UserMapper 中的 selectList() 方法的参数为 MP 内置的条件封装器 Wrapper，所以不填写就是无任何条件。
+
+## Service 案例
+
+mp 框架同样提供了 service 层的封装支持，让我们能够简化 service 层的开发；service 接口继承 IService，service 实现类继承 ServiceImpl，IService 提供了所有通用常用的方法，包括批处理添加更新支持，以及 lambda 支持；DepartmentService 继承 IService：
+
+```java
+public interface DepartmentService extends IService<Department> {
+}
+
+@Service("departmentService")
+public class DepartmentServiceImpl extends ServiceImpl<DepartmentMapper,Department> implements DepartmentService {
+}
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class DepartmentServiceTest {
+
+    @Autowired
+    private DepartmentService departmentService;
+
+    /**
+     * 添加测试
+     */
+    @Test
+    public void save(){
+        Department department=new Department();
+        department.setName("牛逼");
+        department.setRemark("xxx");
+        boolean save = departmentService.save(department);
+        System.out.println(save);
+    }
+
+    /**
+     * 修改测试
+     */
+    @Test
+    public void updateById(){
+        Department department=new Department();
+        department.setId(9);
+        department.setName("牛逼2");
+        department.setRemark("xxx2");
+        boolean save = departmentService.updateById(department);
+        System.out.println(save);
+    }
+
+    /**
+     * 删除
+     */
+    @Test
+    public void removeById(){
+        boolean b = departmentService.removeById(9);
+        System.out.println(b);
+    }
+
+    /**
+     * 查询
+     */
+    @Test
+    public void list(){
+        List<Department> list = departmentService.list();
+        System.out.println(list);
+    }
+
+    /**
+     * 批量添加
+     */
+    @Test
+    public void saveBatch(){
+        Department department1=new Department();
+        department1.setName("牛逼1");
+        department1.setRemark("xxx1");
+
+        Department department2=new Department();
+        department2.setName("牛逼2");
+        department2.setRemark("xxx2");
+
+        Department department3=new Department();
+        department3.setName("牛逼3");
+        department3.setRemark("xxx3");
+
+        boolean b = departmentService.saveBatch(Arrays.asList(department1, department2, department3));
+        System.out.println(b);
+    }
+
+    /**
+     * 批量添加或者更新
+     */
+    @Test
+    public void saveOrUpdateBatch(){
+        Department department1=new Department();
+        department1.setName("牛逼4");
+        department1.setRemark("xxx4");
+
+        Department department2=new Department();
+        department2.setId(11);
+        department2.setName("牛逼2x");
+        department2.setRemark("xxx2x");
+
+        boolean b = departmentService.saveOrUpdateBatch(Arrays.asList(department1, department2));
+        System.out.println(b);
+    }
+
+
+}
+```

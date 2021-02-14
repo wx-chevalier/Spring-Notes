@@ -120,6 +120,192 @@ public class Chapter37ApplicationTests {
 }
 ```
 
+## dynamic-datasource-spring-boot-starter
+
+dynamic-datasource-spring-boot-starter 是一个基于 springboot 的快速集成多数据源的启动器。
+
+1. 支持 **数据源分组** ，适用于多种场景 纯粹多库 读写分离 一主多从 混合模式。
+2. 支持数据库敏感配置信息 **加密** ENC()。
+3. 支持每个数据库独立初始化表结构 schema 和数据库 database。
+4. 支持 **自定义注解** ，需继承 DS(3.2.0+)。
+5. 提供对 Druid，Mybatis-Plus，P6sy，Jndi 的快速集成。
+6. 简化 Druid 和 HikariCp 配置，提供 **全局参数配置** 。配置一次，全局通用。
+7. 提供 **自定义数据源来源** 方案。
+8. 提供项目启动后 **动态增加移除数据源** 方案。
+9. 提供 Mybatis 环境下的 **纯读写分离** 方案。
+10. 提供使用 **spel 动态参数** 解析数据源方案。内置 spel，session，header，支持自定义。
+11. 支持 **多层数据源嵌套切换** 。（ServiceA >>> ServiceB >>> ServiceC）。
+12. 提供对 shiro，sharding-jdbc,quartz 等第三方库集成的方案,注意事项和示例。
+13. 提供 **基于 seata 的分布式事务方案。** 附：不支持原生 spring 事务。
+14. 提供 **本地多数据源事务方案。** 附：不支持原生 spring 事务。
+
+### 基础配置
+
+```xml
+<dependency>
+  <groupId>com.baomidou</groupId>
+  <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
+  <version>${version}</version>
+</dependency>
+```
+
+从 2.0.0 开始所有数据源的 配置同级 ，不再有默认的主从限制，你可以给你的数据源起任何合适的名字。
+
+```yml
+spring:
+  datasource:
+    dynamic:
+      primary: master #设置默认的数据源或者数据源组,默认值即为master
+      strict: false #设置严格模式,默认false不启动. 启动后在未匹配到指定数据源时候会抛出异常,不启动则使用默认数据源.
+      datasource:
+        master:
+          url: jdbc:mysql://xx.xx.xx.xx:3306/dynamic
+          username: root
+          password: 123456
+          driver-class-name: com.mysql.jdbc.Driver # 3.2.0开始支持SPI可省略此配置
+        slave_1:
+          url: jdbc:mysql://xx.xx.xx.xx:3307/dynamic
+          username: root
+          password: 123456
+          driver-class-name: com.mysql.jdbc.Driver
+        slave_2:
+          url: ENC(xxxxx) # 内置加密,使用请查看详细文档
+          username: ENC(xxxxx)
+          password: ENC(xxxxx)
+          driver-class-name: com.mysql.jdbc.Driver
+          schema: db/schema.sql # 配置则生效,自动初始化表结构
+          data: db/data.sql # 配置则生效,自动初始化数据
+          continue-on-error: true # 默认true,初始化失败是否继续
+          separator: ";" # sql默认分号分隔符
+
+
+        #......省略
+        #以上会配置一个默认库master，一个组slave下有两个子库slave_1,slave_2
+```
+
+多主多从方案：(谨慎使用，你清楚的知道多个主库间需要自己做同步)
+
+```yml
+# 多主多从                      纯粹多库（记得设置primary）                   混合配置
+spring:                               spring:                               spring:
+  datasource:                           datasource:                           datasource:
+    dynamic:                              dynamic:                              dynamic:
+      datasource:                           datasource:                           datasource:
+        master_1:                             mysql:                                master:
+        master_2:                             oracle:                               slave_1:
+        slave_1:                              sqlserver:                            slave_2:
+        slave_2:                              postgresql:                           oracle_1:
+        slave_3:                              h2:                                   oracle_2:
+```
+
+@DS 可以注解在方法上或类上，同时存在就近原则方法上注解优先于类上注解：
+
+```java
+@Service
+@DS("slave")
+public class UserServiceImpl implements UserService {
+
+  @Autowired
+  private JdbcTemplate jdbcTemplate;
+
+  public List selectAll() {
+    return  jdbcTemplate.queryForList("select * from user");
+  }
+
+  @Override
+  @DS("slave_1")
+  public List selectByCondition() {
+    return  jdbcTemplate.queryForList("select * from user where age >10");
+  }
+}
+```
+
+### 集成 Druid
+
+SpringBoot2.x 默认使用 HikariCP，但在国内 Druid 的使用者非常庞大，此项目特地对其进行了适配，完成多数据源下使用 Druid 进行监控。主从可以使用不同的数据库连接池，如 master 使用 Druid 监控，从库使用 HikariCP。 如果不配置连接池 type 类型，默认是 Druid 优先于 HikariCP。首先引入 druid-spring-boot-starter 依赖：
+
+```xml
+<dependency>
+    <groupId>com.alibaba</groupId>
+    <artifactId>druid-spring-boot-starter</artifactId>
+    <version>1.1.10</version>
+</dependency>
+```
+
+然后排除原生 Druid 的快速配置类，DruidDataSourceAutoConfigure 会注入一个 DataSourceWrapper，其会在原生的 spring.datasource 下找 url,username,password 等。而我们动态数据源的配置路径是变化的。
+
+```java
+@SpringBootApplication(exclude = DruidDataSourceAutoConfigure.class)
+public class Application {
+
+  public static void main(String[] args) {
+    SpringApplication.run(Application.class, args);
+  }
+
+}
+
+```
+
+如果遇到 DruidDataSourceAutoConfigure 抛出 no suitable driver 表示注解排除没有生效尝试以下这种排除方法：
+
+```yml
+spring:
+  autoconfigure:
+    exclude: com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
+```
+
+其他属性依旧如原生 druid-spring-boot-starter 的配置：
+
+```yml
+spring:
+  datasource:
+    druid:
+      stat-view-servlet:
+        loginUsername: admin
+        loginPassword: 123456
+    dynamic:
+      druid: # 2.2.3开始提供全局druid参数，以下是默认值和druid原生保持一致
+        initial-size: 0
+        max-active: 8
+        min-idle: 2
+        max-wait: -1
+        min-evictable-idle-time-millis: 30000
+        max-evictable-idle-time-millis: 30000
+        time-between-eviction-runs-millis: 0
+        validation-query: select 1
+        validation-query-timeout: -1
+        test-on-borrow: false
+        test-on-return: false
+        test-while-idle: true
+        pool-prepared-statements: true
+        max-open-prepared-statements: 100
+        filters: stat,wall
+        share-prepared-statements: true
+      datasource:
+        master:
+          username: root
+          password: 123456
+          driver-class-name: com.mysql.jdbc.Driver
+          url: jdbc:mysql://47.100.20.186:3306/dynamic?characterEncoding=utf8&useSSL=false
+          druid: # 以下参数针对每个库可以重新设置druid参数
+            initial-size:
+            max-active:
+            min-idle:
+            max-wait:
+            min-evictable-idle-time-millis:
+            max-evictable-idle-time-millis:
+            time-between-eviction-runs-millis:
+            validation-query: select 1 FROM DUAL #比如oracle就需要重新设置这个
+            validation-query-timeout:
+            test-on-borrow:
+            test-on-return:
+            test-while-idle:
+            pool-prepared-statements:
+            max-open-prepared-statements:
+            filters:
+            share-prepared-statements:
+```
+
 # TBD
 
 - https://mp.weixin.qq.com/s/cgR-KVs1UKEM-xTEjIWKQg
