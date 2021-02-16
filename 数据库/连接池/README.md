@@ -222,7 +222,7 @@ public class UserServiceImpl implements UserService {
 
 ### 集成 Druid
 
-SpringBoot2.x 默认使用 HikariCP，但在国内 Druid 的使用者非常庞大，此项目特地对其进行了适配，完成多数据源下使用 Druid 进行监控。主从可以使用不同的数据库连接池，如 master 使用 Druid 监控，从库使用 HikariCP。 如果不配置连接池 type 类型，默认是 Druid 优先于 HikariCP。首先引入 druid-spring-boot-starter 依赖：
+SpringBoot2.x 默认使用 HikariCP，但在国内 Druid 的使用者非常庞大，此项目特地对其进行了适配，完成多数据源下使用 Druid 进行监控。主从可以使用不同的数据库连接池，如 master 使用 Druid 监控，从库使用 HikariCP。如果不配置连接池 type 类型，默认是 Druid 优先于 HikariCP。首先引入 druid-spring-boot-starter 依赖：
 
 ```xml
 <dependency>

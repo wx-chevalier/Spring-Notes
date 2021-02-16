@@ -12,7 +12,7 @@ Spring 的官方网站，可以看到下图：
 
 ![Spring: the source for modern java](https://s3.ax1x.com/2021/02/07/yt0agU.png)
 
-我们可以看到图中官方对 Spring Boot 的定位：Build Anything， Build 任何东西。Spring Boot 旨在尽可能快地启动和运行，并且只需最少的 Spring 前期配置。 同时我们也来看一下官方对后面两个的定位：
+我们可以看到图中官方对 Spring Boot 的定位：Build Anything， Build 任何东西。Spring Boot 旨在尽可能快地启动和运行，并且只需最少的 Spring 前期配置。同时我们也来看一下官方对后面两个的定位：
 
 - SpringCloud：Coordinate Anything，协调任何事情；
 - SpringCloud Data Flow：Connect everything，连接任何东西。
