@@ -106,4 +106,13 @@ List of constraint violations:[
 ], mergedContextConfiguration = [WebMergedContextConfiguration@3c19aaa5 testClass = Chapter310ApplicationTests, locations = '{}', classes = '{class com.didispace.chapter310.Chapter310Application}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@34cd072c, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@528931cf, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@2353b3e6, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@7ce6a65d], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -> true, 'org.springframework.test.context.web.ServletTestExecutionListener.populatedRequestContextHolder' -> true, 'org.springframework.test.context.web.ServletTestExecutionListener.resetRequestContextHolder' -> true]]
 ```
 
-再看数据库中，User 表就没有 AAA 到 EEE 的用户数据了，成功实现了自动回滚。这里主要通过单元测试演示了如何使用@Transactional 注解来声明一个函数需要被事务管理，通常我们单元测试为了保证每个测试之间的数据独立，会使用@Rollback 注解让每个单元测试都能在结束时回滚。而真正在开发业务逻辑时，我们通常在 service 层接口中使用 @Transactional 来对各个业务逻辑进行事务管理的配置，例如：
+再看数据库中，User 表就没有 AAA 到 EEE 的用户数据了，成功实现了自动回滚。这里主要通过单元测试演示了如何使用 @Transactional 注解来声明一个函数需要被事务管理，通常我们单元测试为了保证每个测试之间的数据独立，会使用@Rollback 注解让每个单元测试都能在结束时回滚。而真正在开发业务逻辑时，我们通常在 service 层接口中使用 @Transactional 来对各个业务逻辑进行事务管理的配置，例如：
+
+```java
+public interface UserService {
+
+    @Transactional
+    User update(String name, String password);
+
+}
+```

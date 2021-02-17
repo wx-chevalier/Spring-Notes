@@ -1,5 +1,9 @@
 # 应用缓存
 
+随着时间的积累，应用的使用用户不断增加，数据规模也越来越大，往往数据库查询操作会成为影响用户使用体验的瓶颈，此时使用缓存往往是解决这一问题非常好的手段之一。Spring 3 开始提供了强大的基于注解的缓存支持，可以通过注解配置方式低侵入的给原有 Spring 应用增加缓存功能，提高数据访问性能。
+
+在 Spring Boot 中对于缓存的支持，提供了一系列的自动化配置，使我们可以非常方便的使用缓存。
+
 # On-Heap Cache
 
 on-heap 存储主要指那些存储在 Java 堆中并且会被 GC 的对象，另一方面，off-heap 存储指代那些序列化的被类似 EHCache 这样的缓存框架管理的对象，它们存放在堆之外，因此不会被自动垃圾回收。off-heap 存储的对象同样是被存放在内存中，它的存取速度会比 on-heap 存储要低，但是仍然高于磁盘存储。
@@ -41,33 +45,5 @@ Sample usage scenarios:
 - very simple and fast persistance using memory mapped files
 
 Edit: For some scenarios one might choose more sophisticated Garbage Collection algorithms such as ConcurrentMarkAndSweep or G1 to support larger heaps (but this also has its limits beyond 16GB hepas). There is also a commercial java virtual machine with improved 'pasueless' GC (Azul) available.
-
-## Ehcache
-
-- [Ehcache 详细解读](http://www.blogjava.net/libin2722/articles/406569.html)
-- [ehcache-documentation](http://www.ehcache.org/documentation/3.0/getting-started.html)
-
-```java
-CacheManager cacheManager
-    = CacheManagerBuilder.newCacheManagerBuilder()
-    .withCache("preConfigured",
-        CacheConfigurationBuilder.newCacheConfigurationBuilder()
-            .buildConfig(Long.class, String.class))
-    .build(false);
-cacheManager.init();
-
-Cache<Long, String> preConfigured =
-    cacheManager.getCache("preConfigured", Long.class, String.class);
-
-Cache<Long, String> myCache = cacheManager.createCache("myCache",
-    CacheConfigurationBuilder.newCacheConfigurationBuilder().buildConfig(Long.class, String.class));
-
-myCache.put(1L, "da one!");
-String value = myCache.get(1L);
-
-cacheManager.removeCache("preConfigured");
-
-cacheManager.close();
-```
 
 ## [MapDB](http://www.mapdb.org/index.html)

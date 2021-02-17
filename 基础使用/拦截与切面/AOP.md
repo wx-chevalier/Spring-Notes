@@ -1,37 +1,65 @@
-# Introduction
+# AOP
 
-在切面编程的开发中，我们经常会碰到以下几个概念：Aspect、Pointcut、JoinPoint、Advice 以及 Advisor。首先，Advisor 可以认为是 Advice 与 Pointcut 的集合，用于在 Spring 1.2 之前的一些内置的概念，在 Spring 1.2 之后主要使用@AspectJ 以及 Annotation 进行切面配置，大概示意如下：
+AOP：Aspect Oriented Programming 的缩写，意为：面向切面编程。面向切面编程的目标就是分离关注点。使用 AOP，首先需要引入 AOP 的依赖。
 
-![](http://i.stack.imgur.com/zLOlc.gif)
+```xml
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-aop</artifactId>
+</dependency>
+```
 
-一个标准的 Advisor 大概如下所示：
+# 快速开始
+
+Spring Boot 中使用 AOP 非常简单，假如我们要在项目中打印一些 log，在引入了上面的依赖之后，我们新建一个类 LogAspectHandler，用来定义切面和处理方法。只要在类上加个@Aspect 注解即可。@Aspect 注解用来描述一个切面类，定义切面类的时候需要打上这个注解。@Component 注解让该类交给 Spring 来管理。
 
 ```java
-public interface PointcutAdvisor {
- Pointcut getPointcut();
- Advice getAdvice();
-}
-
-public interface PointcutAdvisor {
-
-
- Pointcut getPointcut();
-
-
- Advice getAdvice();
-
+@Aspect
+@Component
+public class LogAspectHandler {
 
 }
 ```
 
-在最新的 Aspect 与 Pointcut 的结合概念为：
+这里主要介绍几个常用的注解及使用：
 
-![](http://i.stack.imgur.com/k32oZ.jpg)
+- @Pointcut：定义一个切面，即上面所描述的关注的某件事入口。
+- @Before：在做某件事之前做的事。
+- @After：在做某件事之后做的事。
+- @AfterReturning：在做某件事之后，对其返回值做增强处理。
+- @AfterThrowing：在做某件事抛出异常时，处理。
 
-**Joinpoint:** A joinpoint is a _candidate_ point in the **Program Execution** of the application where an aspect can be plugged in. This point could be a method being called, an exception being thrown, or even a field being modified. These are the points where your aspect’s code can be inserted into the normal flow of your application to add new behavior.
+## @Pointcut 注解
 
-**Advice:** This is an object which includes API invocations to the system wide concerns representing the action to perform at a joinpoint specified by a point.
+@Pointcut 注解：用来定义一个切面（切入点），即上文中所关注的某件事情的入口。切入点决定了连接点关注的内容，使得我们可以控制通知什么时候执行。
 
-**Pointcut:** A pointcut defines at what joinpoints, the associated Advice should be applied. Advice can be applied at any joinpoint supported by the AOP framework. Of course, you don’t want to apply all of your aspects at all of the possible joinpoints. Pointcuts allow you to specify where you want your advice to be applied. Often you specify these pointcuts using explicit class and method names or through regular expressions that define matching class and method name patterns. Some AOP frameworks allow you to create dynamic pointcuts that determine whether to apply advice based on runtime decisions, such as the value of method parameters.
+```java
+@Aspect
+@Component
+public class LogAspectHandler {
 
-The following image can help you understand Advice, PointCut, Joinpoints. ![enter image description here](http://i.stack.imgur.com/J7Hrh.png)
+    /**
+     * 定义一个切面，拦截com.test.controller包和子包下的所有方法
+     */
+    @Pointcut("execution(* com.test.controller..*.*(..))")
+    public void pointCut() {}
+}
+```
+
+@Pointcut 注解指定一个切面，定义需要拦截的东西，这里介绍两个常用的表达式：一个是使用 execution()，另一个是使用 annotation()。以 `execution(*com.test.controller.*.*(..)))` 表达式为例，语法如下：
+
+- `execution()` 为表达式主体，第一个 `*` 号的位置：表示返回值类型，`*` 表示所有类型。
+- 包名：表示需要拦截的包名，后面的两个句点表示当前包和当前包的所有子包，`com.test.controller` 包、子包下所有类的方法
+- 第二个 `*` 号的位置：表示类名，`*` 表示所有类
+- `*(..)` ：这个星号表示方法名，`*` 表示所有的方法，后面括弧里面表示方法的参数，两个句点表示任何参数
+
+annotation() 方式是针对某个注解来定义切面，比如我们对具有 @GetMapping 注解的方法做切面，可以如下定义切面：
+
+```java
+@Pointcut("@annotation(org.springframework.web.bind.annotation.GetMapping)")
+public void annotationCut() {}
+```
+
+然后使用该切面的话，就会切入注解是 @GetMapping 的方法。因为在实际项目中，可能对于不同的注解有不同的逻辑处理，比如 @GetMapping、@PostMapping、@DeleteMapping 等。所以这种按照注解的切入方式在实际项目中也很常用。
+
+## @Before 注解
