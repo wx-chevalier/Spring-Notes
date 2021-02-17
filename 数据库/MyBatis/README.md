@@ -217,6 +217,31 @@ public class ApplicationTests {
 
 ## 返回结果绑定
 
+对于增、删、改操作相对变化较小。而对于“查”操作，我们往往需要进行多表关联，汇总计算等操作，那么对于查询的结果往往就不再是简单的实体对象了，往往需要返回一个与数据库实体不同的包装类，那么对于这类情况，就可以通过 @Results 和 @Result 注解来进行绑定，具体如下：
+
+```java
+@Results({
+    @Result(property = "name", column = "name"),
+    @Result(property = "age", column = "age")
+})
+@Select("SELECT name, age FROM user")
+List<User> findAll();
+```
+
+在上面代码中，@Result 中的 property 属性对应 User 对象中的成员名，column 对应 SELECT 出的字段名。在该配置中故意没有查出 id 属性，只对 User 对应中的 name 和 age 对象做了映射配置，这样可以通过下面的单元测试来验证查出的 id 为 null，而其他属性不为 null：
+
+```java
+@Test
+@Rollback
+public void testUserMapper() throws Exception {
+	List<User> userList = userMapper.findAll();
+	for(User user : userList) {
+		Assert.assertEquals(null, user.getId());
+		Assert.assertNotEquals(null, user.getName());
+	}
+}
+```
+
 ### 数据类型
 
 无论是 MyBatis 在预处理语句（PreparedStatement）中设置一个参数时，还是从结果集中取出一个值时，都会用类型处理器将获取的值以合适的方式转换成 Java 类型。从 3.4.5 开始，MyBatis 默认支持 JSR-310(日期和时间 API)。
@@ -250,6 +275,81 @@ public class ApplicationTests {
   STRUCT              Struct
   REF                 Ref
   DATALINK            java.net.URL
+```
+
+## 使用 XML 配置
+
+第一步：在应用主类中增加 mapper 的扫描包配置：
+
+```java
+@MapperScan("com.didispace.chapter36.mapper")
+@SpringBootApplication
+public class Chapter36Application {
+
+	public static void main(String[] args) {
+		SpringApplication.run(Chapter36Application.class, args);
+	}
+
+}
+```
+
+第二步：在第一步中指定的 Mapper 包下创建 User 表的 Mapper 定义：
+
+```java
+public interface UserMapper {
+
+    User findByName(@Param("name") String name);
+
+    int insert(@Param("name") String name, @Param("age") Integer age);
+
+}
+```
+
+第三步：在配置文件中通过 mybatis.mapper-locations 参数指定 xml 配置的位置：
+
+```java
+mybatis.mapper-locations=classpath:mapper/*.xml
+```
+
+第四步：在第三步中指定的 xml 配置目录下创建 User 表的 mapper 配置：
+
+```xml
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.didispace.chapter36.mapper.UserMapper">
+    <select id="findByName" resultType="com.didispace.chapter36.entity.User">
+        SELECT * FROM USER WHERE NAME = #{name}
+    </select>
+
+    <insert id="insert">
+        INSERT INTO USER(NAME, AGE) VALUES(#{name}, #{age})
+    </insert>
+</mapper>
+```
+
+到这里从注解方式的 MyBatis 使用方式就改为了 XML 的配置方式了，为了验证是否运行正常，可以通过下面的单元测试来尝试对数据库的写和读操作：
+
+```java
+@Slf4j
+@RunWith(SpringRunner.class)
+@SpringBootTest
+@Transactional
+public class Chapter36ApplicationTests {
+
+    @Autowired
+    private UserMapper userMapper;
+
+    @Test
+    @Rollback
+    public void test() throws Exception {
+        userMapper.insert("AAA", 20);
+        User u = userMapper.findByName("AAA");
+        Assert.assertEquals(20, u.getAge().intValue());
+    }
+
+}
 ```
 
 # TBD
