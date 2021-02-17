@@ -179,8 +179,13 @@
     - [5.10 监控与运维](/工程实践/监控与运维/README.md)
       - [5.10.1 Prometheus](/工程实践/监控与运维/Prometheus.md)
   - [6 Spring Security](/Spring%20Security/README.md)
-    - [6.1 CORS](/Spring%20Security/CORS.md)
-    - [6.2 CSRF](/Spring%20Security/CSRF.md)
-    - [6.3 JWT](/Spring%20Security/JWT.md)
-    - [6.4 表单登录](/Spring%20Security/表单登录.md)
-    - [6.5 验证码](/Spring%20Security/验证码.md)
+    - [6.1 RBAC](/Spring%20Security/RBAC/README.md)
+      
+    - 6.2 权限验证
+      - [6.2.1 HTTP Basic Auth](/Spring%20Security/权限验证/HTTP%20Basic%20Auth.md)
+      - [6.2.2 JWT](/Spring%20Security/权限验证/JWT.md)
+      - [6.2.3 表单登录](/Spring%20Security/权限验证/表单登录.md)
+      - [6.2.4 验证码](/Spring%20Security/权限验证/验证码.md)
+    - 6.3 策略配置
+      - [6.3.1 CORS](/Spring%20Security/策略配置/CORS.md)
+      - [6.3.2 CSRF](/Spring%20Security/策略配置/CSRF.md)
