@@ -63,3 +63,158 @@ public void annotationCut() {}
 然后使用该切面的话，就会切入注解是 @GetMapping 的方法。因为在实际项目中，可能对于不同的注解有不同的逻辑处理，比如 @GetMapping、@PostMapping、@DeleteMapping 等。所以这种按照注解的切入方式在实际项目中也很常用。
 
 ## @Before 注解
+
+@Before 注解指定的方法在切面切入目标方法之前执行，可以做一些 log 处理，也可以做一些信息的统计，比如获取用户的请求 url 以及用户的 ip 地址等等，这个在做个人站点的时候都能用得到，都是常用的方法。例如：
+
+```java
+
+@Aspect
+@Component
+public class LogAspectHandler {
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    /**
+     * 在上面定义的切面方法之前执行该方法
+     * @param joinPoint jointPoint
+     */
+    @Before("pointCut()")
+    public void doBefore(JoinPoint joinPoint) {
+        logger.info("====doBefore方法进入了====");
+
+        // 获取签名
+        Signature signature = joinPoint.getSignature();
+        // 获取切入的包名
+        String declaringTypeName = signature.getDeclaringTypeName();
+        // 获取即将执行的方法名
+        String funcName = signature.getName();
+        logger.info("即将执行方法为: {}，属于{}包", funcName, declaringTypeName);
+
+        // 也可以用来记录一些信息，比如获取请求的url和ip
+        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        HttpServletRequest request = attributes.getRequest();
+        // 获取请求url
+        String url = request.getRequestURL().toString();
+        // 获取请求ip
+        String ip = request.getRemoteAddr();
+        logger.info("用户请求的url为：{}，ip地址为：{}", url, ip);
+    }
+}
+```
+
+JointPoint 对象很有用，可以用它来获取一个签名，然后利用签名可以获取请求的包名、方法名，包括参数（通过 joinPoint.getArgs() 获取）等等。
+
+## @After 注解
+
+@After 注解和 @Before 注解相对应，指定的方法在切面切入目标方法之后执行，也可以做一些完成某方法之后的 log 处理。
+
+```java
+
+@Aspect
+@Component
+public class LogAspectHandler {
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    /**
+     * 定义一个切面，拦截com.test.course09.controller包下的所有方法
+     */
+    @Pointcut("execution(* com.test.course09.controller..*.*(..))")
+    public void pointCut() {}
+
+    /**
+     * 在上面定义的切面方法之后执行该方法
+     * @param joinPoint jointPoint
+     */
+    @After("pointCut()")
+    public void doAfter(JoinPoint joinPoint) {
+
+        logger.info("====doAfter方法进入了====");
+        Signature signature = joinPoint.getSignature();
+        String method = signature.getName();
+        logger.info("方法{}已经执行完", method);
+    }
+}
+```
+
+到这里，我们来写一个 Controller 来测试一下执行结果，新建一个 AopController 如下：
+
+```java
+@RestController
+@RequestMapping("/aop")
+public class AopController {
+
+    @GetMapping("/{name}")
+    public String testAop(@PathVariable String name) {
+        return "Hello " + name;
+    }
+}
+```
+
+启动项目，在浏览器中输入 localhost:8080/aop/CSDN，观察一下控制台的输出信息：
+
+```java
+====doBefore方法进入了====
+即将执行方法为: testAop，属于com.test.course09.controller.AopController包
+用户请求的url为：http://localhost:8080/aop/name，ip地址为：0:0:0:0:0:0:0:1
+====doAfter方法进入了====
+方法testAop已经执行完
+```
+
+从打印出来的 log 中可以看出程序执行的逻辑与顺序，可以很直观的掌握 @Before 和 @After 两个注解的实际作用。
+
+## @AfterReturning 注解
+
+@AfterReturning 注解和 @After 有些类似，区别在于 @AfterReturning 注解可以用来捕获切入方法执行完之后的返回值，对返回值进行业务逻辑上的增强处理，例如：
+
+```java
+@Aspect
+@Component
+public class LogAspectHandler {
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    /**
+     * 在上面定义的切面方法返回后执行该方法，可以捕获返回对象或者对返回对象进行增强
+     * @param joinPoint joinPoint
+     * @param result result
+     */
+    @AfterReturning(pointcut = "pointCut()", returning = "result")
+    public void doAfterReturning(JoinPoint joinPoint, Object result) {
+
+        Signature signature = joinPoint.getSignature();
+        String classMethod = signature.getName();
+        logger.info("方法{}执行完毕，返回参数为：{}", classMethod, result);
+        // 实际项目中可以根据业务做具体的返回值增强
+        logger.info("对返回参数进行业务上的增强：{}", result + "增强版");
+    }
+}
+```
+
+需要注意的是：在 @AfterReturning 注解 中，属性 returning 的值必须要和参数保持一致，否则会检测不到。该方法中的第二个入参就是被切方法的返回值，在 doAfterReturning 方法中可以对返回值进行增强，可以根据业务需要做相应的封装。
+
+## @AfterThrowing 注解
+
+顾名思义，@AfterThrowing 注解是当被切方法执行时抛出异常时，会进入 @AfterThrowing 注解的方法中执行，在该方法中可以做一些异常的处理逻辑。要注意的是 throwing 属性的值必须要和参数一致，否则会报错。该方法中的第二个入参即为抛出的异常。
+
+```java
+@Aspect
+@Component
+public class LogAspectHandler {
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    /**
+     * 在上面定义的切面方法执行抛异常时，执行该方法
+     * @param joinPoint jointPoint
+     * @param ex ex
+     */
+    @AfterThrowing(pointcut = "pointCut()", throwing = "ex")
+    public void afterThrowing(JoinPoint joinPoint, Throwable ex) {
+        Signature signature = joinPoint.getSignature();
+        String method = signature.getName();
+        // 处理异常的逻辑
+        logger.info("执行方法{}出错，异常为：{}", method, ex);
+    }
+}
+```

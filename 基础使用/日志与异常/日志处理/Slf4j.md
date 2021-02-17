@@ -25,9 +25,9 @@ Spring Boot 对 slf4j 支持的很好，内部已经集成了 slf4j，一般我�
 logging:
   config: logback.xml
   level:
-    com.itcodai.course03.dao: trace
+    com.test.course03.dao: trace
 ```
 
-`logging.config` 是用来指定项目启动的时候，读取哪个配置文件，这里指定的是日志配置文件是根路径下的 `logback.xml` 文件，关于日志的相关配置信息，都放在 `logback.xml` 文件中了。`logging.level` 是用来指定具体的 mapper 中日志的输出级别，上面的配置表示 `com.itcodai.course03.dao` 包下的所有 mapper 日志输出级别为 trace，会将操作数据库的 sql 打印出来，开发时设置成 trace 方便定位问题，在生产环境上，将这个日志级别再设置成 error 级别即可。
+`logging.config` 是用来指定项目启动的时候，读取哪个配置文件，这里指定的是日志配置文件是根路径下的 `logback.xml` 文件，关于日志的相关配置信息，都放在 `logback.xml` 文件中了。`logging.level` 是用来指定具体的 mapper 中日志的输出级别，上面的配置表示 `com.test.course03.dao` 包下的所有 mapper 日志输出级别为 trace，会将操作数据库的 sql 打印出来，开发时设置成 trace 方便定位问题，在生产环境上，将这个日志级别再设置成 error 级别即可。
 
 常用的日志级别按照从高到低依次为：ERROR、WARN、INFO、DEBUG。
