@@ -86,7 +86,7 @@ public class Blogger {
 
 @GetMapping("/getBlogger")
 public String getBlogger(Model model) {
-	Blogger blogger = new Blogger(1L, "倪升武", "123456");
+	Blogger blogger = new Blogger(1L, "xxx", "123456");
 	model.addAttribute("blogger", blogger);
 	return "blogger";
 }
@@ -130,7 +130,7 @@ public String getBlogger(Model model) {
 ```
 @GetMapping("/getList")
 public String getList(Model model) {
-    Blogger blogger1 = new Blogger(1L, "倪升武", "123456");
+    Blogger blogger1 = new Blogger(1L, "xxx", "123456");
     Blogger blogger2 = new Blogger(2L, "达人课", "123456");
     List<Blogger> list = new ArrayList<>();
     list.add(blogger1);
@@ -141,8 +141,6 @@ public String getList(Model model) {
 ```
 
 接下来我们写一个 list.html 来获取该 list 信息，然后在 list.html 中遍历这个 list。如下：
-
-
 
 ```
 <!DOCTYPE html>
