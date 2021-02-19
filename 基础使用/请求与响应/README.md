@@ -268,7 +268,7 @@ public String testPathVariable(@PathVariable(value = "idd") Integer id) {
 
 ## @RequestParam
 
-@RequestParam 注解顾名思义，也是获取请求参数的，上面我们介绍了 @PathValiable 注解也是获取请求参数的，那么 @RequestParam 和 @PathVariable 有什么不同呢？主要区别在于： @PathValiable 是从 url 模板中获取参数值， 即这种风格的 url：http://localhost:8080/user/{id} ；而 @RequestParam 是从 request 里面获取参数值，即这种风格的 url：http://localhost:8080/user?id=1 。我们使用该 url 带上参数 id 来测试一下如下代码：
+@RequestParam 注解顾名思义，也是获取请求参数的，上面我们介绍了 @PathValiable 注解也是获取请求参数的，那么 @RequestParam 和 @PathVariable 有什么不同呢？主要区别在于：@PathValiable 是从 url 模板中获取参数值， 即这种风格的 url：http://localhost:8080/user/{id} ；而 @RequestParam 是从 request 里面获取参数值，即这种风格的 url：http://localhost:8080/user?id=1 。我们使用该 url 带上参数 id 来测试一下如下代码：
 
 ```java
 @GetMapping("/user")
