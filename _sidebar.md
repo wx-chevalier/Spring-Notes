@@ -128,6 +128,7 @@
       - [4.8.2 HikariCP](/数据库/连接池/HikariCP/README.md)
         - [4.8.2.1 HikariCP 实现中的优化技巧](/数据库/连接池/HikariCP/HikariCP%20实现中的优化技巧.md)
         - [4.8.2.2 配置详解](/数据库/连接池/HikariCP/配置详解.md)
+      - [4.8.3 多数据源配置](/数据库/连接池/多数据源配置.md)
   - 5 工程实践
     - [5.1 Alibaba](/工程实践/Alibaba/README.md)
       - [5.1.1 OSS](/工程实践/Alibaba/OSS/README.md)
