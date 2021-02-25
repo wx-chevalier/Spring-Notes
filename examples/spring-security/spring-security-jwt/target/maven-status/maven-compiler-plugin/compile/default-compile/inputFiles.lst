@@ -1,0 +1,17 @@
+/Users/zhangzixiong/Desktop/Docs/Backend/Spring-Series/examples/spring-security/spring-security-jwt/src/main/java/wx/service/UserService.java
+/Users/zhangzixiong/Desktop/Docs/Backend/Spring-Series/examples/spring-security/spring-security-jwt/src/main/java/wx/Application.java
+/Users/zhangzixiong/Desktop/Docs/Backend/Spring-Series/examples/spring-security/spring-security-jwt/src/main/java/wx/controller/UserController.java
+/Users/zhangzixiong/Desktop/Docs/Backend/Spring-Series/examples/spring-security/spring-security-jwt/src/main/java/wx/config/TokenProvider.java
+/Users/zhangzixiong/Desktop/Docs/Backend/Spring-Series/examples/spring-security/spring-security-jwt/src/main/java/wx/config/Constants.java
+/Users/zhangzixiong/Desktop/Docs/Backend/Spring-Series/examples/spring-security/spring-security-jwt/src/main/java/wx/dao/UserDAO.java
+/Users/zhangzixiong/Desktop/Docs/Backend/Spring-Series/examples/spring-security/spring-security-jwt/src/main/java/wx/model/User.java
+/Users/zhangzixiong/Desktop/Docs/Backend/Spring-Series/examples/spring-security/spring-security-jwt/src/main/java/wx/model/Role.java
+/Users/zhangzixiong/Desktop/Docs/Backend/Spring-Series/examples/spring-security/spring-security-jwt/src/main/java/wx/model/LoginUser.java
+/Users/zhangzixiong/Desktop/Docs/Backend/Spring-Series/examples/spring-security/spring-security-jwt/src/main/java/wx/service/impl/UserServiceImpl.java
+/Users/zhangzixiong/Desktop/Docs/Backend/Spring-Series/examples/spring-security/spring-security-jwt/src/main/java/wx/controller/AuthController.java
+/Users/zhangzixiong/Desktop/Docs/Backend/Spring-Series/examples/spring-security/spring-security-jwt/src/main/java/wx/config/JwtAuthenticationFilter.java
+/Users/zhangzixiong/Desktop/Docs/Backend/Spring-Series/examples/spring-security/spring-security-jwt/src/main/java/wx/config/JwtAuthenticationEntryPoint.java
+/Users/zhangzixiong/Desktop/Docs/Backend/Spring-Series/examples/spring-security/spring-security-jwt/src/main/java/wx/config/CorsFilter.java
+/Users/zhangzixiong/Desktop/Docs/Backend/Spring-Series/examples/spring-security/spring-security-jwt/src/main/java/wx/model/AuthToken.java
+/Users/zhangzixiong/Desktop/Docs/Backend/Spring-Series/examples/spring-security/spring-security-jwt/src/main/java/wx/model/UserDTO.java
+/Users/zhangzixiong/Desktop/Docs/Backend/Spring-Series/examples/spring-security/spring-security-jwt/src/main/java/wx/config/WebSecurityConfig.java

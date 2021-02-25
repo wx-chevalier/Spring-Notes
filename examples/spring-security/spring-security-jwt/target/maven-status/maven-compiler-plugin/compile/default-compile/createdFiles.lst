@@ -1,0 +1,17 @@
+wx/controller/UserController.class
+wx/model/LoginUser.class
+wx/model/User.class
+wx/controller/AuthController.class
+wx/service/impl/UserServiceImpl.class
+wx/model/UserDTO.class
+wx/model/AuthToken.class
+wx/Application.class
+wx/config/JwtAuthenticationEntryPoint.class
+wx/dao/UserDAO.class
+wx/model/Role.class
+wx/config/Constants.class
+wx/config/CorsFilter.class
+wx/config/WebSecurityConfig.class
+wx/config/JwtAuthenticationFilter.class
+wx/config/TokenProvider.class
+wx/service/UserService.class
