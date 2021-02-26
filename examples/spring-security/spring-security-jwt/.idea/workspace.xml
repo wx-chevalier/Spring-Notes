@@ -4,43 +4,7 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e84d6e37-8486-4918-b2b3-8e7b13a4c1de" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_projectlombok_lombok_1_18_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/icu/ngte/model/Role.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/icu/ngte/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Spring Security/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Spring Security/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Spring Security/权限验证/JWT.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Spring Security/权限验证/JWT.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Spring Security/权限验证/验证码.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Spring Security/权限验证/验证码.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/spring_security_jwt_war.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/spring_security_jwt_war.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/spring_security_jwt_war_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/spring_security_jwt_war_exploded.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring-security-jwt.iml" beforeDir="false" afterPath="$PROJECT_DIR$/spring-security-jwt.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/wx/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/icu/ngte/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/wx/config/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/icu/ngte/config/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/wx/config/CorsFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/icu/ngte/config/CorsFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/wx/config/JwtAuthenticationEntryPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/icu/ngte/config/JwtAuthenticationEntryPoint.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/wx/config/JwtAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/icu/ngte/config/JwtAuthenticationFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/wx/config/TokenProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/icu/ngte/config/TokenProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/wx/config/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/icu/ngte/config/WebSecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/wx/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/icu/ngte/controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/wx/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/icu/ngte/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/wx/dao/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/icu/ngte/dao/UserDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/wx/model/AuthToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/icu/ngte/model/AuthToken.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/wx/model/LoginUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/icu/ngte/model/LoginUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/wx/model/Role.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/wx/model/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/wx/model/UserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/icu/ngte/model/UserDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/wx/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/icu/ngte/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/wx/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/icu/ngte/service/impl/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../基础使用/依赖注入/参数配置/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../../基础使用/依赖注入/参数配置/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../基础使用/依赖注入/参数配置/配置文件.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../../基础使用/依赖注入/参数配置/配置文件.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../基础使用/依赖注入/参数配置/配置载入.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../基础使用/快速开始/简单全链路应用.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../../基础使用/快速开始/简单全链路应用.md" afterDir="false" />
-    </list>
+    <list default="true" id="e84d6e37-8486-4918-b2b3-8e7b13a4c1de" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -180,7 +144,7 @@
       <workItem from="1556963990564" duration="1560000" />
       <workItem from="1614155355636" duration="405000" />
       <workItem from="1614155766257" duration="3639000" />
-      <workItem from="1614237346523" duration="1819000" />
+      <workItem from="1614237346523" duration="2415000" />
     </task>
     <servers />
   </component>
