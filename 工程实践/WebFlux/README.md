@@ -23,3 +23,7 @@ Java 9 的 Reactive Stream API 只是一套接口，约定了 Reactive 编程的
 
 - Spring WebFlux：基于 Reactive Stream API，需要运行在 servlet 3.1+ 容器（Tomcat 8）或 Netty 上，这些容器支持 NIO、Reactor 模式
 - Spring MVC：基于传统的 Servlet API，运行在传统的 Servlet 容器上，one-request-per-thread，同步阻塞 IO
+
+下图为两大开发栈的对比：
+
+![两大开发栈对比](https://s3.ax1x.com/2021/02/28/6CgvLT.png)
