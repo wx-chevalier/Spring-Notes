@@ -59,6 +59,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 为此，我们需要在域定义文件 baeldung-realm.json 中添加一些配置：
 
-# Todos
+# Links
 
 - https://www.baeldung.com/spring-security-oauth-jwt
