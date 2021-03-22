@@ -49,6 +49,6 @@ public class Ticker {
 }
 ```
 
-# TBD
+# Links
 
 - https://www.baeldung.com/spring-task-scheduler

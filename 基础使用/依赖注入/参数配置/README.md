@@ -76,6 +76,6 @@ private static Properties properties() {
 }
 ```
 
-# TBD
+# Links
 
 - https://mp.weixin.qq.com/s/e0tO2zogV-L6mXLfaiFCfw?from=groupmessage&isappinstalled=0 这样讲 SpringBoot 自动配置原理，你应该能明白了吧

@@ -73,6 +73,6 @@ spring.datasource.url=jdbc:h2:mem:test
 spring.datasource.driver-class-name=org.h2.Driver
 ```
 
-# TBD
+# Links
 
 - https://mp.weixin.qq.com/s/cgR-KVs1UKEM-xTEjIWKQg
