@@ -134,7 +134,7 @@
         - [4.7.3.2 Ehcache](/数据库/缓存与%20KV%20存储/进程内缓存/Ehcache.md)
     - [4.8 连接池](/数据库/连接池/README.md)
       - [4.8.1 Druid](/数据库/连接池/Druid/README.md)
-        
+        - [4.8.1.1 Druid 配置](/数据库/连接池/Druid/Druid%20配置.md)
       - [4.8.2 HikariCP](/数据库/连接池/HikariCP/README.md)
         - [4.8.2.1 HikariCP 实现中的优化技巧](/数据库/连接池/HikariCP/HikariCP%20实现中的优化技巧.md)
         - [4.8.2.2 配置详解](/数据库/连接池/HikariCP/配置详解.md)
