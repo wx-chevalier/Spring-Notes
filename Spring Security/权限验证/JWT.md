@@ -23,7 +23,6 @@
 在 Spring Boot 应用中，首先我们需要声明继承了 WebSecurityConfigurerAdapter 类的配置：
 
 ```java
-
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
