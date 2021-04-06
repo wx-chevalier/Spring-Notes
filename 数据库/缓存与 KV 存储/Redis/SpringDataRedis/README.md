@@ -9,6 +9,7 @@ Spring Boot 集成 redis 很方便，只需要导入一个 redis 的 starter 依
 	<groupId>org.springframework.boot</groupId>
 	<artifactId>spring-boot-starter-data-redis</artifactId>
 </dependency>
+
 <!--阿里巴巴fastjson -->
 <dependency>
     <groupId>com.alibaba</groupId>
