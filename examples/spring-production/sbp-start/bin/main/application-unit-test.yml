@@ -1,0 +1,8 @@
+security:
+  jwt:
+    authority-claim: authorities
+    token-header: Authorization
+    token-prefix: Bearer
+    expiration-ms: 86400000
+    secret: unit-test-secret
+
