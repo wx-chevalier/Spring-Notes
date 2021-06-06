@@ -1,0 +1,75 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/memi?&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: roottoor
+
+  devtools:
+    add-properties: true
+  servlet:
+    multipart:
+      max-file-size: 1024MB
+      max-request-size: 1024MB
+
+  rabbitmq:
+    host: rabbitmq.host
+    port: 31002
+    username: root
+    password: roottoor
+    virtual-host: /dev
+
+application:
+  mail:
+    port: 465
+    username: root
+    password: roottoor
+    host: smtp.exmail.qq.com
+  cors:
+    allowCredentials: true
+    allowedOrigins: ['*']
+    allowedMethods: ['*']
+    allowedHeaders: ['*']
+  file-store:
+    path: ${HOME}/tmp/file
+    base-url: http://localhost:8080/file
+    save-type: LOCAL
+  oss:
+    access-key-id: roottoor
+    access-key-secret: roottoor
+    endpoint: oss-cn-hangzhou.aliyuncs.com
+    bucket-name:  oss-bucket
+    expiration: 900
+    max-size: 5242880
+    callback-url: http://localhost:8080/callback/oss
+  sms:
+    region-id: cn-hangzhou
+    sign-name: WX
+    access-key-id: root
+    access-key-secret: roottoor
+  security:
+    jwt:
+      secret: hello
+  time-series:
+    max-ts-intervals: 700
+    insert-executor-type: FIXED
+    insert-fixed-thread-pool-size: 10
+  mqtt:
+    username: root
+    password: roottoor
+    max-bytes-in-message: 81920
+    reconnect: true
+    broker-host: 0.0.0.0
+    broker-port: 1883
+  feat:
+    utk-telemetry-message-handling: false
+    work-order-notify-service: false
+  msg:
+    device-code-black-list-pattern: .*
+    device-code-white-list-pattern: wx.*
+  wechat:
+    token: root
+    appId: roottoor
+    appSecret: roottoor
+  ding-talk:
+    access-token: roottoor

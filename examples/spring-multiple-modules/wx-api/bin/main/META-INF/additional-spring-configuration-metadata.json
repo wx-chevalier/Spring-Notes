@@ -1,0 +1,21 @@
+{
+  "groups": [
+    {
+      "name": "application",
+      "type": "wx.api.config.properties.ApplicationProperties",
+      "sourceType": "wx.api.config.properties.ApplicationProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "application.msg.device-code-black-list-pattern",
+      "type": "java.lang.String",
+      "description": "设备信息处理黑名单."
+    },
+    {
+      "name": "application.msg.device-code-white-list-pattern",
+      "type": "java.lang.String",
+      "description": "设备信息处理白名单，只用于排除被黑名单规则拉黑的设备."
+    }
+  ]
+}

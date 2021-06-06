@@ -1,0 +1,13 @@
+DROP TABLE IF EXISTS mes_work_order;
+DROP TABLE IF EXISTS mes_work_order_requirement;
+DROP TABLE IF EXISTS mes_work_order_picture;
+DROP TABLE IF EXISTS mes_work_order_utk_printable_file;
+DROP TABLE IF EXISTS mes_printer_work_order_schedule;
+DROP TABLE IF EXISTS mes_work_order_print_info;
+DROP TABLE IF EXISTS mes_work_order_feedback;
+DROP TABLE IF EXISTS mes_dev_utk_base_bp;
+DROP TABLE IF EXISTS mes_dev_utk_bp;
+DROP TABLE IF EXISTS mes_material;
+DROP TABLE IF EXISTS mes_dev_utk_printer_model;
+DROP TABLE IF EXISTS mes_dev_utk_printer;
+DROP TABLE IF EXISTS mes_dev_utk_printer_fault;

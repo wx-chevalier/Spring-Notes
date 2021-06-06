@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="wx.infra.tunnel.db.mapper.infra.message.RoleMessageConfigMapper">
+
+    <!--    获取指定租户中某个角色的配置-->
+    <select id="getConfig" resultType="wx.infra.tunnel.db.infra.message.RoleMessageQueryDO">
+        SELECT config.*,
+        type.name AS messageTypeName,
+        type.key AS messageTypeKey,
+        type.id AS messageTypeId,
+        type.kind AS messageTypeKind
+        FROM infra_role_message_config config
+        LEFT JOIN infra_message_type type ON config.message_type_id = type.id
+        <where>
+            AND config.deleted_at IS NULL
+            AND config.role_id = #{roleId}
+            AND config.tenant_id = #{tenantId}
+            AND type.app_id = #{appId}
+        </where>
+    </select>
+
+    <!--
+        查询指定用户的发送渠道信息
+        <p>子查询查询用户的角色列表</p>
+        <p>根据子查询到角色ID，查询对应的发送消息的渠道</p>
+    -->
+    <select id="getSendChannelByTenantId" resultType="java.lang.String">
+        SELECT DISTINCT infra_role_message_config.send_channel
+            FROM infra_role_message_config
+            LEFT JOIN infra_message_type ON infra_role_message_config.message_type_id = infra_message_type.id
+        WHERE
+          infra_role_message_config.deleted_at IS NULL
+          AND infra_role_message_config.message_type_id = #{messageTypeId}
+          AND infra_role_message_config.role_id IN (
+                SELECT role_id
+                FROM u_role
+                WHERE u_role.tenant_id = #{tenantId} AND u_role.deleted_at IS NULL)
+    </select>
+
+
+    <!--获取指定消息类型的目标用户-->
+    <select id="getTargetUsrIds" resultType="java.lang.Long">
+        SELECT u_user_role_relation.user_id
+            FROM u_user_role_relation
+        WHERE role_id IN (
+            SELECT DISTINCT u_role.id
+            FROM u_role
+                INNER JOIN infra_role_message_config ON u_role.id = infra_role_message_config.role_id
+                INNER JOIN infra_message_type ON infra_role_message_config.message_type_id = infra_message_type.id
+            WHERE u_role.tenant_id = #{tenantId}
+                AND infra_role_message_config.message_type_id = #{messageTypeId}
+                AND infra_role_message_config.deleted_at IS NULL
+                )
+    </select>
+
+</mapper>
