@@ -204,7 +204,7 @@ Integer selectCount(@Param(Constants.WRAPPER) Wrapper<T> queryWrapper);
 |        Map<String, Object>         |  columnMap   |             表字段 map 对象              |
 |              IPage<T>              |     page     | 分页查询条件（可以为 RowBounds.DEFAULT） |
 
-# 案例-Mapper 基础使用
+# 案例：Mapper 基础使用
 
 ```java
 @RunWith(SpringRunner.class)
