@@ -106,4 +106,26 @@ public class Log4JRunnable implements Runnable {
 
 ## Log4j
 
-Log4j 中的 MDC 允许我们在一个类似于地图的结构中填入一些信息，这些信息在实际写入日志消息时可以被 appender 访问。
+Log4j 中的 MDC 允许我们在一个类似于地图的结构中填入一些信息，这些信息在实际写入日志消息时可以被 appender 访问。MDC 结构在内部被附加到执行线程上，与 ThreadLocal 变量的方式相同。
+
+```java
+import org.apache.log4j.MDC;
+
+public class Log4JRunnable implements Runnable {
+    private Transfer tx;
+    private static Log4JTransferService log4jBusinessService = new Log4JTransferService();
+
+    public Log4JRunnable(Transfer tx) {
+        this.tx = tx;
+    }
+
+    public void run() {
+        MDC.put("transaction.id", tx.getTransactionId());
+        MDC.put("transaction.owner", tx.getSender());
+        log4jBusinessService.transfer(tx.getAmount());
+        MDC.clear();
+    }
+}
+```
+
+不出所料，MDC.put()被用来在 MDC 中添加一个键和一个相应的值，而 MDC.clear()则清空 MDC。
