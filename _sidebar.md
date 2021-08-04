@@ -96,6 +96,7 @@
         - [5.1.4.3 上下文配置](/数据库/MyBatis/配置使用/上下文配置.md)
         - [5.1.4.4 动态 SQL](/数据库/MyBatis/配置使用/动态%20SQL.md)
         - [5.1.4.5 注解映射](/数据库/MyBatis/配置使用/注解映射.md)
+        - [5.1.4.6 流式查询](/数据库/MyBatis/配置使用/流式查询.md)
     - [5.2 ORM](/数据库/ORM/README.md)
       - [5.2.1 Hibernate](/数据库/ORM/Hibernate/README.md)
         
