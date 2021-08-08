@@ -70,7 +70,7 @@
       - [4.7.2 copyProperties](/基础使用/Spring%20工具库/copyProperties.md)
     - [4.8 打包与部署](/基础使用/打包与部署/README.md)
       - [4.8.1 Docker 与 K8s](/基础使用/打包与部署/Docker%20与%20K8s.md)
-      - [4.8.2 Kubernetes](/基础使用/打包与部署/Kubernetes/README.md)
+      - [4.8.2 K8s](/基础使用/打包与部署/K8s/README.md)
         
     - [4.9 定时任务](/基础使用/定时任务/README.md)
       - [4.9.1 TaskScheduler](/基础使用/定时任务/TaskScheduler.md)
