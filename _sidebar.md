@@ -202,16 +202,17 @@
       
     - [7.3 Shiro](/Spring%20Security/Shiro/README.md)
       
-    - [7.4 快速开始](/Spring%20Security/快速开始.md)
-    - 7.5 权限验证
-      - [7.5.1 HTTP Basic Auth](/Spring%20Security/权限验证/HTTP%20Basic%20Auth.md)
-      - [7.5.2 JWT](/Spring%20Security/权限验证/JWT/README.md)
-        - [7.5.2.1 WebSecurityConfig 配置](/Spring%20Security/权限验证/JWT/WebSecurityConfig%20配置.md)
-        - [7.5.2.2 注册与登录](/Spring%20Security/权限验证/JWT/注册与登录.md)
-        - [7.5.2.3 访问与鉴权](/Spring%20Security/权限验证/JWT/访问与鉴权.md)
-      - [7.5.3 表单登录](/Spring%20Security/权限验证/表单登录.md)
-      - [7.5.4 验证码](/Spring%20Security/权限验证/验证码/README.md)
+    - 7.4 权限验证
+      - [7.4.1 HTTP Basic Auth](/Spring%20Security/权限验证/HTTP%20Basic%20Auth.md)
+      - [7.4.2 JWT](/Spring%20Security/权限验证/JWT/README.md)
+        - [7.4.2.1 WebSecurityConfig 配置](/Spring%20Security/权限验证/JWT/WebSecurityConfig%20配置.md)
+        - [7.4.2.2 注册与登录](/Spring%20Security/权限验证/JWT/注册与登录.md)
+        - [7.4.2.3 访问与鉴权](/Spring%20Security/权限验证/JWT/访问与鉴权.md)
+      - [7.4.3 表单登录](/Spring%20Security/权限验证/表单登录.md)
+      - [7.4.4 验证码](/Spring%20Security/权限验证/验证码/README.md)
         
-    - 7.6 策略配置
-      - [7.6.1 CORS](/Spring%20Security/策略配置/CORS.md)
-      - [7.6.2 CSRF](/Spring%20Security/策略配置/CSRF.md)
+    - 7.5 策略配置
+      - [7.5.1 CORS](/Spring%20Security/策略配置/CORS.md)
+      - [7.5.2 CSRF](/Spring%20Security/策略配置/CSRF.md)
+    - 7.6 快速开始
+      - [7.6.1 快速开始](/Spring%20Security/快速开始/快速开始.md)
