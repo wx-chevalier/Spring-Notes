@@ -269,4 +269,173 @@ public class ScopedBeanDemo {
 }
 ```
 
-可以发现，IoC 容器中的确存在 ScopedBeanDemo 的两个 BeanDefinition 数据，一个 beanName 为“scopedTarget.scopedBeanName”，另一个为“scopeBeanDemo”。
+可以发现，IoC 容器中的确存在 ScopedBeanDemo 的两个 BeanDefinition 数据，一个 beanName 为“scopedTarget.scopedBeanName”，另一个为“scopeBeanDemo”。如上面的分析结果，IoC 容器中存在两个相同类型的 Bean，那么当我们通过 BeanFactory 的 getBean(Class)方法来查找时，是会抛出异常呢？还是正常返回呢？如果正常返回，那么该返回那个呢？
+
+```java
+import org.springframework.aop.scope.ScopedProxyUtils;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+
+import java.beans.Introspector;
+import java.lang.reflect.Field;
+
+@Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
+public class ScopedBeanDemo {
+
+    public static void main(String[] args) throws Exception {
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+        context.register(ScopedBeanDemo.class);
+        context.refresh();
+        // 根据 ScopedBeanDemo 类型来查找
+        ScopedBeanDemo byType = context.getBean(ScopedBeanDemo.class);
+        // 根据 ScopedBeanDemo 在IoC容器中的BeanName来进行查找 -> 其底层也是通过 Java Beans 中的
+        // Introspector#decapitalize方法来生成BeanName
+        ScopedBeanDemo byName =
+                (ScopedBeanDemo) context.getBean(Introspector.decapitalize("ScopedBeanDemo"));
+        // 在 ScopedBeanDemo 在IoC容器中的BeanName 前面拼接上 ScopedProxyUtils#TARGET_NAME_PREFIX 字段的值
+        Field field = ScopedProxyUtils.class.getDeclaredField("TARGET_NAME_PREFIX");
+        field.setAccessible(true);
+        Object value = field.get(null);
+        ScopedBeanDemo byScopedName =
+                (ScopedBeanDemo)
+                        context.getBean(value + Introspector.decapitalize("ScopedBeanDemo"));
+        System.out.println("根据ScopedBeanDemo类型查找到的：" + byType.getClass());
+        System.out.println("根据ScopedBeanDemo名称查找到的：" + byName.getClass());
+        System.out.println("根据scopedTarget.ScopedBeanDemo名称查找到的：" + byScopedName.getClass());
+        // 关闭Spring 应用上下文
+        context.close();
+    }
+}
+```
+
+可以发现无论是根据类型还是根据 beanName 来进行 IoC 容器返回的始终是是代理后的对象。只有按其拼接的规则来拼接 beanName 后(在 beanName 前拼接上“scopedTarget.”前缀)，再使用 BeanFactory 的 getBean(String)方法来查找才会返回原始对象。按照 beanName 来进行查找，IoC 容器会返回代理对象，这点可以理解，因为在 ScopedProxyUtils 的 createScopedProxy 方法偷梁换柱，将原始的 beanName 对应的 BeanDefinition 替换为代理 BeanDefinition，所以查找根据原始 beanName 查找出来的 bean 为代理 Bean 就不奇怪了，那么为什么根据类型来查找返回的依然是代理 Bean 呢？
+
+这里先说下结论：是因为前面在 ScopedProxyUtils 的 createScopedProxy 方法中将原始的 BeanDefinit-ion(targetDefinition)的 autowireCandidate 设置为 false 导致的。
+
+```java
+// The target bean should be ignored in favor of the scoped proxy.
+targetDefinition.setAutowireCandidate(false);
+targetDefinition.setPrimary(false);
+```
+
+下面我们来分析下 BeanFactory 的 getBean(Class)方法。AsbtractApplicationContext 实现了该方法，在该方法中首先来对 BeanFactory 实现类实例的存活状态进行校验。之后就是调用 BeanFactory 实现类实例的 getBean 方法，传入要获取的 Class。
+
+```java
+// AbstractApplicationContext#getBean(java.lang.Class<T>)
+public <T> T getBean(Class<T> requiredType) throws BeansException {
+   assertBeanFactoryActive();
+   return getBeanFactory().getBean(requiredType);
+}
+
+```
+
+在 DefaultListableBeanFactory 实现的 getBean 方法中，调用 resolveBean 方法来根据类型获取，如果该方法的返回值为 null，抛出 NoSuchBeanDefinitionException 异常。可以看出的是 resolveBean 方法并不会主动抛出异常，而是 getBean 方法抛出的异常，这一点很重要，因为包括 BeanFactory 提供的安全查找 Bean 的 getBeanProvider 方法底层也是基于该方法进行实现，这里就不再展开分析了。
+
+```java
+// DefaultListableBeanFactory#getBean(java.lang.Class<T>, java.lang.Object...)
+public <T> T getBean(Class<T> requiredType, @Nullable Object... args) throws BeansException {
+   Assert.notNull(requiredType, "Required type must not be null");
+   Object resolved = resolveBean(ResolvableType.forRawClass(requiredType), args, false);
+   if (resolved == null) {
+      throw new NoSuchBeanDefinitionException(requiredType);
+   }
+   return (T) resolved;
+}
+```
+
+在 resolveBean 方法中，调用 resolveNamedBean 方法来进行查找，如果该方法返回值不为 null，则直接返回，否则获取当前 IoC 容器的父容器(如果有)，层层查找。
+
+```java
+// DefaultListableBeanFactory#resolveBean
+private <T> T resolveBean(ResolvableType requiredType, @Nullable Object[] args, boolean nonUniqueAsNull) {
+   NamedBeanHolder<T> namedBean = resolveNamedBean(requiredType, args, nonUniqueAsNull);
+   if (namedBean != null) {
+      return namedBean.getBeanInstance();
+   }
+   BeanFactory parent = getParentBeanFactory();
+   if (parent instanceof DefaultListableBeanFactory) {
+      return ((DefaultListableBeanFactory) parent).resolveBean(requiredType, args, nonUniqueAsNull);
+   }
+   else if (parent != null) {
+      ObjectProvider<T> parentProvider = parent.getBeanProvider(requiredType);
+      if (args != null) {
+         return parentProvider.getObject(args);
+      }
+      else {
+         return (nonUniqueAsNull ? parentProvider.getIfUnique() : parentProvider.getIfAvailable());
+      }
+   }
+   return null;
+}
+```
+
+在 resolveNamedBean 方法中，首先根据 getNamesForType 方法来获取指定类型的所有 beanName，该方法的返回值是一个数组。结合前面的代码可以得出这里获取到的 candidateNames 有两个，分别为：scopedTarget.scopedBeanDemo 和 scopedBeanDemo。
+
+因此会进入第一个判断即 candidateNames 的长度大于 1，遍历 candidateNames 集合，对于遍历到的每一个 beanName，通过 containsBeanDefinition 方法来判断当前 IoC 容器中是否包含指定 beanName 的 BeanDefinition 数据(注意这里是对结果进行取反，因此判断失败)，第二个判断是根据 beanName 获取到对应的 BeanDefinition 实例后，然后调用其 isAutowireCandidate 方法，注意前面我们已经分析过在 ScopedProxyUtils 的 createScopedProxy 方法将 targetDefinition 的 autowireCandidate 属性设置为 false，因此真正的 BeanDefinition 是不会被作为候选的 BeanDefinition，反而是代理 BeanDefinition 会作为候选的 BeanDefinition。
+
+next，判断 candidateNames 数组的长度是否等等于 1，如果判断成立，则调用 getBean 方法来根据 beanName 获取，并将方法返回结果构建为 NamedBeanHolder 返回。
+
+```java
+// DefaultListableBeanFactory#resolveNamedBean
+private <T> NamedBeanHolder<T> resolveNamedBean(
+      ResolvableType requiredType, @Nullable Object[] args, boolean nonUniqueAsNull) throws BeansException {
+
+   Assert.notNull(requiredType, "Required type must not be null");
+	// getBean(ScopedBeanDemo.class) -> candidateNames 中存在两个beanName，分别为
+	// “scopedTarget.scopedBeanDemo”以及“scopedBeanDemo”。
+   String[] candidateNames = getBeanNamesForType(requiredType);
+
+   if (candidateNames.length > 1) {
+      List<String> autowireCandidates = new ArrayList<>(candidateNames.length);
+      for (String beanName : candidateNames) {
+				// 由于真正的ScopedBeanDemo的BeanDefinition的autowireCandidate属性被设置为false，
+				// 因此这里被保存到autowireCandidates集合中的是代理Bean的BeanDefinition
+         if (!containsBeanDefinition(beanName) || getBeanDefinition(beanName).isAutowireCandidate()) {
+            autowireCandidates.add(beanName);
+         }
+      }
+      if (!autowireCandidates.isEmpty()) {
+         candidateNames = StringUtils.toStringArray(autowireCandidates);
+      }
+   }
+		// 如果candidateNames的长度为1，通过getBean方法来触发初始化或者从缓存中获取并构建为
+		// NamedBeanHolder 对象返回。
+   if (candidateNames.length == 1) {
+      String beanName = candidateNames[0];
+      return new NamedBeanHolder<>(beanName, (T) getBean(beanName, requiredType.toClass(), args));
+   } else if (candidateNames.length > 1) {
+      Map<String, Object> candidates = new LinkedHashMap<>(candidateNames.length);
+      for (String beanName : candidateNames) {
+         if (containsSingleton(beanName) && args == null) {
+            Object beanInstance = getBean(beanName);
+            candidates.put(beanName, (beanInstance instanceof NullBean ? null : beanInstance));
+         } else {
+            candidates.put(beanName, getType(beanName));
+         }
+      }
+      String candidateName = determinePrimaryCandidate(candidates, requiredType.toClass());
+      if (candidateName == null) {
+         candidateName = determineHighestPriorityCandidate(candidates, requiredType.toClass());
+      }
+      if (candidateName != null) {
+         Object beanInstance = candidates.get(candidateName);
+         if (beanInstance == null || beanInstance instanceof Class) {
+            beanInstance = getBean(candidateName, requiredType.toClass(), args);
+         }
+         return new NamedBeanHolder<>(candidateName, (T) beanInstance);
+      }
+      if (!nonUniqueAsNull) {
+         throw new NoUniqueBeanDefinitionException(requiredType, candidates.keySet());
+      }
+   }
+
+   return null;
+}
+```
+
+# 总结
+
+@Scope 注解中的 proxyMode 方法值指示了 IoC 容器要不要为 Bean 创建代理，如何创建代理，是使用 JDK 的动态代理还是使用 CGLIB？我们通过源码也了解到 ScopedProxyMode 的 DEFAULT 和 NO 作用是一样的，如果配置为 INTERFACES 或 TARGET_CLASS，在 ScopedProxyUtils 的 createScopedProxy 方法中将会为目标 Bean 创建一个 ScopedProxyFactoryBean 的 BeanDefinition，并使用目标 Bean 的 beanName 来注册这个 BeanDefinition，将目标 Bean 的 beanName 拼接上“ScopedTarget.”前缀来注册目标 Bean 的 BeanDefinition。
+
+同时将目标 BeanDefinition 的 autowireCandidate 属性设置为 false，以此来确保 IoC 容器在查找该类型的单个 Bean 时(getBean 方法)不会返回原始 Bean 实例，而是返回经过代理后的 Bean 实例。
