@@ -11,21 +11,21 @@ Spring 4.0 引入了 @RestController，这是一个控制器的专用版本，�
 ```java
 @RestController
 @RequestMapping("employees")
-public class EmployeeController { 
-    Employee employee = new Employee(); 
+public class EmployeeController {
+    Employee employee = new Employee();
 
-    @RequestMapping(value = "/{name}", method = RequestMethod.GET, produces = "application/json")
-    public Employee getEmployeeInJSON(@PathVariable String name) { 
-   	 employee.setName(name);
-   	 employee.setEmail("employee1@genuitec.com"); 
-   	 return employee; 
-    } 
+    @RequestMapping(value = "/{name}", method = RequestMethod.GET, produces = "application/json")
+    public Employee getEmployeeInJSON(@PathVariable String name) {
+   	 employee.setName(name);
+   	 employee.setEmail("employee1@genuitec.com");
+   	 return employee;
+    }
 
-    @RequestMapping(value = "/{name}.xml", method = RequestMethod.GET, produces = "application/xml")
-    public Employee getEmployeeInXML(@PathVariable String name) { 
-   	 employee.setName(name);
-   	 employee.setEmail("employee1@genuitec.com"); 
-   	 return employee; 
-    } 
+    @RequestMapping(value = "/{name}.xml", method = RequestMethod.GET, produces = "application/xml")
+    public Employee getEmployeeInXML(@PathVariable String name) {
+   	 employee.setName(name);
+   	 employee.setEmail("employee1@genuitec.com");
+   	 return employee;
+    }
 }
 ```

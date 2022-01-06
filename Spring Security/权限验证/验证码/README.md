@@ -1,4 +1,4 @@
-# Captcha | 验证码
+# Captcha | 验证码
 
 ```xml
 <dependencies>

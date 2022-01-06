@@ -4,59 +4,59 @@
 
 ## 路径匹配
 
-@RequestMapping 是 Spring MVC 中最常用的注解之一，`org.springframework.web.bind.annotation.RequestMapping` 被用于将某个请求映射到具体的处理类或者方法中：
+@RequestMapping 是 Spring MVC 中最常用的注解之一，`org.springframework.web.bind.annotation.RequestMapping` 被用于将某个请求映射到具体的处理类或者方法中：
 
 ```java
-// @RequestMapping with Class
+// @RequestMapping with Class
 @Controller
 @RequestMapping("/home")
-public class HomeController {}
+public class HomeController {}
 
-// @RequestMapping with Method
+// @RequestMapping with Method
 @RequestMapping(value="/method0")
 @ResponseBody
-public String method0(){
-    return "method0";
+public String method0(){
+    return "method0";
 }
 
-// @RequestMapping with Multiple URI
+// @RequestMapping with Multiple URI
 @RequestMapping(value={"/method1","/method1/second"})
 @ResponseBody
-public String method1(){
-    return "method1";
+public String method1(){
+    return "method1";
 }
 
-// @RequestMapping with HTTP Method
-@RequestMapping(value="/method3", method={RequestMethod.POST,RequestMethod.GET})
+// @RequestMapping with HTTP Method
+@RequestMapping(value="/method3", method={RequestMethod.POST,RequestMethod.GET})
 @ResponseBody
-public String method3(){
-    return "method3";
+public String method3(){
+    return "method3";
 }
 
-// @RequestMapping default method
+// @RequestMapping default method
 @RequestMapping()
 @ResponseBody
-public String defaultMethod(){
-    return "default method";
+public String defaultMethod(){
+    return "default method";
 }
 
-// @RequestMapping fallback method
+// @RequestMapping fallback method
 @RequestMapping("*")
 @ResponseBody
-public String fallbackMethod(){
-    return "fallback method";
+public String fallbackMethod(){
+    return "fallback method";
 }
 
-// @RequestMapping headers
-@RequestMapping(value="/method5", headers={"name=pankaj", "id=1"})
+// @RequestMapping headers
+@RequestMapping(value="/method5", headers={"name=pankaj", "id=1"})
 @ResponseBody
-public String method5(){
-    return "method5";
+public String method5(){
+    return "method5";
 }
 
 // 表示将功能处理方法将生产 json 格式的数据，此时根据请求头中的 Accept 进行匹配，如请求头 Accept:application/json 时即可匹配;
-@RequestMapping(value = "/produces", produces = "application/json")
-@RequestMapping(produces={"text/html", "application/json"})
+@RequestMapping(value = "/produces", produces = "application/json")
+@RequestMapping(produces={"text/html", "application/json"})
 ```
 
 ## 路由日志

@@ -19,26 +19,26 @@ deferredResult.setResult(data);
 
 ```java
 @RequestMapping("/getAMessageFutureAsync")
-public DeferredResult<Message> getAMessageFutureAsync() {
-    DeferredResult<Message> deffered = new DeferredResult<>(90000);
-    CompletableFuture<Message> f = this.service1.getAMessageFuture();
-    f.whenComplete((res, ex) -> {
-        if (ex != null) {
-            deffered.setErrorResult(ex);
-        } else {
-            deffered.setResult(res);
-        }
-    });
-    return deffered;
+public DeferredResult<Message> getAMessageFutureAsync() {
+    DeferredResult<Message> deffered = new DeferredResult<>(90000);
+    CompletableFuture<Message> f = this.service1.getAMessageFuture();
+    f.whenComplete((res, ex) -> {
+        if (ex != null) {
+            deffered.setErrorResult(ex);
+        } else {
+            deffered.setResult(res);
+        }
+    });
+    return deffered;
 }
 
-public CompletableFuture<Message> getAMessageFuture() {
-    return CompletableFuture.supplyAsync(() -> {
-        logger.info("Start: Executing slow task in Service 1");
-        Util.delay(1000);
-        logger.info("End: Executing slow task in Service 1");
-        return new Message("data 1");
-    }, futureExecutor);
+public CompletableFuture<Message> getAMessageFuture() {
+    return CompletableFuture.supplyAsync(() -> {
+        logger.info("Start: Executing slow task in Service 1");
+        Util.delay(1000);
+        logger.info("End: Executing slow task in Service 1");
+        return new Message("data 1");
+    }, futureExecutor);
 }
 ```
 
