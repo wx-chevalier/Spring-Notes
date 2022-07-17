@@ -213,9 +213,11 @@
     - 7.4 权限验证
       - [7.4.1 HTTP Basic Auth](/Spring%20Security/权限验证/HTTP%20Basic%20Auth.md)
       - [7.4.2 JWT](/Spring%20Security/权限验证/JWT/README.md)
-        - [7.4.2.1 WebSecurityConfig 配置](/Spring%20Security/权限验证/JWT/WebSecurityConfig%20配置.md)
-        - [7.4.2.2 注册与登录](/Spring%20Security/权限验证/JWT/注册与登录.md)
-        - [7.4.2.3 访问与鉴权](/Spring%20Security/权限验证/JWT/访问与鉴权.md)
+        - 7.4.2.1 JWT 解析库
+          - [7.4.2.1.1 nimbus jose jwt](/Spring%20Security/权限验证/JWT/JWT%20解析库/nimbus-jose-jwt.md)
+        - [7.4.2.2 WebSecurityConfig 配置](/Spring%20Security/权限验证/JWT/WebSecurityConfig%20配置.md)
+        - [7.4.2.3 注册与登录](/Spring%20Security/权限验证/JWT/注册与登录.md)
+        - [7.4.2.4 访问与鉴权](/Spring%20Security/权限验证/JWT/访问与鉴权.md)
       - [7.4.3 表单登录](/Spring%20Security/权限验证/表单登录.md)
       - [7.4.4 验证码](/Spring%20Security/权限验证/验证码/README.md)
         
