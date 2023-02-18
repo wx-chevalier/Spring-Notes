@@ -12,7 +12,7 @@
   </a>
 
   <p align="center">
-    <a href="https://wx-chevalier.github.io/Spring-Series"><strong>在线阅读 >> </strong></a>
+    <a href="https://ng-tech.icu/books/Spring-Series"><strong>在线阅读 >> </strong></a>
     <br />
     <br />
     <a href="https://github.com/wx-chevalier/Awesome-CheatSheets">速览手册</a>
@@ -36,7 +36,7 @@ Spring 的设计目标是为我们提供一个一站式的轻量级应用开发�
 
 ![Spring](https://s2.ax1x.com/2019/09/03/nkYetx.png)
 
-本篇是[《服务端开发实践与工程架构](https://wx-chevalier.github.io/Backend-Series/#/)》系列文章的一部分，关联的示例代码请参考 [java-snippets](https://github.com/Dev-Snippets/java-snippets)，[spring-examples](https://github.com/BE-Kits/spring-snippets)。
+本篇是[《服务端开发实践与工程架构](https://ng-tech.icu/books/Backend-Series/#/)》系列文章的一部分，关联的示例代码请参考 [java-snippets](https://github.com/Dev-Snippets/java-snippets)，[spring-examples](https://github.com/BE-Kits/spring-snippets)。
 
 > 如果你是才入门的新手，那么建议首先阅读 [《Java Series]()》、[《数据结构与算法]()》。如果你已经有了一定的经验，想了解更多工程架构方面的知识，那么建议阅读 []()。如果你想寻求分布式系统的解决方案，那么建议阅读 []()。
 
@@ -50,9 +50,9 @@ Spring 的设计目标是为我们提供一个一站式的轻量级应用开发�
 
 ## Copyright & More | 延伸阅读
 
-您还可以前往 [NGTE Books](https://wx-chevalier.github.io/books/) 主页浏览包含知识体系、编程语言、软件工程、模式与架构、Web 与大前端、服务端开发实践与工程架构、分布式基础架构、人工智能与深度学习、产品运营与创业等多类目的书籍列表：
+您还可以前往 [NGTE Books](https://ng-tech.icu/books-gallery/) 主页浏览包含知识体系、编程语言、软件工程、模式与架构、Web 与大前端、服务端开发实践与工程架构、分布式基础架构、人工智能与深度学习、产品运营与创业等多类目的书籍列表：
 
-[![NGTE Books](https://s2.ax1x.com/2020/01/18/19uXtI.png)](https://wx-chevalier.github.io/books/)
+[![NGTE Books](https://s2.ax1x.com/2020/01/18/19uXtI.png)](https://ng-tech.icu/books-gallery/)
 
 ## Links
 
