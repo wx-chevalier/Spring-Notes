@@ -152,7 +152,7 @@ WebFlux 是 Spring Framework 5 的一个新模块，包含了响应式 HTTP 和 
 ![WebFlux 模块](https://img.imgdb.cn/item/603c8b585f4313ce253e29a6.jpg)
 
 ```java
-// 首先，引入 parent ：
+// 首先，引入 parent：
 <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
