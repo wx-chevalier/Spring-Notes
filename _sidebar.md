@@ -78,12 +78,12 @@
       - [2.1.1 Mybatis Generator](/2.数据库/MyBatis/Mybatis%20Generator/README.md)
         
       - [2.1.2 Mybatis Plus [6]](/2.数据库/MyBatis/Mybatis%20Plus/README.md)
-        - [2.1.2.1 CRUD 接口](/2.数据库/MyBatis/Mybatis%20Plus/CRUD%20接口.md)
-        - [2.1.2.2 分页查询](/2.数据库/MyBatis/Mybatis%20Plus/分页查询.md)
-        - [2.1.2.3 多租户与优化](/2.数据库/MyBatis/Mybatis%20Plus/多租户与优化.md)
-        - [2.1.2.4 快速开始](/2.数据库/MyBatis/Mybatis%20Plus/快速开始.md)
-        - [2.1.2.5 条件构造器](/2.数据库/MyBatis/Mybatis%20Plus/条件构造器.md)
-        - [2.1.2.6 类型增强](/2.数据库/MyBatis/Mybatis%20Plus/类型增强.md)
+        - [2.1.2.1 1.快速开始](/2.数据库/MyBatis/Mybatis%20Plus/1.快速开始.md)
+        - [2.1.2.2 2.CRUD 接口](/2.数据库/MyBatis/Mybatis%20Plus/2.CRUD%20接口.md)
+        - [2.1.2.3 3.条件构造器](/2.数据库/MyBatis/Mybatis%20Plus/3.条件构造器.md)
+        - [2.1.2.4 4.分页查询](/2.数据库/MyBatis/Mybatis%20Plus/4.分页查询.md)
+        - [2.1.2.5 5.类型增强](/2.数据库/MyBatis/Mybatis%20Plus/5.类型增强.md)
+        - [2.1.2.6 6.多租户与优化](/2.数据库/MyBatis/Mybatis%20Plus/6.多租户与优化.md)
       - [2.1.3 工程架构 [3]](/2.数据库/MyBatis/工程架构/README.md)
         - [2.1.3.1 Mapper 与动态代理](/2.数据库/MyBatis/工程架构/Mapper%20与动态代理.md)
         - [2.1.3.2 Mybatis 代码流程浅析](/2.数据库/MyBatis/工程架构/Mybatis%20代码流程浅析.md)
@@ -154,22 +154,22 @@
       
     - [3.3 Shiro](/3.Spring%20Security/Shiro/README.md)
       
-    - 3.4 权限验证 [4]
-      - [3.4.1 HTTP Basic Auth](/3.Spring%20Security/权限验证/HTTP%20Basic%20Auth.md)
-      - [3.4.2 JWT [4]](/3.Spring%20Security/权限验证/JWT/README.md)
-        - [3.4.2.1 1.WebSecurityConfig 配置](/3.Spring%20Security/权限验证/JWT/1.WebSecurityConfig%20配置.md)
-        - [3.4.2.2 2.注册与登录](/3.Spring%20Security/权限验证/JWT/2.注册与登录.md)
-        - [3.4.2.3 3.访问与鉴权](/3.Spring%20Security/权限验证/JWT/3.访问与鉴权.md)
-        - 3.4.2.4 JWT 解析库 [1]
-          - [3.4.2.4.1 nimbus jose jwt](/3.Spring%20Security/权限验证/JWT/JWT%20解析库/nimbus-jose-jwt.md)
-      - [3.4.3 表单登录](/3.Spring%20Security/权限验证/表单登录.md)
-      - [3.4.4 验证码](/3.Spring%20Security/权限验证/验证码/README.md)
+    - 3.4 快速开始 [1]
+      - [3.4.1 快速开始](/3.Spring%20Security/快速开始/快速开始.md)
+    - 3.5 权限验证 [4]
+      - [3.5.1 HTTP Basic Auth](/3.Spring%20Security/权限验证/HTTP%20Basic%20Auth.md)
+      - [3.5.2 JWT [4]](/3.Spring%20Security/权限验证/JWT/README.md)
+        - [3.5.2.1 1.WebSecurityConfig 配置](/3.Spring%20Security/权限验证/JWT/1.WebSecurityConfig%20配置.md)
+        - [3.5.2.2 2.注册与登录](/3.Spring%20Security/权限验证/JWT/2.注册与登录.md)
+        - [3.5.2.3 3.访问与鉴权](/3.Spring%20Security/权限验证/JWT/3.访问与鉴权.md)
+        - 3.5.2.4 JWT 解析库 [1]
+          - [3.5.2.4.1 nimbus jose jwt](/3.Spring%20Security/权限验证/JWT/JWT%20解析库/nimbus-jose-jwt.md)
+      - [3.5.3 表单登录](/3.Spring%20Security/权限验证/表单登录.md)
+      - [3.5.4 验证码](/3.Spring%20Security/权限验证/验证码/README.md)
         
-    - 3.5 策略配置 [2]
-      - [3.5.1 CORS](/3.Spring%20Security/策略配置/CORS.md)
-      - [3.5.2 CSRF](/3.Spring%20Security/策略配置/CSRF.md)
-    - 3.6 快速开始 [1]
-      - [3.6.1 快速开始](/3.Spring%20Security/快速开始/快速开始.md)
+    - 3.6 策略配置 [2]
+      - [3.6.1 CORS](/3.Spring%20Security/策略配置/CORS.md)
+      - [3.6.2 CSRF](/3.Spring%20Security/策略配置/CSRF.md)
   - 4 4.工程实践 [7]
     - [4.1 Alibaba [2]](/4.工程实践/Alibaba/README.md)
       - [4.1.1 OSS](/4.工程实践/Alibaba/OSS/README.md)
