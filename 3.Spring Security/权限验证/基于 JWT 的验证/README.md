@@ -1,7 +1,5 @@
 # JWT
 
-> 本文关联的代码仓库参阅：[Spring-Series/examples](https://github.com/wx-chevalier/Spring-Series)
-
 本文将会详细介绍 Spring Boot 中集成 Spring Security 并基于 JWT 进行用户权限验证的案例，下图（图片源自 [bezkoder.com/spring-boot-jwt-authentication](https://bezkoder.com/spring-boot-jwt-authentication/)）显示了我们如何实现用户注册、用户登录和授权的流程：
 
 ![请求与响应交互流程](https://s3.ax1x.com/2021/02/25/yvC7iq.png)
@@ -17,3 +15,7 @@
 - AuthenticationManager 有一个 DaoAuthenticationProvider（在 UserDetailsService 和 PasswordEncoder 的帮助下）来验证 UsernamePasswordAuthenticationToken 对象。如果成功，AuthenticationManager 返回一个完全填充的 Authentication 对象（包括授权）。
 - OncePerRequestFilter 对我们的 API 的每个请求进行一次执行。它提供了一个 doFilterInternal()方法，我们将实现解析和验证 JWT，加载 User 详情（使用 UserDetailsService），检查 Authorizaion（使用 UsernamePasswordAuthenticationToken）。
 - AuthenticationEntryPoint 将捕获认证错误。
+
+# Links
+
+- 本文关联的代码仓库参阅：[Spring-Series/examples](https://github.com/wx-chevalier/Spring-Series)
