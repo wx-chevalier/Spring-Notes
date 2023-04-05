@@ -78,7 +78,7 @@ OpenFeign 实现服务调用非常简单：
 - 定义返回值
 
 ```java
-@FeignClient"provider")
+@FeignClient("provider")
 public interface Service {
     //必须用@RequestParam注解，否则提供者接收不到
     @GetMapping("/getUsers")
