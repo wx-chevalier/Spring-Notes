@@ -2,7 +2,7 @@
 
 我们将 Spring Cloud 与 K8s 中的概念进行协调对比：
 
-![Spring Cloud 与 K8s 对比](https://i.postimg.cc/nLfpz5Nw/image.png)
+![Spring Cloud 与 K8s 对比](https://assets.ng-tech.icu/item/20230417205616.png)
 
 Spring Cloud 为我们提供了分布式/版本化配置、服务注册和发现、路由、服务和服务之间的调用、负载均衡、断路器、分布式消息传递等特性。其核心子项目包含了如下模块：
 
