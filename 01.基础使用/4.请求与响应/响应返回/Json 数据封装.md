@@ -59,7 +59,7 @@ Spring Boot 中对依赖都做了很好的封装，可以看到很多 spring-boo
 
 在实际项目中，常用的数据结构无非有类对象、List 对象、Map 对象，我们看一下默认的 jackson 框架对这三个常用的数据结构转成 json 后的格式如何。
 
-> 参阅《[Java-Series](https://github.com/wx-chevalier/Java-Series?q=)》了解更多有关 Jackson 的使用。
+> 参阅《[Java-Notes](https://github.com/wx-chevalier/Java-Notes?q=)》了解更多有关 Jackson 的使用。
 
 为了测试，我们需要创建一个实体类，这里我们就用 User 来演示。
 

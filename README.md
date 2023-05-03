@@ -7,12 +7,12 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/wx-chevalier/Spring-Series">
+  <a href="https://github.com/wx-chevalier/Spring-Notes">
     <img src="https://assets.ng-tech.icu/item/header.svg" alt="Logo" style="width: 100vw;height: 400px" />
   </a>
 
   <p align="center">
-    <a href="https://ng-tech.icu/books/Spring-Series"><strong>在线阅读 >> </strong></a>
+    <a href="https://ng-tech.icu/books/Spring-Notes"><strong>在线阅读 >> </strong></a>
     <br />
     <br />
     <a href="https://github.com/wx-chevalier">代码案例</a>
@@ -32,7 +32,7 @@ Spring 的设计目标是为我们提供一个一站式的轻量级应用开发�
 
 ![Spring](https://s2.ax1x.com/2019/09/03/nkYetx.png)
 
-本篇是[《服务端开发实践与工程架构](https://ng-tech.icu/books/Backend-Series/#/)》系列文章的一部分，关联的示例代码请参考 [java-snippets](https://github.com/Dev-Snippets/java-snippets)，[spring-examples](https://github.com/BE-Kits/spring-snippets)。
+本篇是[《服务端开发实践与工程架构](https://ng-tech.icu/books/Backend-Notes/#/)》系列文章的一部分，关联的示例代码请参考 [java-snippets](https://github.com/Dev-Snippets/java-snippets)，[spring-examples](https://github.com/BE-Kits/spring-snippets)。
 
 > 如果你是才入门的新手，那么建议首先阅读 [《Java Series]()》、[《数据结构与算法]()》。如果你已经有了一定的经验，想了解更多工程架构方面的知识，那么建议阅读 []()。如果你想寻求分布式系统的解决方案，那么建议阅读 []()。
 
@@ -58,13 +58,13 @@ Spring 的设计目标是为我们提供一个一站式的轻量级应用开发�
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/wx-chevalier/Spring-Series.svg?style=flat-square
-[contributors-url]: https://github.com/wx-chevalier/Spring-Series/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/wx-chevalier/Spring-Series.svg?style=flat-square
-[forks-url]: https://github.com/wx-chevalier/Spring-Series/network/members
-[stars-shield]: https://img.shields.io/github/stars/wx-chevalier/Spring-Series.svg?style=flat-square
-[stars-url]: https://github.com/wx-chevalier/Spring-Series/stargazers
-[issues-shield]: https://img.shields.io/github/issues/wx-chevalier/Spring-Series.svg?style=flat-square
-[issues-url]: https://github.com/wx-chevalier/Spring-Series/issues
-[license-shield]: https://img.shields.io/github/license/wx-chevalier/Spring-Series.svg?style=flat-square
-[license-url]: https://github.com/wx-chevalier/Spring-Series/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/wx-chevalier/Spring-Notes.svg?style=flat-square
+[contributors-url]: https://github.com/wx-chevalier/Spring-Notes/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/wx-chevalier/Spring-Notes.svg?style=flat-square
+[forks-url]: https://github.com/wx-chevalier/Spring-Notes/network/members
+[stars-shield]: https://img.shields.io/github/stars/wx-chevalier/Spring-Notes.svg?style=flat-square
+[stars-url]: https://github.com/wx-chevalier/Spring-Notes/stargazers
+[issues-shield]: https://img.shields.io/github/issues/wx-chevalier/Spring-Notes.svg?style=flat-square
+[issues-url]: https://github.com/wx-chevalier/Spring-Notes/issues
+[license-shield]: https://img.shields.io/github/license/wx-chevalier/Spring-Notes.svg?style=flat-square
+[license-url]: https://github.com/wx-chevalier/Spring-Notes/blob/master/LICENSE.txt

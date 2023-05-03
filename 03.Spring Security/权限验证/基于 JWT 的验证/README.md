@@ -18,4 +18,4 @@
 
 # Links
 
-- 本文关联的代码仓库参阅：[Spring-Series/examples](https://github.com/wx-chevalier/Spring-Series)
+- 本文关联的代码仓库参阅：[Spring-Notes/examples](https://github.com/wx-chevalier/Spring-Notes)

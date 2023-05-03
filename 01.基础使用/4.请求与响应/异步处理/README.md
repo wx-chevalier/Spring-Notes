@@ -1,6 +1,6 @@
 # Spring Boot 中异步请求处理
 
-在 [Linux 并发编程](https://github.com/wx-chevalier/Linux-Series)系列中我们讨论了 Linux 系统中的 IO 模型。
+在 [Linux 并发编程](https://github.com/wx-chevalier/Linux-Notes)系列中我们讨论了 Linux 系统中的 IO 模型。
 
 ![IO 模型](https://assets.ng-tech.icu/item/20230417205601.png)
 
