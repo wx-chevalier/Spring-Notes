@@ -2,7 +2,7 @@
 
 ORM，即对象关系映射（**O**bject **R**elational **M**apping）模式
 
-在初学 Java 的时候，都是使用 JDBC 方式连接数据库。之后逐步使用 EclipseLink 、iBATIS（半自动） 和 Hibernate（全自动）等开源 ORM 框架。
+在初学 Java 的时候，都是使用 JDBC 方式连接数据库。之后逐步使用 EclipseLink、iBATIS（半自动） 和 Hibernate（全自动）等开源 ORM 框架。
 
 JDBC 的使用流程为：
 
