@@ -253,7 +253,7 @@ Tomcat 整体的启动流程如下图所示：
 
 #### 1. startup.sh & catalina.sh
 
-`startup.sh` 是对 `catalina.sh` 的一层薄封装，主要用于检查 `catalina.sh` 是否存在以及调用它。 `catalina.sh` 负责启动一个 JVM 来运行 Tomcat 的启动类 Bootstrap 。
+`startup.sh` 是对 `catalina.sh` 的一层薄封装，主要用于检查 `catalina.sh` 是否存在以及调用它。`catalina.sh` 负责启动一个 JVM 来运行 Tomcat 的启动类 Bootstrap 。
 
 #### 2. Bootstrap
 

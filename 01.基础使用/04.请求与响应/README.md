@@ -188,7 +188,7 @@ public @interface RestController {
 }
 ```
 
-可以看出， @RestController 注解包含了原来的 @Controller 和 @ResponseBody 注解，使用过 Spring 的朋友对 @Controller 注解已经非常了解了，这里不再赘述， @ResponseBody 注解是将返回的数据结构转换为 Json 格式。所以 @RestController 可以看作是 @Controller 和 @ResponseBody 的结合体，相当于偷个懒，我们使用 @RestController 之后就不用再使用 @Controller 了。但是需要注意一个问题：如果是前后端分离，不用模板渲染的话，比如 Thymeleaf，这种情况下是可以直接使用@RestController 将数据以 json 格式传给前端，前端拿到之后解析；但如果不是前后端分离，需要使用模板来渲染的话，一般 Controller 中都会返回到具体的页面，那么此时就不能使用@RestController 了，比如：
+可以看出，@RestController 注解包含了原来的 @Controller 和 @ResponseBody 注解，使用过 Spring 的朋友对 @Controller 注解已经非常了解了，这里不再赘述，@ResponseBody 注解是将返回的数据结构转换为 Json 格式。所以 @RestController 可以看作是 @Controller 和 @ResponseBody 的结合体，相当于偷个懒，我们使用 @RestController 之后就不用再使用 @Controller 了。但是需要注意一个问题：如果是前后端分离，不用模板渲染的话，比如 Thymeleaf，这种情况下是可以直接使用@RestController 将数据以 json 格式传给前端，前端拿到之后解析；但如果不是前后端分离，需要使用模板来渲染的话，一般 Controller 中都会返回到具体的页面，那么此时就不能使用@RestController 了，比如：
 
 ```java
 public String getUser() {
@@ -268,7 +268,7 @@ public String testPathVariable(@PathVariable(value = "idd") Integer id) {
 
 ## @RequestParam
 
-@RequestParam 注解顾名思义，也是获取请求参数的，上面我们介绍了 @PathValiable 注解也是获取请求参数的，那么 @RequestParam 和 @PathVariable 有什么不同呢？主要区别在于：@PathValiable 是从 url 模板中获取参数值， 即这种风格的 url：http://localhost:8080/user/{id} ；而 @RequestParam 是从 request 里面获取参数值，即这种风格的 url：http://localhost:8080/user?id=1 。我们使用该 url 带上参数 id 来测试一下如下代码：
+@RequestParam 注解顾名思义，也是获取请求参数的，上面我们介绍了 @PathValiable 注解也是获取请求参数的，那么 @RequestParam 和 @PathVariable 有什么不同呢？主要区别在于：@PathValiable 是从 url 模板中获取参数值，即这种风格的 url：http://localhost:8080/user/{id} ；而 @RequestParam 是从 request 里面获取参数值，即这种风格的 url：http://localhost:8080/user?id=1 。我们使用该 url 带上参数 id 来测试一下如下代码：
 
 ```java
 @GetMapping("/user")

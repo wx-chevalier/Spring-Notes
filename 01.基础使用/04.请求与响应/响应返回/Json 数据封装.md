@@ -13,7 +13,7 @@ public @interface RestController {
 }
 ```
 
-可以看出， @RestController 注解包含了原来的 @Controller 和 @ResponseBody 注解，使用过 Spring 的朋友对 @Controller 注解已经非常了解了，这里不再赘述， @ResponseBody 注解是将返回的数据结构转换为 Json 格式。所以在默认情况下，使用了 @RestController 注解即可将返回的数据结构转换成 Json 格式，Spring Boot 中默认使用的 Json 解析技术框架是 jackson。我们点开 pom.xml 中的 spring-boot-starter-web 依赖，可以看到一个 spring-boot-starter-json 依赖：
+可以看出，@RestController 注解包含了原来的 @Controller 和 @ResponseBody 注解，使用过 Spring 的朋友对 @Controller 注解已经非常了解了，这里不再赘述，@ResponseBody 注解是将返回的数据结构转换为 Json 格式。所以在默认情况下，使用了 @RestController 注解即可将返回的数据结构转换成 Json 格式，Spring Boot 中默认使用的 Json 解析技术框架是 jackson。我们点开 pom.xml 中的 spring-boot-starter-web 依赖，可以看到一个 spring-boot-starter-json 依赖：
 
 ```xml
 <dependency>
