@@ -6,4 +6,4 @@ Druid 是由阿里巴巴数据库事业部出品的开源项目。它除了是�
 
 - https://parg.co/kmH
 
-- [2021-池化技术有多牛？来，告诉你阿里的 Druid 为啥如此牛逼！](https://mp.weixin.qq.com/s/p2JqgLu5qWgEpd9hfVrYuQ): 今天无聊带你们撩一下 Druid，从底层的分析 Druid 是如何管理数据库连接？
+- [2021~池化技术有多牛？来，告诉你阿里的 Druid 为啥如此牛逼！](https://mp.weixin.qq.com/s/p2JqgLu5qWgEpd9hfVrYuQ): 今天无聊带你们撩一下 Druid，从底层的分析 Druid 是如何管理数据库连接？
