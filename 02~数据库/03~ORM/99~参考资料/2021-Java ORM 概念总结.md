@@ -12,11 +12,11 @@ JDBC 的使用流程为：
 4. 设置入参执行 SQL
 5. 返回结果集 (resultSet)
 
-![image-20230319134837722](https://assets.ng-tech.icu/item/20230514224404.png)
+![image-20230319134837722](https://ngte-superbed.oss-cn-beijing.aliyuncs.com/item/20230514224404.png)
 
 JDBC 使用流程
 
-![image-20230312192006619](https://assets.ng-tech.icu/item/20230514224423.png)
+![image-20230312192006619](https://ngte-superbed.oss-cn-beijing.aliyuncs.com/item/20230514224423.png)
 
 使用 JDBC 连接数据库
 

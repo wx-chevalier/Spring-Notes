@@ -2,7 +2,7 @@
 
 在 [Linux 并发编程](https://github.com/wx-chevalier/Linux-Notes)系列中我们讨论了 Linux 系统中的 IO 模型。
 
-![IO 模型](https://assets.ng-tech.icu/item/20230417205601.png)
+![IO 模型](https://ngte-superbed.oss-cn-beijing.aliyuncs.com/item/20230417205601.png)
 
 # 同步与异步请求的对比
 
