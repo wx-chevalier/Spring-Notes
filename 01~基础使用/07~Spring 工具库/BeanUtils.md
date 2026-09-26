@@ -26,11 +26,6 @@ public class CopyPropsToSameType {
 ```java
 public class CopyPropsToDifferentType {
 
-  public static void main(String[] args) {
-    BeanWrapper bw = new BeanWrapperImpl(new TestBean());
-    bw.setPropertyValue("aString", "someString");
-    bw.setPropertyValue("anInt", 3);
-
     TestBeanDifferent testBean2 = new TestBeanDifferent();
 
     //only properties of same name will be copied

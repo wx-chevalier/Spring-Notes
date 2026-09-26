@@ -68,9 +68,6 @@ import org.springframework.beans.BeanUtils;
 
 public class Main {
 
-  public static void main(String[] args) {
-    List<Article> articleList = Arrays.asList(new Article(1L, "hello world"));
-
     Member m1 = new Member("Eddy", articleList);
 
     User u1 = new User();
@@ -86,18 +83,6 @@ class Member {
   private List<Article> articleList; // <-- small camel case
 
   public Member() {}
-
-  public Member(String name, List<Article> articleList) {
-    this.name = name;
-    this.articleList = articleList;
-  }
-
-  @Override
-  public String toString() {
-    return "name:" + name + ", " + "articleList:" + articleList;
-  }
-// getters and setters
-}
 
 class Article {
   private Long id;

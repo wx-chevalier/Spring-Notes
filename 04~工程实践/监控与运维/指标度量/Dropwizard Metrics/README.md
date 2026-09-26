@@ -90,11 +90,6 @@ public class CounterTest {
         return q.poll();
     }
 
-    public static void main(String[] args) throws InterruptedException {
-        MetricRegistry registry = new MetricRegistry();
-        ConsoleReporter reporter = ConsoleReporter.forRegistry(registry).build();
-        reporter.start(1, TimeUnit.SECONDS);
-
         pendingJobs = registry.counter(MetricRegistry.name(Queue.class,"pending-jobs","size"));
 
         int num = 1;
@@ -148,11 +143,6 @@ public class MeterTest {
         }
     }
 
-    public static void main(String[] args) throws InterruptedException {
-        MetricRegistry registry = new MetricRegistry();
-        ConsoleReporter reporter = ConsoleReporter.forRegistry(registry).build();
-        reporter.start(1, TimeUnit.SECONDS);
-
         Meter meterTps = registry.meter(MetricRegistry.name(MeterTest.class,"request","tps"));
 
         while(true){
@@ -186,11 +176,6 @@ Histogram 统计数据的分布情况。比如最小值，最大值，中间值�
 ```java
 public class HistogramTest {
     public static Random random = new Random();
-
-    public static void main(String[] args) throws InterruptedException {
-        MetricRegistry registry = new MetricRegistry();
-        ConsoleReporter reporter = ConsoleReporter.forRegistry(registry).build();
-        reporter.start(1, TimeUnit.SECONDS);
 
         Histogram histogram = new Histogram(new ExponentiallyDecayingReservoir());
         registry.register(MetricRegistry.name(HistogramTest.class, "request", "histogram"), histogram);
@@ -230,11 +215,6 @@ Timer 其实是 Histogram 和 Meter 的结合，histogram 某部分代码/调用
 public class TimerTest {
 
     public static Random random = new Random();
-
-    public static void main(String[] args) throws InterruptedException {
-        MetricRegistry registry = new MetricRegistry();
-        ConsoleReporter reporter = ConsoleReporter.forRegistry(registry).build();
-        reporter.start(1, TimeUnit.SECONDS);
 
         Timer timer = registry.timer(MetricRegistry.name(TimerTest.class,"get-latency"));
 

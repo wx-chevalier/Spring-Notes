@@ -141,11 +141,6 @@ return factory;
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 
-<beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans
-    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
-
    <bean id="helloWorld" class="com.tutorialspoint.HelloWorld">
       <property name="message1" value="Hello World!"/>
       <property name="message2" value="Hello Second World!"/>
@@ -259,11 +254,6 @@ India Message3 : Namaste India!
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 
-<beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans
-    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
-
    <bean id="beanTeamplate" abstract="true">
       <property name="message1" value="Hello World!"/>
       <property name="message2" value="Hello Second World!"/>
@@ -299,11 +289,6 @@ Spring 框架中主要的作用域为如下五种，其中三种只能用在基�
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 
-<beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans
-    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
-
    <bean id="helloWorld" class="com.tutorialspoint.HelloWorld"
       scope="singleton">
    </bean>
@@ -331,13 +316,6 @@ public class HelloWorld {
 
 ```java
 package com.tutorialspoint;
-
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-public class MainApp {
-   public static void main(String[] args) {
-      ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
 
       HelloWorld objA = (HelloWorld) context.getBean("helloWorld");
 
@@ -399,13 +377,6 @@ public class HelloWorld {
 ```java
 package com.tutorialspoint;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-public class MainApp {
-   public static void main(String[] args) {
-      ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
-
       HelloWorld objA = (HelloWorld) context.getBean("helloWorld");
 
       objA.setMessage("I'm object A");
@@ -420,11 +391,6 @@ public class MainApp {
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-
-<beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans
-    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
    <bean id="helloWorld" class="com.tutorialspoint.HelloWorld"
       scope="prototype">
@@ -545,16 +511,6 @@ public class PersonService  implements InitializingBean,DisposableBean{
 }
 ```
 - 定义相应的配置文件
-
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xmlns:context="http://www.springframework.org/schema/context"
-xsi:schemaLocation="http://www.springframework.org/schema/beans
-http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
-http://www.springframework.org/schema/context
-http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
 <!-- <context:component-scan  base-package="com.myapp.core.jsr330"/> -->
 
@@ -831,11 +787,6 @@ public class MovieRecommender {
 
   @Autowired
   private MovieCatalog movieCatalog;
-
-  @Autowired
-  public MovieRecommender(CustomerPreferenceDao customerPreferenceDao) {
-  this.customerPreferenceDao = customerPreferenceDao;
-  }
 
   // ...
 
