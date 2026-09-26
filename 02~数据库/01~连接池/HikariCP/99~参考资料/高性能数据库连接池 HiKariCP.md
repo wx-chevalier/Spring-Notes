@@ -73,7 +73,7 @@ void close(AutoCloseable rs) {
     }
   }
 }
-```java
+```
 [HiKariCP 官方网站](https://github.com/brettwooldridge/HikariCP/wiki/Down-the-Rabbit-Hole) 解释了其性能之所以如此之高的秘密。
 
 微观上 HiKariCP 程序编译出的`字节码`执行效率更高，站在字节码的角度去优化 Java 代码，HiKariCP 的作者对性能的执着可见一斑，不过遗憾的是他并没有详细解释都做了哪些优化。而宏观上主要是和`两个数据结构`有关：
@@ -119,7 +119,7 @@ HiKariCP 中的 FastList 相对于 ArrayList 的一个优化点就是将 remove(
 BlockingQueue<Connection> busy;
 //空闲队列
 BlockingQueue<Connection> idle;
-```java
+```
 HiKariCP 并没有使用 Java SDK 中的阻塞队列，而是自己实现了一个叫做 `ConcurrentBag 的并发容器`。
 
 ConcurrentBag 的设计最初源自 `C#`，它的一个核心设计是使用 `ThreadLocal` 避免部分并发问题，不过 HiKariCP 中的 ConcurrentBag 并没有完全参考 C# 的实现，下面来看看它是如何实现的。
@@ -142,7 +142,7 @@ ThreadLocal<List<Object>> threadList;
 AtomicInteger waiters;
 //分配数据库连接的工具
 SynchronousQueue<T> handoffQueue;
-```java
+```
 当线程池创建了一个数据库连接时，通过调用 ConcurrentBag 的 add() 方法加入到 ConcurrentBag 中，下面是 add() 方法的具体实现，逻辑很简单，就是将这个连接加入到共享队列 sharedList 中，如果此时有线程在等待数据库连接，那么就通过 handoffQueue 将这个连接分配给等待的线程。
 
 ```java
@@ -158,7 +158,7 @@ void add(final T bagEntry){
       yield();
   }
 }
-```java
+```
 通过 ConcurrentBag 提供的 `borrow()` 方法，可以`获取一个空闲的数据库连接`，borrow() 的主要逻辑是：
 
 1. 首先查看线程本地存储是否有空闲连接，如果有，则返回一个空闲的连接；
@@ -216,7 +216,7 @@ T borrow(long timeout, final TimeUnit timeUnit){
     waiters.decrementAndGet();
   }
 }
-```java
+```
 释放连接需要调用 ConcurrentBag 提供的 requite() 方法，该方法的逻辑很简单，首先将数据库连接状态更改为 STATE_NOT_IN_USE，之后查看是否存在等待线程，如果有，则分配给等待线程；如果没有，则将该数据库连接保存到线程本地存储里。
 
 ```java
@@ -243,7 +243,7 @@ void requite(final T bagEntry){
       : bagEntry);
   }
 }
-```java
+```
 # 四、总结
 
 HiKariCP 中的 FastList 和 ConcurrentBag 这两个数据结构使用得非常巧妙，虽然实现起来并不复杂，但是对于性能的提升非常明显，根本原因在于这两个数据结构适用于数据库连接池这个特定的场景。

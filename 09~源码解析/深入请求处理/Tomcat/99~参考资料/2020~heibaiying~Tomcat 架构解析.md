@@ -102,7 +102,7 @@ Tomcat 容器的分层结构在其 conf 目录下的 `server.xml` 配置文件�
     </Engine>
   </Service>
 </Server>
-```java
+```
 这里的 appBase 代表我们应用程序所在父目录，我们部署的每一个应用程序就是一个独立的 Context 。
 
 ### 4.3 Pipeline 和 Valve
@@ -124,7 +124,7 @@ public interface Pipeline extends Contained {
     public boolean isAsyncSupported();
     public void findNonAsyncValves(Set<String> result);
 }
-```java
+```
 ```java
 public interface Valve {
 
@@ -137,7 +137,7 @@ public interface Valve {
     public boolean isAsyncSupported();
 }
 
-```java
+```
 通过 Pipeline 的 Valve 责任链模式，每一层容器都可以很方便地进行功能的扩展，来对请求进行检查、处理或增强。每一层处理完成后，就会传递到下一层的 First Valve，由下一层进行处理。以 Engine 容器为例，其实现类为 StandardEngine：
 
 ```java
@@ -148,7 +148,7 @@ public class StandardEngine extends ContainerBase implements Engine {
          ....
         }
     }
-```java
+```
 在 StandardEngine 创建时就会为其 Pipeline 设置上一个名为 StandardEngineValve 的 Basic Valve，StandardEngineValve 的实现如下：
 
 ```java
@@ -172,7 +172,7 @@ final class StandardEngineValve extends ValveBase {
         host.getPipeline().getFirst().invoke(request, response);
     }
 }
-```java
+```
 Engine 的 Basic Valve（即最后一个 Valve）在 `invoke` 方法中会获取到下一级容器（Host）的第一个 Valve，从而完成首尾相接。
 
 ### 4.4 FilterChain
@@ -185,12 +185,12 @@ ApplicationFilterChain filterChain = ApplicationFilterFactory.createFilterChain(
 .....
 // 调用Filter Chain的doFilter方法
 filterChain.doFilter(request.getRequest(), response.getResponse());
-```java
+```
 当到达执行链的末端后，会执行 servlet 的 service 方法：
 
 ```java
 servlet.service(request, response);
-```java
+```
 以我们最常使用的 HttpServlet 为例，其最终的 service 方法如下：
 
 ```shell
@@ -228,7 +228,7 @@ protected void service(HttpServletRequest req, HttpServletResponse resp) throws 
 
         } ......
     }
-```java
+```
 至此，来自客户端的请求就逐步传递到我们编写的 doGet 或者 doPost 方法中。
 
 ## 五、请求流程

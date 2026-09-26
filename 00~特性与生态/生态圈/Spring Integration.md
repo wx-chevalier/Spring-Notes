@@ -30,7 +30,7 @@ messageChannel.subscribe(msg-> { // 2
 });
 
 messageChannel.send(MessageBuilder.withPayload("msgfrom alibaba").build()); // 3
-```java
+```
 1. 构造一个可订阅的消息通道 `messageChannel`；
 
 2. 使用 `MessageHandler` 去消费这个消息通道里的消息；
@@ -56,13 +56,13 @@ messageChannel.subscribe(msg -> {
 
 messageChannel.send(MessageBuilder.withPayload("msg from alibaba").build());
 messageChannel.send(MessageBuilder.withPayload("msg from alibaba").build());
-```java
+```
 由于 `DirectChannel` 内部的消息分发器是 `UnicastingDispatcher` 单播的方式，并且采用轮询的负载均衡策略，所以这里两次的消费分别对应这两个 `MessageHandler`。控制台打印出：
 
 ```java
 receive1: msg from alibaba
 receive2: msg from alibaba
-```java
+```
 既然存在单播的消息分发器 `UnicastingDispatcher`，必然也会存在广播的消息分发器，那就是 `BroadcastingDispatcher`，它被 `PublishSubscribeChannel` 这个消息通道所使用。广播消息分发器会把消息分发给所有的 `MessageHandler`：
 
 ```java
@@ -78,7 +78,7 @@ messageChannel.subscribe(msg -> {
 
 messageChannel.send(MessageBuilder.withPayload("msg from alibaba").build());
 messageChannel.send(MessageBuilder.withPayload("msg from alibaba").build());
-```java
+```
 发送两个消息，都被所有的 `MessageHandler` 所消费。控制台打印：
 
 ```java
@@ -86,4 +86,4 @@ receive1: msg from alibaba
 receive2: msg from alibaba
 receive1: msg from alibaba
 receive2: msg from alibaba
-```java
+```

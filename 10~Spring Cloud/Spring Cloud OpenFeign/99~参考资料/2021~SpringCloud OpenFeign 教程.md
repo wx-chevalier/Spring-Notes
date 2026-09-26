@@ -25,7 +25,7 @@ OpenFeign 集成了 Ribbon 和 Hystrix，并简化了服务调用方式，使用
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-web</artifactId>
 </dependency>
-```java
+```
 ## 启动类注解
 
 添加 @EnableEurekaClient 和 @EnableFeignClients 注解：
@@ -39,7 +39,7 @@ public class FeignConsumerApplication {
         SpringApplication.run(FeignConsumerApplication.class, args);
     }
 }
-```java
+```
 ## 服务提供者
 
 服务提供者有三个接口，分别测试 Json 参数、对象参数、普通参数：
@@ -62,7 +62,7 @@ public class Controller {
         return ids.split(",");
     }
 }
-```java
+```
 ## 实现服务调用
 
 OpenFeign 实现服务调用非常简单：
@@ -89,7 +89,7 @@ public interface Service {
     @GetMapping("/getUser3")
     User get3(@RequestBody User user);
 }
-```java
+```
 接口定义好以后就可以直接使用了，不需要实现类，下面 Controller 层调用它：
 
 ```java
@@ -103,7 +103,7 @@ public String[] getUsers(String ids){
     //调用接口的方法
     return service.get(ids);
 }
-```java
+```
 ## Ribbon 配置
 
 OpenFeign 集成了 Ribbon，Ribbon 的配置可以参考这篇文章 SpringCloud Ribbon 教程。
@@ -116,7 +116,7 @@ OpenFeign 集成了 Hystrix，默认是关闭的，需要先启用它：
 feign:
   hystrix:
     enabled: true
-```java
+```
 Hystrix 配置与这篇文章一致 SpringCloud Hystrix 教程。
 
 ## 定义服务降级逻辑
@@ -147,7 +147,7 @@ public class ServiceFallback implements Service{
         return null;
     }
 }
-```java
+```
 - Service 接口上的注解添加 fallback = ServiceFallback.class 指定降级处理类
 
 ```java
@@ -162,7 +162,7 @@ public interface Service {
     @GetMapping("/getUser3")
     User get3(@RequestBody User user);
 }
-```java
+```
 # OpenFeign 配置
 
 ## 压缩
@@ -181,7 +181,7 @@ feign:
       enabled: true
       # GZIP压缩
       useGzipDecoder: true
-```java
+```
 ## 日志
 
 OpenFeign 日志记录级别，定义记录那些信息：
@@ -210,7 +210,7 @@ public class FeignConsumerApplication {
         return Logger.Level.FULL;
     }
 }
-```java
+```
 配置文件中定义日志级别，这里的日志级别跟上面的不一样，Feign 日志记录仅响应 debug 级别：
 
 ```yaml
@@ -221,7 +221,7 @@ logging:
       example:
         feignconsumer:
           Service: debug
-```java
+```
 访问接口可以看到控制台输出日志：
 
 ```sh
@@ -234,4 +234,4 @@ logging:
 2021-02-03 16:29:02.818 DEBUG 17308 --- [trix-provider-1] com.example.feignconsumer.Service        : [Service#get2]
 2021-02-03 16:29:02.822 DEBUG 17308 --- [trix-provider-1] com.example.feignconsumer.Service        : [Service#get2] {"id":null,"name":"1","password":"2"}
 2021-02-03 16:29:02.822 DEBUG 17308 --- [trix-provider-1] com.example.feignconsumer.Service        : [Service#get2] <--- END HTTP (37-byte body)
-```java
+```

@@ -57,7 +57,7 @@ public interface Subscription {
 // Processor：继承了 Publisher 和 Subscriber，用于转换发布者到订阅者之间管道中的元素。Processor<T,R> 订阅类型为 T 的数据元素，接收并转换为类型为 R 的数据，然后发布变换后的数据。
 public interface Processor<T, R> extends Subscriber<T>, Publisher<R> {
 }
-```java
+```
 ![发布者与订阅者之间关系](https://img.imgdb.cn/item/603c88e25f4313ce253d07ab.jpg)
 
 下图显示了发布者和订阅者之间的典型交互顺序。
@@ -96,7 +96,7 @@ Flux.create(sink -> {
     }
     sink.complete();
 }).subscribe(System.out::println);
-```java
+```
 创建 Mono 的方式如下：
 
 ```java
@@ -104,7 +104,7 @@ Flux.create(sink -> {
 Mono.fromSupplier(() -> "Hello").subscribe(System.out::println);
 Mono.justOrEmpty(Optional.of("Hello")).subscribe(System.out::println);
 Mono.create(sink -> sink.success("Hello")).subscribe(System.out::println);
-```java
+```
 流的操作函数如下：
 
 ```java
@@ -113,7 +113,7 @@ Flux.just("a", "b").zipWith(Flux.just("c", "d")).subscribe(System.out::println);
 // reduce 和 reduceWith 操作符对流中包含的所有元素进行累积操作，得到一个包含计算结果的 Mono 序列。
 Flux.range(1, 100).reduce((x, y) -> x + y).subscribe(System.out::println);
 Flux.range(1, 100).reduceWith(() -> 100, (x, y) -> x + y).subscribe(System.out::println);
-```java
+```
 当需要处理 Flux 或 Mono 中的消息时，可以通过 subscribe 方法来添加相应的订阅逻辑。例如：
 
 ```java
@@ -139,7 +139,7 @@ Flux.just(1, 2)
         .concatWith(Mono.error(new IllegalStateException()))
         .retry(1)
         .subscribe(System.out::println);
-```java
+```
 ## WebFlux 模块简介
 
 WebFlux 是 Spring Framework 5 的一个新模块，包含了响应式 HTTP 和 WebSocket 的支持，另外在上层服务端支持两种不同的编程模型：第一种是 Spring MVC 中使用的基于 Java 注解的方式，第二种是基于 Java 8 的 lambda 表达式的函数式编程模型。这两种编程模型只是在代码编写方式上存在不同，它们运行在同样的反应式底层架构之上，因此在运行时是相同的。
@@ -190,5 +190,5 @@ public class ReactiveController {
         return Mono.just("Hello World");
     }
 }
-```java
+```
 Reactive Controller 操作的是异步的 ServerHttpRequest 和 ServerHttpResponse，而不再是 Spring MVC 里的 HttpServletRequest 和 HttpServletResponse。Mono 和 Flux 是异步的，当流中的数据没有就绪时，方法也能立即返回（返回的是对象引用）。当数据就绪后，web server 会扫描到这个就绪事件。

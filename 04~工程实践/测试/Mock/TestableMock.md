@@ -18,14 +18,14 @@ dependencies {
     testImplementation('com.alibaba.testable:testable-all:0.5.2')
     testAnnotationProcessor('com.alibaba.testable:testable-processor:0.5.2')
 }
-```java
+```
 然后在测试配置中添加 javaagent：
 
 ```groovy
 test {
     jvmArgs "-javaagent:${classpath.find { it.name.contains("testable-agent") }.absolutePath}"
 }
-```java
+```
 然后相比以往 Mock 工具以类为粒度的 Mock 方式，TestableMock 允许用户直接定义需要 Mock 的单个方法，并遵循约定优于配置的原则，按照规则自动在测试运行时替换被测方法中的指定方法调用。
 
 - Mock 非构造方法，拷贝原方法定义到 Mock 容器类，加 @MockMethod 注解
@@ -43,7 +43,7 @@ public class DemoTest {
     }
 
 }
-```java
+```
 在 Mock 容器类中定义一个有@MockMethod 注解的普通方法，使它与需覆写的方法名称、参数、返回值类型完全一致，并在注解的 targetClass 参数指定该方法原本所属对象类型。此时被测类中所有对该需覆写方法的调用，将在单元测试运行时，将自动被替换为对上述自定义 Mock 方法的调用。例如，被测类中有一处"anything".substring(1, 2)调用，我们希望在运行测试的时候将它换成一个固定字符串，则只需在 Mock 容器类定义如下方法：
 
 ```java
@@ -53,7 +53,7 @@ public class DemoTest {
 private String substring(int i, int j) {
     return "sub_string";
 }
-```java
+```
 当遇到待覆写方法有重名时，可以将需覆写的方法名写到 @MockMethod 注解的 targetMethod 参数里，这样 Mock 方法自身就可以随意命名了。下面这个例子展示了 targetMethod 参数的用法，其效果与上述示例相同：
 
 ```java
@@ -63,7 +63,7 @@ private String substring(int i, int j) {
 private String use_any_mock_method_name(int i, int j) {
     return "sub_string";
 }
-```java
+```
 有时，在 Mock 方法里会需要访问发起调用的原始对象中的成员变量，或是调用原始对象的其他方法。此时，可以将 @MockMethod 注解中的 targetClass 参数去除，然后在方法参数列表首位增加一个类型为该方法原本所属对象类型的参数。TestableMock 约定，当@MockMethod 注解的 targetClass 参数值为空时，Mock 方法的首位参数即为目标方法所属类型，参数名称随意。通常为了便于代码阅读，建议将此参数统一命名为 self 或 src。举例如下：
 
 ```java
@@ -74,7 +74,7 @@ private String substring(String self, int i, int j) {
     // 可以直接调用原方法，此时Mock方法仅用于记录调用，常见于对void方法的测试
     return self.substring(i, j);
 }
-```java
+```
 ## 覆写被测类自身的成员方法
 
 有时候，在对某些方法进行测试时，希望将被测类自身的另外一些成员方法 Mock 掉（比如这个方法里有许多外部依赖或耗时操作）。做法与前一种情况完全相同，只需将 targetClass 参数赋值为被测类，即可实现对被测类自身（不论是公有或私有）成员方法的覆写。例如，被测类中有一个签名为 String innerFunc(String)的私有方法，我们希望在测试的时候将它替换掉，则只需在 Mock 容器类定义如下方法：
@@ -85,7 +85,7 @@ private String substring(String self, int i, int j) {
 private String innerFunc(String text) {
     return "mock_" + text;
 }
-```java
+```
 同样的，上述示例中的方法如需访问发起调用的原始被测对象，也可不使用 targetClass 参数，而是在定义 Mock 方法时，在方法参数列表首位加一个类型为 DemoMock 的参数（名字随意）。
 
 ## 覆写任意类的静态方法
@@ -97,7 +97,7 @@ private String innerFunc(String text) {
 private BlackBox secretBox() {
     return new BlackBox("not_secret_box");
 }
-```java
+```
 对于静态方法的 Mock，通常不使用方法参数列表的首位加参数来表示目标类型。但这种方法也依然适用，只是实际传入的第一个参数值将始终是`null`。
 
 ## 覆写任意类的 new 操作
@@ -113,7 +113,7 @@ private BlackBox secretBox() {
 private BlackBox createBlackBox(String text) {
     return new BlackBox("mock_" + text);
 }
-```java
+```
 ## 在 Mock 方法中区分调用来源
 
 在 Mock 方法中通过 TestableTool.SOURCE_METHOD 变量可以识别进入该 Mock 方法前的被测类方法名称；此外，还可以借助 TestableTool.MOCK_CONTEXT 变量为 Mock 方法注入“额外的上下文参数”，从而区分处理不同的调用场景。例如，在测试用例中验证当被 Mock 方法返回不同结果时，对被测目标方法的影响：
@@ -127,7 +127,7 @@ public void testDemo() {
     MOCK_CONTEXT.put("case", "has-error");
     assertEquals(false, demo());
 }
-```java
+```
 在 Mock 方法中取出注入的参数，根据情况返回不同结果：
 
 ```java
@@ -142,4 +142,4 @@ private Data mockDemo() {
             return null;
     }
 }
-```java
+```

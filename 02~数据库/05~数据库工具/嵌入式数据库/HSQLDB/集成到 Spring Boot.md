@@ -14,12 +14,12 @@
     <version>2.4.0</version>
     <scope>runtime</scope>
 </dependency>
-```java
+```
 然后可以以服务器模式运行 HSQLDB：
 
 ```sh
 java -cp ../lib/hsqldb.jar org.hsqldb.server.Server --database.0 file.testdb --dbname0.testdb
-```java
+```
 或者以内存模式运行，其配置方式分别如下：
 
 ```s
@@ -34,7 +34,7 @@ spring.datasource.url=jdbc:hsqldb:mem:testdb;DB_CLOSE_DELAY=-1
 spring.datasource.username=sa
 spring.datasource.password=
 spring.jpa.hibernate.ddl-auto=create
-```java
+```
 然后我们创建实体类以及 CrudRepository：
 
 ```java
@@ -53,7 +53,7 @@ public class Customer {
 
 @Repository
 public interface CustomerRepository extends CrudRepository<Customer, Long> {}
-```java
+```
 最后的测试代码如下所示：
 
 ```java
@@ -85,4 +85,4 @@ public class CustomerRepositoryTest {
     assertThat(customer.getName()).isEqualTo("Bob");
   }
 }
-```java
+```

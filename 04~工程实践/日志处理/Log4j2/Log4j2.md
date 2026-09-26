@@ -44,7 +44,7 @@ Log4j 2 是 Log4j 的升级版本，该版本比起其前任来说有着显著�
         <artifactId>log4j-slf4j-impl</artifactId>
         <version>2.0-beta9</version>
     </dependency>
-```java
+```
 而后在代码文件中，可以使用 Slf4j，也可以直接使用 Log4j2，如下：
 
 ```java
@@ -52,7 +52,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 private static final Logger log = LoggerFactory.getLogger(Test.class);
-```java
+```
 如果是直接使用的 log4j2，则只要用 LogManager 的 getLogger 函数获取一个 logger，就可以使用 logger 记录日志，代码如下：
 
 ```java
@@ -72,7 +72,7 @@ public class HelloLog4j {
     logger.exit();
   }
 }
-```java
+```
 需要注意的是，log4j 2.0 与以往的 1.x 有一个明显的不同，其配置文件只能采用.xml, .json 或者 .jsn。在默认情况下，系统选择 configuration 文件的优先级如下：
 
 - classpath 下名为 log4j-test.json 或者 log4j-test.jsn 文件
@@ -146,7 +146,7 @@ public class HelloLog4j {
         </root>
     </loggers>
 </configuration>
-```java
+```
 loggers 标签，用于定义 logger 的 lever 和所采用的 appender，其中 appender-ref 必须为先前定义的 appenders 的名称，例如，此处为 Console。那么 log 就会以 appender 所定义的输出格式来输出 log。root 标签为 log 的默认输出形式，如果一个类的 log 没有在 loggers 中明确指定其输出 lever 与格式，那么就会采用 root 中定义的格式。例如以下定义：
 
 ```xml
@@ -166,7 +166,7 @@ loggers 标签，用于定义 logger 的 lever 和所采用的 appender，其中
     </root>
   </loggers>
 </configuration>
-```java
+```
 此时，HelloLog4j 则会在 error 级别上输出 log，而其他类则会在 trace 级别上输出 log。需要注意的是 additivity 选项，如果设置为 true(默认值)则 HelloLog4j 的 log 会被打印两次，第二次打印是由于 HelloLog4j 同时也满足 root 里面定义的 trace。在 log4j2 中可以配置不同的 Logger 输出到不同的文件中，如果有时候需要按照不同的级别输出到不同的文件中，则直接在 logger 的 AppenderRef 中定义不同的 level 指向。
 
 ```xml
@@ -176,4 +176,4 @@ loggers 标签，用于定义 logger 的 lever 和所采用的 appender，其中
         <appenderRef ref="InfoController" level="info"/>
     </logger>
 </loggers>
-```java
+```

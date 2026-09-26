@@ -47,7 +47,7 @@ if (principal instanceof UserDetails) {
 } else {
   String username = principal.toString();
 }
-```java
+```
 调用 getContext() 返回的对象是 SecurityContext 接口的一个实例，对应 SecurityContext 接口定义如下：
 
 ```java
@@ -56,7 +56,7 @@ public interface SecurityContext extends Serializable {
 	Authentication getAuthentication();
 	void setAuthentication(Authentication authentication);
 }
-```java
+```
 ## Authentication
 
 在 SecurityContext 接口中定义了 getAuthentication 和 setAuthentication 两个抽象方法，当调用 getAuthentication 方法后会返回一个 Authentication 类型的对象，这里的 Authentication 也是一个接口，它的定义如下：
@@ -74,5 +74,5 @@ public interface Authentication extends Principal, Serializable {
 	boolean isAuthenticated();
 	void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException;
 }
-```java
+```
 以上的 Authentication 接口是 spring-security-core jar 包中的接口，直接继承自 Principal 类，而 Principal 是位于 java.security 包中，由此可知 Authentication 是 spring security 中核心的接口。通过这个 Authentication 接口的实现类，我们可以得到用户拥有的权限信息列表，密码，用户细节信息，用户身份信息，认证信息等。

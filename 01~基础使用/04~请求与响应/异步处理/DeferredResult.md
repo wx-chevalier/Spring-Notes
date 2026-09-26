@@ -13,7 +13,7 @@ public DeferredResult<String> quotes() {
 
 // From some other thread...
 deferredResult.setResult(data);
-```java
+```
 控制器可以从不同的线程异步生成返回值，例如，响应外部事件（JMS 消息），计划任务或其他事件等。
 
 ```java
@@ -39,7 +39,7 @@ public CompletableFuture<Message> getAMessageFuture() {
         return new Message("data 1");
     }, futureExecutor);
 }
-```java
+```
 # 源码分析
 
 ```java
@@ -211,5 +211,5 @@ public class DeferredResult<T> {
 	}
 
 }
-```java
+```
 DeferredResult 的超时处理，采用委托机制，也就是在实例 DeferredResult 时给予一个超时时长（毫秒），同时在 onTimeout 中委托（传入）一个新的处理线程（我们可以认为是超时线程）；当超时时间到来，DeferredResult 启动超时线程，超时线程处理业务，封装返回数据，给 DeferredResult 赋值（正确返回的或错误返回的）

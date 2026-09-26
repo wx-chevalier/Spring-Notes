@@ -27,4 +27,4 @@ protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         .password("admin")
         .roles("USER", "ADMIN");
 }
-```java
+```

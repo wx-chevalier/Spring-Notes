@@ -33,7 +33,7 @@ Logback 主要由 logback-core, logback-classic, logback-access 三个模块组�
         // xxxx
     </root>
 </configuration>
-```java
+```
 property 用来定义变量值的标签，property 标签有两个属性，name 和 value；其中 name 的值是变量的名称，value 的值时变量定义的值。通过 property 定义的值会被插入到 logger 上下文中。定义变量后，可以使 `${name}` 来使用变量。
 
 ```xml
@@ -57,7 +57,7 @@ property 用来定义变量值的标签，property 标签有两个属性，name 
 		<appender-ref ref="DEBUG_LEVEL_REMAPPER"/>
 	</logger>
 </included>
-```java
+```
 然后在 Java 代码中可以通过 Slf4j 来获取到日志记录器对象：
 
 ```java
@@ -67,7 +67,7 @@ private static final Logger logger = LoggerFactory.getLogger(DemoTest.class);
 // 通过 Slf4j 注解注入
 @Slf4j
 logger.info("info")
-```java
+```
 # Appender
 
 Appender 是一个日志打印的组件，这里组件里面定义了打印过滤的条件、打印输出方式、滚动策略、编码方式、打印格式等等。但是它仅仅是一个打印组件，如果我们不使用一个 logger 或者 root 的 appender-ref 指定某个具体的 appender 时，它就没有什么意义。上文定义的 root 本质上是根 logger,只不过 root 中不能有 name 和 additivity 属性，是有一个 level。
@@ -95,7 +95,7 @@ Appender 主要包含以下三类：
 <root level="${logLevel}">
     <appender-ref ref="console"/>
 </root>
-```java
+```
 ## RollingFileAppender
 
 ```xml
@@ -112,7 +112,7 @@ Appender 主要包含以下三类：
         <totalSizeCap>20GB</totalSizeCap>
     </rollingPolicy>
 </appender>
-```java
+```
 其中 rollingPolicy 子标签用来描述滚动策略，仅在 RollingFileAppender 中才需要配置。而该标签中常用的滚动策略是 TimeBasedRollingPolicy，它根据时间来制定滚动策略，既负责滚动也负责触发滚动。其他还有，FixedWindowRollingPolicy 根据固定窗口算法重命名文件的滚动策略。
 
 ## Filter
@@ -162,7 +162,7 @@ filter 其实是 appender 里面的子元素。它作为过滤器存在，执行
     <appender-ref ref="fileInfoLog"/>
     <appender-ref ref="fileErrorLog"/>
 </root>
-```java
+```
 其他的常用的 Filter 还有 ThresholdFilter 与 LevelFilter：
 
 - ThresholdFilter: 临界值过滤器，过滤掉低于指定临界值的日志。当日志级别等于或高于临界值时，过滤器返回 NEUTRAL；当日志级别低于临界值时，日志会被拒绝。
@@ -178,7 +178,7 @@ filter 其实是 appender 里面的子元素。它作为过滤器存在，执行
         level="${logging.level}" additivity="false">
     <appender-ref ref="console" />
 </logger>
-```java
+```
 上面的这个配置文件描述的是：wx.spring.boot.controller 这个包下的 `${logging.level}` 级别的日志将会使用 console 来打印；logger 有三个属性和一个子标签：
 
 - name: 用来指定受此 logger 约束的某一个包或者具体的某一个类。
@@ -213,7 +213,7 @@ filter 其实是 appender 里面的子元素。它作为过滤器存在，执行
     <appender-ref ref="fileServiceLog" />
     <appender-ref ref="fileErrorLog" />
 </logger>
-```java
+```
 我们也可以将日志维度固定到某个具体的类：
 
 ```xml
@@ -222,19 +222,19 @@ filter 其实是 appender 里面的子元素。它作为过滤器存在，执行
         <appender-ref ref="SCHEDULERTASKLOCK-APPENDER" />
         <appender-ref ref="fileErrorLog" />
     </logger>
-```java
+```
 或者自定义 logger 名称：
 
 ```xml
 <logger name="dependency" level="info" additivity="false">
     <appender-ref ref="dependencyAppender" />
 </logger>
-```java
+```
 然后在代码中显式获取：
 
 ```java
 private static Logger logger = LoggerFactory.getLogger("dependency");
-```java
+```
 如果我们希望打印出 MyBatis 的 SQL 语句，则在 logback-spring.xml 中添加如下配置：
 
 ```xml
@@ -242,7 +242,7 @@ private static Logger logger = LoggerFactory.getLogger("dependency");
 <logger name="wx.dao" level="${logging.sql.level}" additivity="false">
     <appender-ref ref="sqlAppender"/>
 </logger>
-```java
+```
 # Links
 
 - https://mp.weixin.qq.com/s/IAGPxOfCz9a2C0VrnyT2eg Logback 配置文件这么写，TPS 提高 10 倍

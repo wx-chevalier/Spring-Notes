@@ -11,7 +11,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     User findUser(@Param("name") String name);
 
 }
-```java
+```
 我们只需要通过编写一个继承自 JpaRepository 的接口就能完成数据访问，下面以一个具体实例来体验 Spring Data JPA 给我们带来的强大功能。
 
 # 基础使用
@@ -27,7 +27,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-data-jpa</artifactId>
 </dependency>
-```java
+```
 在 application.xml 中配置：数据库连接信息（如使用嵌入式数据库则不需要）、自动创建表结构的设置，例如使用 mysql 的情况如下：
 
 ```java
@@ -37,7 +37,7 @@ spring.datasource.password=
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 
 spring.jpa.properties.hibernate.hbm2ddl.auto=create-drop
-```java
+```
 spring.jpa.properties.hibernate.hbm2ddl.auto 是 hibernate 的配置属性，其主要作用是：自动创建、更新、验证数据库表结构。该参数的几种配置如下：
 
 - `create`：每次加载 hibernate 时都会删除上一次的生成的表，然后根据你的 model 类再重新来生成新表，哪怕两次没有任何改变也要这样执行，这就是导致数据库表数据丢失的一个重要原因。
@@ -67,7 +67,7 @@ public class User {
         this.age = age;
     }
 }
-```java
+```
 - `@Entity`注解标识了 User 类是一个持久化的实体
 - `@Data`和`@NoArgsConstructor`是 Lombok 中的注解。用来自动生成各参数的 Set、Get 函数以及不带参数的构造函数。
 - `@Id`和`@GeneratedValue`用来标识 User 对应对应数据库表中的主键
@@ -87,7 +87,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     User findUser(@Param("name") String name);
 
 }
-```java
+```
 在 Spring Data JPA 中，只需要编写类似上面这样的接口就可实现数据访问。不再像我们以往编写了接口时候还需要自己编写接口实现类，直接减少了我们的文件清单。下面对上面的 UserRepository 做一些解释，该接口继承自 JpaRepository，通过查看 JpaRepository 接口的 API 文档，可以看到该接口本身已经实现了创建（save）、更新（save）、删除（delete）、查询（findAll、findOne）等基本操作的函数，因此对于这些基础操作的数据访问就不需要开发者再自己定义。
 
 # 单元测试
@@ -137,4 +137,4 @@ public class ApplicationTests {
 
     }
 }
-```java
+```

@@ -31,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
        <mapper  resource="sqlMapper/userMapper.xml"/>
     </mappers>
 </configuration>
-```java
+```
 # 创建一个 sqlSessionFactory
 
 Mybatis 首先会解析 XML 文件生成 Configuration：
@@ -62,7 +62,7 @@ private void parseConfiguration(XNode root) {
       throw new BuilderException("Error parsing SQL Mapper Configuration. Cause: " + e, e);
     }
   }
-```java
+```
 其中核心的是对于 Mapper 的解析，mapperElemet()方法是解析 mapper 映射文件的，具体代码如下：
 
 ```java
@@ -96,7 +96,7 @@ private void mapperElement(XNode parent) throws Exception {
       }
     }
   }
-```java
+```
 根据以上代码可以分析，在写 mapper 映射文件的地址时不仅可以写成 resource，还可以写成 url 和 mapperClass 的形式，由于我们用的是 resource，所以直接进入第一个判断，最后解析 mapper 映射文件的方法是：
 
 ```java
@@ -117,12 +117,12 @@ private void configurationElement(XNode context) {
       throw new BuilderException("Error parsing Mapper XML. Cause: " + e, e);
     }
   }
-```java
+```
 其中具体解析每一个 sql 语句节点的是
 
 ```java
 buildStatementFromContext(context.evalNodes("select|insert|update|delete"));
-```java
+```
 进入这个方法一层层深究，最后到这里可以知道 MappedStatement 是由 builderAssistant（即 MapperBuildAssistant）创建的。
 
 ```java
@@ -133,7 +133,7 @@ public void parseStatementNode() {
         resultSetTypeEnum, flushCache, useCache, resultOrdered,
         keyGenerator, keyProperty, keyColumn, databaseId, langDriver, resultSets);
   }
-```java
+```
 最后进入方法 addMappedStatement()，mappedStatement 最后以 id 为键保存在了 Configuration 中的一个 map 变量 mappedStatements 中。
 
 ```java
@@ -185,7 +185,7 @@ public MappedStatement addMappedStatement(
     configuration.addMappedStatement(statement);
     return statement;
   }
-```java
+```
 最后回到我们的创建 sqlSessionFactory 上，之前的一切都是为了生成一个 sqlSessionFactory 服务的
 
 ```java
@@ -208,7 +208,7 @@ public SqlSessionFactory build(InputStream inputStream, String environment, Prop
   public SqlSessionFactory build(Configuration config) {
     return new DefaultSqlSessionFactory(config);
   }
-```java
+```
 从上面的代码可以看出最后是通过以 Configuration 为参数 build()方法生成 DefautSqlSessionFactory。
 
 # 创建 sqlSession
@@ -241,7 +241,7 @@ private SqlSession openSessionFromDataSource(ExecutorType execType, TransactionI
     this.dirty = false;
     this.autoCommit = autoCommit;
   }
-```java
+```
 executor 在这一步得到创建，具体的使用在下一步。
 
 # 执行具体的 sql 请求
@@ -258,7 +258,7 @@ executor 在这一步得到创建，具体的使用在下一步。
 
 ```java
 User user = sqlSession.selectOne("test.findUserById", 1);
-```java
+```
 具体到里面的方法就是
 
 ```java
@@ -275,7 +275,7 @@ public <E> List<E> selectList(String statement, Object parameter, RowBounds rowB
       ErrorContext.instance().reset();
     }
   }
-```java
+```
 在这里通过 statementId 拿到了我们在第一步存在 map 里面的 MappedStatement。SqlSession 根据 Statement ID, 在 mybatis 配置对象 Configuration 中获取到对应的 MappedStatement 对象，然后调用 mybatis 执行器来执行具体的操作。再继续看 query()和 queryFromDatabase() 这两个方法：
 
 ```java
@@ -324,7 +324,7 @@ private <E> List<E> queryFromDatabase(MappedStatement ms, Object parameter, RowB
     }
     return list;
   }
-```java
+```
 在这两个方法里面会为当前的查询创建一个缓存 key，如果缓存中没有值，直接从数据库中读取，执行查询后将得到的 list 结果放入缓存之中。紧接着看 doQuery()在 SimpleExecutor 类中重写的方法
 
 ```java
@@ -339,7 +339,7 @@ public <E> List<E> doQuery(MappedStatement ms, Object parameter, RowBounds rowBo
       closeStatement(stmt);
     }
   }
-```java
+```
 Statement 连接对象就是在这里创建的，因此 Executor 的作用之一就是创建 Statement 了，创建完后又把 Statement 丢给 StatementHandler 返回 List 查询结果。接下来再看一下这里的两个方法 prepareStatement()和 query()的具体实现
 
 ```java
@@ -356,5 +356,5 @@ public <E> List<E> query(Statement statement, ResultHandler resultHandler) throw
     ps.execute();
     return resultSetHandler.<E> handleResultSets(ps);
   }
-```java
+```
 prepareStatement()是创建 Statement 的具体实现方法，调用 parameterize()对创建的 Statement 对象设置参数，即为我们设为占位符的地方赋上指定的参数，parameterize()方法再深入进去就是调用 ParameterHandler 的 setParameters()方法具体赋值了。这里的 query()是调用了 ResultSetHandler 的 handleResultSets(Statement) 方法。作用就是把 ResultSet 结果集对象转换成 List 类型的集合。

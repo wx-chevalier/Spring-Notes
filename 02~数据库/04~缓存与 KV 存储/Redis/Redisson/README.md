@@ -13,4 +13,4 @@ config.useSingleServer().setAddress("127.0.0.1:6379");
 config.useSingleServer().setAddress("127.0.0.1:6379").setDatabase(1);
 
 Redisson redisson = Redisson.create(config);
-```java
+```

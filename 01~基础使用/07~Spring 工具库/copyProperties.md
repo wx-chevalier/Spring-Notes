@@ -56,7 +56,7 @@ class Article {
   }
 // getters and setters
 }
-```java
+```
 上面可以看到经由`BeanUtils.copyProperties()`复制后`m2`的属性值确实与`m1`相同，里面的`List`物件属性也会被复制，属于深拷贝(deep copy)。下面范例则是把`m1`复制到另一个类别`User`，除了`articlelist`属性名称外几乎相同。
 
 ```java
@@ -129,7 +129,7 @@ class User {
   }
 // getters and setters
 }
-```java
+```
 此时 u1.articlelist 的内容却是 null，由此可知 BeanUtils.copyProperties()只会复制属性名称相同的属性值，若属性名称不同则被忽略。
 
 # 内部实现
@@ -185,7 +185,7 @@ public abstract class BeanUtils {
     }
     ...
 }
-```java
+```
 BeanUtils.copyProperties()虽然在复制 POJO 物件时非常方便，但在属性的命名上必须统一，所以系统中各属性的命名规则必须严格规范。还有个问题就是 debug 时错误不好找，所以并不推荐使用。大型程序中最好有专人专职负责维护整个系统的命名列表，中英文对照表，名词解释等，让开发人员可以直接查找使用，如果找不到就写信去申请由维护人员建立，否则就常看到同一种东西在程序中出现多种名称，这样 BeanUtils.copyProperties()就派不上用场了，更严重的是维护上常令人困惑。
 
 - 例如顾客编号 customerId，customerID，custId，custID，clientId，clientId；

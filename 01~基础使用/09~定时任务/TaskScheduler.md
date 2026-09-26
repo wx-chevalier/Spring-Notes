@@ -47,7 +47,7 @@ public class Ticker {
     void onTick();
   }
 }
-```java
+```
 # Links
 
 - https://www.baeldung.com/spring-task-scheduler

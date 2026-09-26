@@ -57,7 +57,7 @@ CREATE TABLE user
 	email VARCHAR(50) NULL DEFAULT NULL COMMENT '邮箱',
 	PRIMARY KEY (id)
 );
-```java
+```
 表数据文件（data-h2.sql）内容：
 
 ```sql
@@ -67,7 +67,7 @@ INSERT INTO user (id, name, age, email) VALUES
 (3, 'pure', 28, 'smile3@ityouknow.com'),
 (4, 'smile', 21, 'smile4@ityouknow.com'),
 (5, 'it', 24, 'smile5@ityouknow.com');
-```java
+```
 在示例项目的 resources 目录下创建 db 文件夹，将两个文件放入其中。
 
 ## 添加依赖
@@ -82,7 +82,7 @@ INSERT INTO user (id, name, age, email) VALUES
 		<scope>runtime</scope>
 	</dependency>
 </dependencies>
-```java
+```
 然后配置文件如下：
 
 ```yml
@@ -100,4 +100,4 @@ spring:
 logging:
   level:
     wx: debug
-```java
+```

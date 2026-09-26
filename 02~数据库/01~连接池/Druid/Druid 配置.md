@@ -10,7 +10,7 @@
     <artifactId>druid-spring-boot-starter</artifactId>
     <version>1.1.21</version>
 </dependency>
-```java
+```
 在 application.properties 中配置数据库连接信息。Druid 的配置都以 spring.datasource.druid 作为前缀，所以根据之前的配置，稍作修改即可：
 
 ```java
@@ -18,7 +18,7 @@ spring.datasource.druid.url=jdbc:mysql://localhost:3306/test
 spring.datasource.druid.username=root
 spring.datasource.druid.password=
 spring.datasource.druid.driver-class-name=com.mysql.cj.jdbc.Driver
-```java
+```
 配置 Druid 的连接池。与 Hikari 一样，要用好一个数据源，就要对其连接池做好相应的配置，比如下面这样：
 
 ```yml
@@ -36,7 +36,7 @@ spring.datasource.druid.maxOpenPreparedStatements=20
 spring.datasource.druid.validationQuery=SELECT 1
 spring.datasource.druid.validation-query-timeout=500
 spring.datasource.druid.filters=stat
-```java
+```
 # 配置 Druid 监控
 
 在 pom.xml 中引入 spring-boot-starter-actuator 模块：
@@ -46,7 +46,7 @@ spring.datasource.druid.filters=stat
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-actuator</artifactId>
 </dependency>
-```java
+```
 在 application.properties 中添加 Druid 的监控配置。
 
 ```yml
@@ -55,7 +55,7 @@ spring.datasource.druid.stat-view-servlet.url-pattern=/druid/*
 spring.datasource.druid.stat-view-servlet.reset-enable=true
 spring.datasource.druid.stat-view-servlet.login-username=admin
 spring.datasource.druid.stat-view-servlet.login-password=admin
-```java
+```
 上面的配置主要用于开启 stat 监控统计的界面以及监控内容的相关配置，具体释意如下：
 
 - `spring.datasource.druid.stat-view-servlet.url-pattern`：访问地址规则
@@ -99,7 +99,7 @@ public class UserController {
     }
 
 }
-```java
+```
 完成上面所有配置之后，启动应用，访问 Druid 的监控页面 http://localhost:8080/druid/，输入上面 spring.datasource.druid.stat-view-servlet.login-username 和 spring.datasource.druid.stat-view-servlet.login-password 配置的登录账户与密码，就能看到如下监控页面：
 
 ![Druid Monitor](https://s3.ax1x.com/2021/02/07/ytze3R.png)
@@ -137,5 +137,5 @@ public class UserController {
 
 ```java
 spring.datasource.druid.filters=stat,wall
-```java
+```
 **注意**：这里的所有监控信息是对这个应用实例的数据源而言的，而并不是数据库全局层面的，可以视为应用层的监控，不可能作为中间件层的监控。

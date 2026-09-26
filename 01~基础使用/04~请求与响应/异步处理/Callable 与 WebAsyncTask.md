@@ -27,7 +27,7 @@ http-nio-8080-exec-1 main thread end
 task-1 child thread start
 task-1 child thread end
 */
-```java
+```
 # WebAsyncTask
 
 Spring 官方推荐如果我们需要超时处理的回调或者错误处理的回调，我们可以使用 WebAsyncTask 代替 Callable。
@@ -67,7 +67,7 @@ System.out.println(Thread.currentThread().getName() + " main thread start");
 
 	return webAsyncTask;
 }
-```java
+```
 WebAsyncTask 的源码如下：
 
 ```java
@@ -137,7 +137,7 @@ public class WebAsyncTask<V> implements BeanFactoryAware {
 	}
 
 }
-```java
+```
 WebAsyncTask 的异步编程 API，相比于 @Async 注解，WebAsyncTask 提供更加健全的 超时处理 和 异常处理 支持。但是 @Async 也有更优秀的地方，就是他不仅仅能用于 Controller 中，而是可以用在任何地方。
 
 # WebMvcConfigurerAdapter
@@ -163,4 +163,4 @@ public class RequestAsyncPoolConfig extends WebMvcConfigurerAdapter {
     return new TimeoutCallableProcessingInterceptor();
   }
 }
-```java
+```

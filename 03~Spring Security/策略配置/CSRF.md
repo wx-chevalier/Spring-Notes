@@ -42,7 +42,7 @@ protected void doFilterInternal(HttpServletRequest request,
 
     filterChain.doFilter(request, response);
 }
-```java
+```
 # Links
 
 - https://www.baeldung.com/spring-security-csrf

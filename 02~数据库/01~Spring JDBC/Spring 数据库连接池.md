@@ -9,7 +9,7 @@ spring.datasource.url=jdbc:mysql://localhost:3306/test
 spring.datasource.username=root
 spring.datasource.password=123456
 spring.datasource.driver-class-name=com.mysql.jdbc.Driver
-```java
+```
 - 数据源连接池配置：以`spring.datasource.<数据源名称>.*`的形式存在，比如：Hikari 的配置参数就是`spring.datasource.hikari.*`形式。下面这个是我们最常用的几个配置项及对应说明：
 
 ```java
@@ -19,7 +19,7 @@ spring.datasource.hikari.idle-timeout=500000
 spring.datasource.hikari.max-lifetime=540000
 spring.datasource.hikari.connection-timeout=60000
 spring.datasource.hikari.connection-test-query=SELECT 1
-```java
+```
 这些配置的含义：
 
 - `spring.datasource.hikari.minimum-idle`: 最小空闲连接，默认值 10，小于 0 或大于 maximum-pool-size，都会重置为 maximum-pool-size
@@ -49,7 +49,7 @@ public class DataSourceConfig {
         return dataSourceBuilder.build();
     }
 }
-```java
+```
 当然，我们也可以局部地应用 application.properties 中定义的属性：
 
 ```java
@@ -61,13 +61,13 @@ public DataSource getDataSource() {
     return dataSourceBuilder.build();
 }
 
-```java
+```
 并在 application.properties 文件中额外指定一些：
 
 ```xml
 spring.datasource.url=jdbc:h2:mem:test
 spring.datasource.driver-class-name=org.h2.Driver
-```java
+```
 # Links
 
 - https://mp.weixin.qq.com/s/cgR-KVs1UKEM-xTEjIWKQg

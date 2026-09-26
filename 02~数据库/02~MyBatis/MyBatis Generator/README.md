@@ -6,7 +6,7 @@ MyBatis Generator 可以直接通过命令行调用：
 
 ```sh
 java -jar mybatis-generator-core-x.x.x.jar -configfile generatorConfig.xml
-```java
+```
 或者添加 Maven 插件：
 
 ```xml
@@ -28,12 +28,12 @@ java -jar mybatis-generator-core-x.x.x.jar -configfile generatorConfig.xml
   </build>
   ...
 </project>
-```java
+```
 然后在项目目录下执行 mvn 命令：
 
 ```sh
 $ mvn mybatis-generator:generate
-```java
+```
 # 配置详解
 
 generatorConfig.xml 的基础结构如下：
@@ -55,7 +55,7 @@ generatorConfig.xml 的基础结构如下：
      ...
     </context>
 </generatorConfiguration>
-```java
+```
 `<context>` 元素用于指定生成一组对象的环境。例如指定要连接的数据库，要生成对象的类型和要处理的数据库中的表。运行 MBG 的时候还可以指定要运行的 `<context>`。该元素只有一个必选属性 id，用来唯一确定一个 `<context>` 元素，该 id 属性可以在运行 MBG 的使用。`<context>` 还包含了 defaultModelType 属性，用来指定 MBG 生成实体类的规则：
 
 - conditional: 默认设置，这个模型和下面的 hierarchical 类似，除了如果那个单独的类将只包含一个字段，将不会生成一个单独的类。因此,如果一个表的主键只有一个字段,那么不会为该字段生成单独的实体类,会将该字段合并到基本实体类中。
@@ -83,7 +83,7 @@ commentGenerator 旨在创建 class 时，对注释进行控制。一般情况�
     <property name="suppressAllComments" value="true"/>
     <property name="suppressDate" value="true"/>
 </commentGenerator>
-```java
+```
 - `<jdbcConnection>` (1 个)
 
 jdbcConnection 用于指定数据库连接信息，该元素必选，并且只能有一个。配置该元素只需要注意如果 JDBC 驱动不在 classpath 下，就需要通过 `<classPathEntry>` 元素引入 jar 包，这里推荐将 jar 包放到 classpath 下。
@@ -98,7 +98,7 @@ jdbcConnection 用于指定数据库连接信息，该元素必选，并且只�
 <!--或者使用外部依赖-->
 <jdbcConnection driverClass="${jdbc.driverClass}" connectionURL="${jdbc.connectionURL}" userId="${jdbc.userId}" password="${jdbc.password}">
 </jdbcConnection>
-```java
+```
 ## 实体类解析配置
 
 - `<javaTypeResolver>` (0 个或 1 个)
@@ -113,7 +113,7 @@ jdbcConnection 用于指定数据库连接信息，该元素必选，并且只�
     <!-- 如果精度=0并且长度<5，就会使用java.lang.Short -->
     <property name="forceBigDecimals" value="false" />
 </javaTypeResolver>
-```java
+```
 - `<javaModelGenerator>` (1 个)
 
 Model 模型生成器,用来生成含有主键 key 的类，记录类 以及查询 Example 类；targetPackage 指定生成的 model 生成所在的包名，targetProject 指定在该项目下所在的路径。
@@ -135,7 +135,7 @@ Model 模型生成器,用来生成含有主键 key 的类，记录类 以及查�
     <!-- 是否对类 CHAR 类型的列的数据进行 trim 操作 -->
     <property name="trimStrings" value="true"/>
 </javaModelGenerator>
-```java
+```
 - `<sqlMapGenerator>` (0 个或 1 个)
 
 Mapper 映射文件生成所在的目录 为每一个数据库的表生成对应的 SqlMap 文件：
@@ -144,7 +144,7 @@ Mapper 映射文件生成所在的目录 为每一个数据库的表生成对应
 <sqlMapGenerator targetPackage="wx.map.domain" targetProject="src/main/java">
     <property name="enableSubPackages" value="false"/>
 </sqlMapGenerator>
-```java
+```
 - `<javaClientGenerator>` (0 个或 1 个)
 
 客户端代码，生成易于使用的针对 Model 对象和 XML 配置文件的代码：
@@ -177,7 +177,7 @@ Mapper 映射文件生成所在的目录 为每一个数据库的表生成对应
     -->
     <property name="rootInterface" value=""/>
 </javaClientGenerator>
-```java
+```
 - `<table>` (1 个或多个)
 
 ```xml
@@ -216,7 +216,7 @@ Mapper 映射文件生成所在的目录 为每一个数据库的表生成对应
     <columnOverride column="" javaType="" jdbcType="" typeHandler=""	delimitedColumnName="" />
 
 </table>
-```java
+```
 ## Lombok
 
 如果我们希望在生成的实体类中支持 Lombok，那可以参考 [mybatis-generator-lombok-plugin](https://github.com/softwareloop/mybatis-generator-lombok-plugin) 等项目。在 pom.xml 中可以添加该插件：
@@ -237,7 +237,7 @@ Mapper 映射文件生成所在的目录 为每一个数据库的表生成对应
         </dependency>
     </dependencies>
 </plugin>
-```java
+```
 然后在 Generator 的配置中添加该插件：
 
 ```xml
@@ -272,7 +272,7 @@ Mapper 映射文件生成所在的目录 为每一个数据库的表生成对应
 
     </context>
 </generatorConfiguration>
-```java
+```
 # 模板使用
 
 对于 MyBatis Generator 生成的代码模板，不建议修改生成后的模板，这样在数据库发生变化时候可以直接重新生成，根据错误提示修改对应代码。MyBatis Generator 为我们自动生成了 Model, Mapper 与 Example 文件，其中 Example 能够被用于构建搜索条件，譬如：
@@ -307,7 +307,7 @@ pager.setPageSize(5);
 UserExample ex = new UserExample();
 ex.setPage(pager);
 List<User> userList = userDao.selectByExample(ex);
-```java
+```
 ## Mapper 类
 
 Mapper 也就是数据库访问类 DAO：
@@ -372,7 +372,7 @@ public interface OrderDTOMapper {
   //通过主键更新,dto全部字段,不包含text等大字段
   int updateByPrimaryKey(OrderDTO record);
 }
-```java
+```
 - 最常用的动态查询方法 selectByExample(OrderDTOExample example),简单通过构造不同的 example 对象就可以实现.
 
 - 后缀为 Selective 的插入和更新方法,只处理 dto 对象的非空字段,例如经常我们只想更新某些记录的部分字段,那么 updateByExampleSelective 方法最合适不过.
@@ -397,7 +397,7 @@ andPaymentAmtGreaterThan(300L);
 
 //执行查询
 return orderMapper.selectByExample(example);
-```java
+```
 # Example
 
 Example 类中有三个内部类 Criteria，Criterion，GeneratedCriteria：
@@ -429,7 +429,7 @@ from order
     order by ${orderByClause}
 </if>
 </select>
-```java
+```
 sqlmapper.xml 是如何构造动态查询条件：
 
 ```xml
@@ -468,5 +468,5 @@ sqlmapper.xml 是如何构造动态查询条件：
       </foreach>
     </where>
   </sql>
-```java
+```
 通过以上 sqlmapper.xml 我们可以看出 Example 对象及它的内部对象属性在运行时被 mybatis 框架循环遍历解析成动态 sql 语句，与我们手写 sql 语句并无差别。

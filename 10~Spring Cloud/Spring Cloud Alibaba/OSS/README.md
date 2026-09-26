@@ -30,7 +30,7 @@ export default (ossConfig: IOssConfig) => {
     bucket: ossConfig.bucket
   });
 };
-```java
+```
 ```js
 import http from '../httpService';
 import { IOssConfig } from 'src/utils/ossClientCreator';
@@ -91,7 +91,7 @@ export default {
   put,
   upload,
 };
-```java
+```
 在上传组件的加载完毕的事件中，加载 OSS 配置：
 
 ```js
@@ -99,7 +99,7 @@ async componentDidMount() {
     const config = await ossService.getOssConfig();
     this.client = ossClientCreator(config);
   }
-```java
+```
 然后如下封装 Antd 的 Upload 组件：
 
 ```js
@@ -147,7 +147,7 @@ async componentDidMount() {
 >
   {uploadButton}
 </Upload>
-```java
+```
 ## 服务端签名后直传
 
 采用 JavaScript 客户端直接签名时，AccessKeyID 和 AcessKeySecret 会暴露在前端页面，因此存在严重的安全隐患。因此，OSS 提供了服务端签名后直传的方案。
@@ -215,7 +215,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
         System.out.println(e.getMessage());
     }
 }
-```java
+```
 在前端使用中，即将返回的前面参数拼接到请求服务中：
 
 ```js
@@ -227,7 +227,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
   'callback' : callbackbody,
   'signature': signature
 }
-```java
+```
 - 上传回调服务
 
 上传回调服务响应 OSS 发送给应用服务器的 POST 消息。
@@ -274,4 +274,4 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
         response(request, response, "{\"Status\":\"verdify not ok\"}", HttpServletResponse.SC_BAD_REQUEST);
     }
 }
-```java
+```

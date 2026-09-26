@@ -11,7 +11,7 @@
 public @interface RestController {
     String value() default "";
 }
-```java
+```
 可以看出，@RestController 注解包含了原来的 @Controller 和 @ResponseBody 注解，使用过 Spring 的朋友对 @Controller 注解已经非常了解了，这里不再赘述，@ResponseBody 注解是将返回的数据结构转换为 Json 格式。所以在默认情况下，使用了 @RestController 注解即可将返回的数据结构转换成 Json 格式，Spring Boot 中默认使用的 Json 解析技术框架是 jackson。我们点开 pom.xml 中的 spring-boot-starter-web 依赖，可以看到一个 spring-boot-starter-json 依赖：
 
 ```xml
@@ -21,7 +21,7 @@ public @interface RestController {
     <version>2.0.3.RELEASE</version>
     <scope>compile</scope>
 </dependency>
-```java
+```
 Spring Boot 中对依赖都做了很好的封装，可以看到很多 spring-boot-starter-xxx 系列的依赖，这是 Spring Boot 的特点之一，不需要人为去引入很多相关的依赖了，starter-xxx 系列直接都包含了所必要的依赖，所以我们再次点进去上面这个 spring-boot-starter-json 依赖，可以看到：
 
 ```xml
@@ -49,7 +49,7 @@ Spring Boot 中对依赖都做了很好的封装，可以看到很多 spring-boo
     <version>2.9.6</version>
     <scope>compile</scope>
 </dependency>
-```java
+```
 到此为止，我们知道了 Spring Boot 中默认使用的 json 解析框架是 jackson。下面我们看一下默认的 jackson 框架对常用数据类型的转 Json 处理。
 
 # 基于 Jackson 的默认 Json 处理
@@ -68,7 +68,7 @@ public class User {
     private String password;
 	/* 省略get、set和带参构造方法 */
 }
-```java
+```
 然后我们创建一个 Controller，分别返回 User 对象、List<User> 和 `Map<String, Object>`。
 
 ```java
@@ -97,7 +97,7 @@ public class JsonController {
         return map;
     }
 }
-```java
+```
 接口，分别返回了一个 User 对象、一个 List 集合和一个 Map 集合，其中 Map 集合中的 value 存的是不同的数据类型。接下来我们依次来测试一下效果。
 
 ```sh
@@ -113,7 +113,7 @@ public class JsonController {
 
 {"info":{"id":1,"username":"test","password":"123456"},"cnt":4153}
 
-```java
+```
 ## jackson 中对 null 的处理
 
 在实际项目中，我们难免会遇到一些 null 值出现，我们转 json 时，是不希望有这些 null 出现的，比如我们期望所有的 null 在转 json 时都变成 "" 这种空字符串，那怎么做呢？在 Spring Boot 中，我们做一下配置即可，新建一个 jackson 的配置类：
@@ -135,7 +135,7 @@ public class JacksonConfig {
         return objectMapper;
     }
 }
-```java
+```
 该段及会将 null 转化为空字符串。
 
 # fastJson
@@ -148,7 +148,7 @@ public class JacksonConfig {
 	<artifactId>fastjson</artifactId>
 	<version>1.2.35</version>
 </dependency>
-```java
+```
 使用 fastJson 时，对 null 的处理和 jackson 有些不同，需要继承 WebMvcConfigurationSupport 类，然后覆盖 configureMessageConverters 方法，在方法中，我们可以选择对要实现 null 转换的场景，配置好即可。如下：
 
 ```java
@@ -184,7 +184,7 @@ public class FastJsonConfig extends WebMvcConfigurationSupport {
         converters.add(converter);
     }
 }
-```java
+```
 # 封装统一返回的数据结构
 
 以上是 Spring Boot 返回 json 的几个代表的例子，但是在实际项目中，除了要封装数据之外，我们往往需要在返回的 json 中添加一些其他信息，比如返回一些状态码 code ，返回一些 msg 给调用者，这样调用者可以根据 code 或者 msg 做一些逻辑判断。所以在实际项目中，我们需要封装一个统一的 json 返回结构存储返回信息。由于封装的 json 数据的类型不确定，所以在定义统一的 json 结构时，我们需要用到泛型。统一的 json 结构中属性包括数据、状态码、提示信息即可，构造方法可以根据实际业务需求做相应的添加即可，一般来说，应该有默认的返回结构，也应该有用户指定的返回结构。如下：
@@ -231,4 +231,4 @@ public class JsonResult<T> {
     }
     // 省略get和set方法
 }
-```java
+```

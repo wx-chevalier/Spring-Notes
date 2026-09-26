@@ -32,7 +32,7 @@ Spring Boot 官方并没有纳入 Shiro，怎么解决？很简单，官方不�
     <artifactId>shiro-spring</artifactId>
     <version>1.5.3</version>
 </dependency>
-```java
+```
 ## 自定义 Shiro 过滤器
 
 对 URL 进行拦截，没有认证的需要认证，认证成功的则可以根据需要判断角色及权限。这个过滤器需要开发者自定义，然后去指定认证和授权的逻辑，继承抽象类 AuthorizingRealm，实现两个抽象方法分别完成授权和认证的逻辑。首先来完成认证的逻辑，需要连接数据库，这里我们使用 MyBatis Plus 来完成，pom.xml 中添加 MyBatis Plus 依赖，如下所示。
@@ -49,7 +49,7 @@ Spring Boot 官方并没有纳入 Shiro，怎么解决？很简单，官方不�
     <artifactId>mybatis-plus-boot-starter</artifactId>
     <version>3.3.1.tmp</version>
 </dependency>
-```java
+```
 创建数据表 account，添加两条记录，SQL 如下所示。
 
 ```sql
@@ -65,7 +65,7 @@ CREATE TABLE `account` (
 LOCK TABLES `account` WRITE;
 INSERT INTO `account` VALUES (1,'zs','123123','',''),(2,'ls','123123','manage',''),(3,'ww','123123','manage','administrator');
 UNLOCK TABLES;
-```java
+```
 创建实体类 Account：
 
 ```java
@@ -77,13 +77,13 @@ public class Account {
     private String perms;
     private String role;
 }
-```java
+```
 创建 AccountMapper 接口：
 
 ```java
 public interface AccountMapper extends BaseMapper<Account> {
 }
-```java
+```
 创建 application.yml
 
 ```js
@@ -96,7 +96,7 @@ spring:
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-```java
+```
 启动类添加 @MapperScan 注解扫描 Mapper 接口
 
 ```js
@@ -109,7 +109,7 @@ public class SpringbootshirodemoApplication {
     }
 
 }
-```java
+```
 首先通过单元测试调试 AccoutMapper 接口
 
 ```js
@@ -127,7 +127,7 @@ class AccountMapperTest {
         System.out.println(account);
     }
 }
-```java
+```
 ![img](https://ask.qcloudimg.com/http-save/yehe-1646884/pv7089o8ip.png?imageView2/2/w/1620)
 
 返回上图表示调试成功，MyBatis Plus 调试成功，接下来完成 Service 层代码编写。
@@ -148,7 +148,7 @@ public class AccountServiceImpl implements AccountService {
         return accountMapper.selectOne(wrapper);
     }
 }
-```java
+```
 接下来回到 Shiro 完成用户认证，在 MyRealm 中完成代码的编写。
 
 ```js
@@ -183,7 +183,7 @@ public class MyRealm extends AuthorizingRealm {
         return null;
     }
 }
-```java
+```
 客户端传来的 username 和 password 会自动封装到 token，先根据 username 进行查询，如果返回 null，则表示用户名错误，直接 return null 即可，Shiro 会自动抛出 UnknownAccountException 异常。
 
 如果返回不为 null，则表示用户名正确，再验证密码，直接返回 SimpleAuthenticationInfo 对象即可，如果密码验证成功，Shiro 认证通过，否则返回 IncorrectCredentialsException 异常。
@@ -213,7 +213,7 @@ public class ShiroConfig {
         return new MyRealm();
     }
 }
-```java
+```
 这个配置类中一共自动装配了 3 个 Bean 实例，第一个是自定义过滤器 MyRealm，我们的业务逻辑全部定义在这个 Bean 中。然后需要创建第二个 Bean 示例 DefaultWebSecurityManager，并且将 MyRealm 注入到 DefaultWebSecurityManager Bean 中，完成注册。
 
 最终需要装配第三个 Bean ShiroFilterFactoryBean，这是 Shiro 自带的一个 Filter 工厂实例，所有的认证和授权判断都是由这个 Bean 生成的 Filter 对象来完成的，这就是 Shiro 框架的运行机制，开发者只需要定义规则，进行配置，具体的执行者全部由 Shiro 自己创建的 Filter 来完成。
@@ -259,7 +259,7 @@ public ShiroFilterFactoryBean filterFactoryBean(@Qualifier("manager") DefaultWeb
     factoryBean.setUnauthorizedUrl("/unauth");
     return factoryBean;
 }
-```java
+```
 Controller 如下所示。
 
 ```js
@@ -293,7 +293,7 @@ public class MyController {
         return "未授权没有访问权限";
     }
 }
-```java
+```
 现在只需要登录就可以访问 main.html，但是无法访问 manage.html，这是因为没有授权，接下来我们完成授权操作，回到 MyRealm，代码如下所示。
 
 ```js
@@ -312,7 +312,7 @@ protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principal
     info.addStringPermission(account.getPerms());
     return info;
 }
-```java
+```
 数据库如下所示：
 
 zs 没有权限和角色，所以登录之后只能访问 main.html。
@@ -332,7 +332,7 @@ ww 拥有 manage 权限和 administrator 角色，所以登录之后可以访问
     <artifactId>thymeleaf-extras-shiro</artifactId>
     <version>2.0.0</version>
 </dependency>
-```java
+```
 2、配置类添加 ShiroDialect。
 
 ```js
@@ -340,7 +340,7 @@ ww 拥有 manage 权限和 administrator 角色，所以登录之后可以访问
 public ShiroDialect shiroDialect(){
     return new ShiroDialect();
 }
-```java
+```
 3、Controller 登录成功后将用户信息存入 session，同时添加退出操作。
 
 ```js
@@ -368,7 +368,7 @@ public String logout(){
     subject.logout();
     return "login";
 }
-```java
+```
 4、index.html。
 
 ```js
@@ -399,4 +399,4 @@ public String logout(){
     </div>
 </body>
 </html>
-```java
+```

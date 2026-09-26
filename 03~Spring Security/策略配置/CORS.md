@@ -21,7 +21,7 @@ public class AccountController {
     // ...
   }
 }
-```java
+```
 我们也可以在全局的配置中添加 CORS 统一配置：
 
 ```java
@@ -42,4 +42,4 @@ public class WebConfig implements WebMvcConfigurer {
   // Add more mappings...
   }
 }
-```java
+```

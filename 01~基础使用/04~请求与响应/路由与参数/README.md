@@ -57,14 +57,14 @@ public String method5(){
 // 表示将功能处理方法将生产 json 格式的数据，此时根据请求头中的 Accept 进行匹配，如请求头 Accept:application/json 时即可匹配;
 @RequestMapping(value = "/produces", produces = "application/json")
 @RequestMapping(produces={"text/html", "application/json"})
-```java
+```
 ## 路由日志
 
 该 Spring Boot 2.1.x 版本开始，将这些日志的打印级别做了调整：从原来的 INFO 调整为 TRACE。所以，当我们希望在应用启动的时候打印这些信息的话，只需要在配置文件增增加对 RequestMappingHandlerMapping 类的打印级别设置即可，比如在 application.properties 中增加下面这行配置：
 
 ```sh
 logging.level.org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping=trace
-```java
+```
 在增加了上面的配置之后重启应用，便可以看到如下的日志打印：
 
 ```sh
@@ -81,5 +81,5 @@ logging.level.org.springframework.web.servlet.mvc.method.annotation.RequestMappi
 	{ /error, produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
 2020-02-11 15:36:09.793 DEBUG 49215 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 7 mappings in 'requestMappingHandlerMapping'
 
-```java
+```
 可以看到在 2.1.x 版本之后，除了调整了日志级别之外，对于打印内容也做了调整。现在的打印内容根据接口创建的 Controller 类做了分类打印，这样更有助于开发者根据自己编写的 Controller 来查找初始化了那些 HTTP 接口。

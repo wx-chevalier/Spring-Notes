@@ -20,7 +20,7 @@ public class CopyPropsToSameType {
   }
 }
 // TestBean{aString='someString', anInt=3, date=Mon May 01 16:08:07 CDT 2017}
-```java
+```
 以下是针对不同类型的 Bean 处理的例子：
 
 ```java
@@ -74,7 +74,7 @@ public class CopyPropsToDifferentType {
   }
 }
 // TestBeanDifferent{aString='someString', differentInt=0}
-```java
+```
 # getPropertyDescriptors
 
 ```java
@@ -93,7 +93,7 @@ public class PropDescriptorExample {
   }
 }
 // [java.beans.PropertyDescriptor[name=AString; propertyType=class java.lang.String; readMethod=public java.lang.String com.logicbig.example.TestBean.getAString(); writeMethod=public void com.logicbig.example.TestBean.setAString(java.lang.String)], java.beans.PropertyDescriptor[name=anInt; propertyType=int; readMethod=public int com.logicbig.example.TestBean.getAnInt(); writeMethod=public void com.logicbig.example.TestBean.setAnInt(int)], java.beans.PropertyDescriptor[name=class; propertyType=class java.lang.Class; readMethod=public final native java.lang.Class java.lang.Object.getClass()], java.beans.PropertyDescriptor[name=date; propertyType=class java.util.Date; readMethod=public java.util.Date com.logicbig.example.TestBean.getDate()]]
-```java
+```
 # resolveSignature
 
 ```java
@@ -149,4 +149,4 @@ public class ResolveSignature2 {
   }
 }
 // -- doing something --
-```java
+```

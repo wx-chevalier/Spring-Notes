@@ -13,7 +13,7 @@ Spring JDBC 框架提供了多种访问数据库的方法，其中最著名的�
     <artifactId>mysql-connector-java</artifactId>
     <version>5.1.26</version>
 </dependency>
-```java
+```
 # 基础使用
 
 ## 数据源配置
@@ -25,7 +25,7 @@ Spring JDBC 框架提供了多种访问数据库的方法，其中最著名的�
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-jdbc</artifactId>
 </dependency>
-```java
+```
 嵌入式数据库通常用于开发和测试环境，不推荐用于生产环境。Spring Boot 提供自动配置的嵌入式数据库有 H2、HSQL、Derby，你不需要提供任何连接配置就能使用。比如，我们可以在 pom.xml 中引入如下配置使用 HSQL：
 
 ```xml
@@ -34,7 +34,7 @@ Spring JDBC 框架提供了多种访问数据库的方法，其中最著名的�
     <artifactId>hsqldb</artifactId>
     <scope>runtime</scope>
 </dependency>
-```java
+```
 以 MySQL 数据库为例，先引入 MySQL 连接的依赖包，在 pom.xml 中加入：
 
 ```xml
@@ -42,7 +42,7 @@ Spring JDBC 框架提供了多种访问数据库的方法，其中最著名的�
     <groupId>mysql</groupId>
     <artifactId>mysql-connector-java</artifactId>
 </dependency>
-```java
+```
 在 src/main/resources/application.properties 中配置数据源信息：
 
 ```yml
@@ -50,7 +50,7 @@ spring.datasource.url=jdbc:mysql://localhost:3306/test
 spring.datasource.username=dbuser
 spring.datasource.password=dbpass
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-```java
+```
 注意：因为 Spring Boot 2.1.x 默认使用了 MySQL 8.0 的驱动，所以这里采用 com.mysql.cj.jdbc.Driver，而不是老的 com.mysql.jdbc.Driver。
 
 ## 使用 JdbcTemplate 操作数据库
@@ -63,7 +63,7 @@ CREATE TABLE `User` (
   `age` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
 
-```java
+```
 根据数据库中创建的 User 表，创建领域对象：
 
 ```java
@@ -73,7 +73,7 @@ public class User {
     private String name;
     private Integer age;
 }
-```java
+```
 然后定义包含有插入、删除、查询的抽象接口 UserService：
 
 ```java
@@ -113,7 +113,7 @@ public interface UserService {
     int deleteAllUsers();
 
 }
-```java
+```
 最后通过 JdbcTemplate 实现 UserService 中定义的数据访问操作：
 
 ```java
@@ -158,7 +158,7 @@ public class UserServiceImpl implements UserService {
     }
 
 }
-```java
+```
 ## 单元测试
 
 创建对 UserService 的单元测试用例，通过创建、删除和查询来验证数据库操作的正确性。
@@ -203,7 +203,7 @@ public class Chapter31ApplicationTests {
     }
 
 }
-```java
+```
 # 数据查询
 
 ```java
@@ -215,7 +215,7 @@ public Employee findById(int id){
     sql, new Object[] { id }, new BeanPropertyRowMapper(Employee.class));
     return employee;
 }
-```java
+```
 在 query 中，最后需要传入一个继承自 RowMapper 的实现类，有时候方便起见，也可以直接传入一个 Entity。如果是采用的 RowMapper 模式，需要实现如下的映射器类：
 
 ```java
@@ -229,12 +229,12 @@ public class EmployeeRowMapper implements RowMapper	{
     return employee;
     }
 }
-```java
+```
 最后在调用的时候，把映射器作为最后一个参数传入：
 
 ```java
 Employee employee = (Employee) jdbcTemplate.queryForObject(sql, new Object[] { id }, new EmployeeRowMapper());
-```java
+```
 # 插入与修改
 
 ## Insert
@@ -252,7 +252,7 @@ public void insert(Employee employee) {
             employee.getName(), employee.getAge()
     });
 }
-```java
+```
 有时候需要在插入之后，将插入行自动生成的主键返回，可以使用 jdbcTemplate 中提供的 KeyHolder 来实现：
 
 ```java
@@ -281,4 +281,4 @@ public class ExampleDao {
     return newNameId;
   }
 }
-```java
+```

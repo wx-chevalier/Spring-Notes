@@ -175,7 +175,7 @@ public abstract class AbstractDatabaseTest {
     }
 }
 
-```java
+```
 然后声明 MyBatis 的配置：
 
 ```java
@@ -273,7 +273,7 @@ public abstract class AbstractDatabaseTestConfig extends AbstractMyBatisConfig {
         return sqlSessionFactory.getObject();
     }
 }
-```java
+```
 最后在具体的测试类中，继承 AbstractDatabaseTest，并注入 TestConfig 就可以使用 MyBatis 了：
 
 ```java
@@ -289,4 +289,4 @@ public abstract class AbstractDatabaseTestConfig extends AbstractMyBatisConfig {
     },
     properties = {"logging.level.com.unionfab.cloud.alarm.infra.dmr=debug"})
 class CustomerServiceImplTest extends AbstractDatabaseTest {}
-```java
+```

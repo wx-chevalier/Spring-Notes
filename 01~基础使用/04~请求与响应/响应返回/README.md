@@ -12,7 +12,7 @@ public void method(HttpServletResponse httpServletResponse) {
 public ModelAndView method() {
     return new ModelAndView("redirect:" + projectUrl);
 }
-```java
+```
 # Jsonp
 
 对于 Jsonp 风格的请求，Spring 在返回时需要加以修改已支持前端的跨域调用，在后端处理方式如下：
@@ -32,7 +32,7 @@ protected String responseHandler(JSONObject rtn,
     // TODO Auto-generated method stub
     return rtn.toJSONString();
 }
-```java
+```
 前端请求方式：
 
 ```js
@@ -49,7 +49,7 @@ jsonp: function (path, params, callback) {
     }).error(errorCallBack);
 
 }
-```java
+```
 # 文件处理
 
 # 缓存

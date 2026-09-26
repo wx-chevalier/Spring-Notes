@@ -22,7 +22,7 @@ LoadingCache<Key, Graph> graphs = Caffeine.newBuilder()
     .expireAfterAccess(5, TimeUnit.MINUTES)
     .refreshAfterWrite(1, TimeUnit.MINUTES)
     .build(key -> createExpensiveGraph(key));
-```java
+```
 # Off-Heap Cache
 
 Usually all non-temporary objects you allocate are managed by java's garbage collector. Although the VM does a decent job doing garbage collection, at a certain point the VM has to do a so called 'Full GC'. A full GC involves scanning the complete allocated Heap, which means GC pauses/slowdowns are proportional to an applications heap size. So don't trust any person telling you 'Memory is Cheap'. In java memory consumtion hurts performance. Additionally you may get notable pauses using heap sizes > 1 Gb. This can be nasty if you have any near-real-time stuff going on, in a cluster or grid a java process might get unresponsive and get dropped from the cluster.

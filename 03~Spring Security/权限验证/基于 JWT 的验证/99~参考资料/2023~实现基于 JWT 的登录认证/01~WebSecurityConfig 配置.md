@@ -56,7 +56,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     return new BCryptPasswordEncoder();
   }
 }
-```java
+```
 - 在该配置中我们声明了 BCryptPasswordEncoder 作为全局的加密编码器，然后将它指定为 userDetailsService 的默认编码器；该编码器会在用户注册与鉴权时使用。
 - 在 configure 方法中可以配置需要过滤的路由，并且指定自定义的 JwtAuthenticationFilter 作为过滤器。
 
@@ -107,7 +107,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
   }
 }
 
-```java
+```
 在该类的 doFilterInternal 方法中，我们会依次对 Authorization 的值进行判断，并且通过注入的 UserDetailsService 来查找用户，这里的用户名或者其他信息就是来自于 JWT 的 Token。其中对于 Token 的解析，我们是在单独类进行处理：
 
 ```java
@@ -170,7 +170,7 @@ public class TokenProvider implements Serializable {
     return new UsernamePasswordAuthenticationToken(userDetails, "", authorities);
   }
 }
-```java
+```
 我们也可以自定义鉴权失败的处理类：
 
 ```java
@@ -187,5 +187,5 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
       response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage());
    }
 }
-```java
+```
 在该类中可以设置如何返回针对校验失败的 HTTP 响应。
