@@ -24,4 +24,4 @@ String value = myCache.get(1L);
 cacheManager.removeCache("preConfigured");
 
 cacheManager.close();
-```
+```java

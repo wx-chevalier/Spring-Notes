@@ -14,8 +14,7 @@ public class SecurityContextHolder {
     public static final String MODE_INHERITABLETHREADLOCAL = "MODE_INHERITABLETHREADLOCAL";  // 支持子线程
     public static final String MODE_GLOBAL = "MODE_GLOBAL";  // 全局模式
 }
-```
-
+```java
 SecurityContextHolder 包含三个重要概念：
 
 1. SecurityContext：安全上下文
@@ -46,8 +45,7 @@ public class SecurityService {
                 username, authorities);
     }
 }
-```
-
+```java
 ### 2. 通过 AuthenticationManager 注入
 
 ```java:src/main/java/com/example/service/AuthService.java
@@ -77,8 +75,7 @@ public class AuthService {
         }
     }
 }
-```
-
+```java
 ### 3. 在过滤器中注入
 
 ```java:src/main/java/com/example/security/JwtAuthenticationFilter.java
@@ -119,8 +116,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 }
-```
-
+```java
 ## 三、从 SecurityContextHolder 获取信息
 
 ### 1. 工具类方式
@@ -147,8 +143,7 @@ public class SecurityUtils {
             .anyMatch(a -> a.getAuthority().equals("ROLE_" + role));
     }
 }
-```
-
+```java
 ### 2. 注解方式（推荐）
 
 ```java:src/main/java/com/example/controller/UserController.java
@@ -168,8 +163,7 @@ public class UserController {
         return userService.findAll();
     }
 }
-```
-
+```java
 ## 四、异步操作中的处理
 
 ### 1. 配置异步支持
@@ -197,8 +191,7 @@ public class AsyncConfig implements AsyncConfigurer {
         return new DelegatingSecurityContextAsyncTaskExecutor(executor);
     }
 }
-```
-
+```java
 ### 2. 在异步方法中使用
 
 ```java:src/main/java/com/example/service/AsyncService.java
@@ -215,8 +208,7 @@ public class AsyncService {
         return CompletableFuture.completedFuture("Processed by: " + username);
     }
 }
-```
-
+```java
 ## 五、最佳实践
 
 1. **安全处理**
@@ -230,8 +222,7 @@ try {
     // 清理认证信息
     SecurityContextHolder.clearContext();
 }
-```
-
+```java
 2. **异常处理**
 
 ```java
@@ -249,8 +240,7 @@ public void secureOperation() {
         throw e;
     }
 }
-```
-
+```java
 3. **避免重复获取**
 
 ```java
@@ -264,6 +254,5 @@ public class SecurityAwareService {
         // 使用缓存的认证信息
     }
 }
-```
-
+```java
 通过以上方式，我们可以有效地管理和使用 SecurityContextHolder，确保应用程序的安全性和可维护性。

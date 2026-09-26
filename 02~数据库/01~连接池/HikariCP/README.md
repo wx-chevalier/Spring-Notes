@@ -78,8 +78,7 @@ public class HikariCPExample {
         dataSource.close();
     }
 }
-```
-
+```java
 在这个示例中，我们首先创建了一个 HikariConfig 对象，设置了数据库的连接 URL、用户名和密码等信息，然后配置了连接池的一些属性，比如最大连接数、最小空闲连接数、连接超时等。
 
 然后，我们通过创建 HikariDataSource 来实例化数据源，该数据源可以用于从连接池中获取数据库连接。接着，我们通过调用 getConnection()方法从连接池中获取一个连接，然后执行 SQL 查询，并处理查询结果。最后，我们在 finally 块中关闭了所有资源，包括连接、预处理语句和结果集，并调用数据源的 close() 方法关闭数据源。

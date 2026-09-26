@@ -29,8 +29,7 @@
         <version>0.11.5</version>
     </dependency>
 </dependencies>
-```
-
+```java
 ## 二、JWT 工具类
 
 ```java:src/main/java/com/example/security/JwtTokenProvider.java
@@ -93,8 +92,7 @@ public class JwtTokenProvider {
         return Keys.hmacShaKeyFor(keyBytes);
     }
 }
-```
-
+```java
 ## 三、JWT 认证过滤器
 
 ```java:src/main/java/com/example/security/JwtAuthenticationFilter.java
@@ -141,8 +139,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         return null;
     }
 }
-```
-
+```java
 ## 四、Security 配置
 
 ```java:src/main/java/com/example/config/SecurityConfig.java
@@ -189,8 +186,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 }
-```
-
+```java
 ## 五、认证控制器
 
 ```java:src/main/java/com/example/controller/AuthController.java
@@ -246,8 +242,7 @@ public class AuthController {
         return ResponseEntity.ok(new ApiResponse(true, "User registered successfully"));
     }
 }
-```
-
+```java
 ## 六、用户服务
 
 ```java:src/main/java/com/example/service/UserService.java
@@ -273,8 +268,7 @@ public class UserService {
         return userRepository.existsByUsername(username);
     }
 }
-```
-
+```java
 ## 七、配置文件
 
 ```yaml:src/main/resources/application.yml
@@ -290,8 +284,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-```
-
+```java
 ## 八、使用示例
 
 1. **登录请求**
@@ -304,15 +297,13 @@ Content-Type: application/json
     "username": "user",
     "password": "password"
 }
-```
-
+```java
 2. **使用 JWT 访问受保护资源**
 
 ```http
 GET /api/users/me
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9...
-```
-
+```java
 3. **在控制器中使用权限注解**
 
 ```java
@@ -332,8 +323,7 @@ public class UserController {
         return userService.findByUsername(username);
     }
 }
-```
-
+```java
 主要功能：
 
 1. JWT 生成和验证

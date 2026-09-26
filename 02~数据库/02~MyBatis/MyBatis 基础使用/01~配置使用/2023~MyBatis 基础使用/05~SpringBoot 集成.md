@@ -12,8 +12,7 @@ public interface UserMapper {
   @Select("select * from user where id = #{id}")
   Optional<User> selectById(Long id);
 }
-```
-
+```java
 ```java
 public class UserController {
   @Autowired
@@ -27,8 +26,7 @@ public class UserController {
     }
   }
 }
-```
-
+```java
 ```java
 public class UserController {
   @Autowired
@@ -42,4 +40,4 @@ public class UserController {
       );
   }
 }
-```
+```java

@@ -16,8 +16,7 @@ p:password="${db.password}">
 
 </bean>
 ...
-```
-
+```java
 我们可以通过在启动应用程序时设置特定属性或通过自定义嵌入式服务器配置来以编程方式配置端口。
 
 ```java
@@ -30,8 +29,7 @@ public class CustomApplication {
     app.run(args);
   }
 }
-```
-
+```java
 我们也可以直接设置实体类的属性，来修改端口号：
 
 ```java
@@ -44,8 +42,7 @@ public class ServerPortCustomizer
     factory.setPort(8086);
   }
 }
-```
-
+```java
 也可以使用 properties 属性：
 
 ```java
@@ -74,8 +71,7 @@ private static Properties properties() {
 
     return properties;
 }
-```
-
+```java
 # Links
 
 - https://mp.weixin.qq.com/s/e0tO2zogV-L6mXLfaiFCfw?from=groupmessage&isappinstalled=0 这样讲 SpringBoot 自动配置原理，你应该能明白了吧

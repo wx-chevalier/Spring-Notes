@@ -11,8 +11,7 @@ public interface UserMapper
  public void updateUser(User user);
  public void deleteUser(Integer userId);
 }
-```
-
+```java
 其关联的 xml 映射如下：
 
 ```xml
@@ -64,8 +63,7 @@ public interface UserMapper
   </delete>
 
 </mapper>
-```
-
+```java
 在 MyBatis 3.0 之后，即可以直接以 Annotation 方式将 SQL 与配置写在 Java 文件中，也可以直接写在 XML 文件中。笔者建议的简单的 SQL 语句可以直接以 Annotation 方式编写，复杂的 SQL 语句可以写在 XML 文件中。
 
 ```java
@@ -93,8 +91,7 @@ public interface BlogMapper
  public void deleteBlog(Integer blogId);
 
 }
-```
-
+```java
 # select
 
 查询是最常见的数据操作之一，如下查询语句接受一个 int（或 Integer）类型的参数，并返回一个 HashMap 类型的对象，其中的键是列名，值便是结果行中的对应值。
@@ -103,8 +100,7 @@ public interface BlogMapper
 <select id="selectPerson" parameterType="int" resultType="hashmap">
   SELECT * FROM PERSON WHERE ID = #{id}
 </select>
-```
-
+```java
 其类似于创建一个新的预处理语句，并以 ? 来传递参数。select 元素允许你配置很多属性来配置每条语句的作用细节：
 
 ```xml
@@ -122,8 +118,7 @@ public interface BlogMapper
   fetchSize="256"
   statementType="PREPARED"
   resultSetType="FORWARD_ONLY"></select>
-```
-
+```java
 # 数据操作
 
 数据变更语句 insert，update 和 delete 的实现非常接近：
@@ -154,8 +149,7 @@ public interface BlogMapper
   flushCache="true"
   statementType="PREPARED"
   timeout="20">
-```
-
+```java
 典型的操作语句示范如下：
 
 ```xml
@@ -176,8 +170,7 @@ public interface BlogMapper
 <delete id="deleteAuthor">
   delete from Author where id = #{id}
 </delete>
-```
-
+```java
 ## 主键
 
 如果你的数据库支持自动生成主键的字段（比如 MySQL 和 SQL Server），那么你可以设置 useGeneratedKeys=”true”，然后再把 keyProperty 设置到目标属性上：
@@ -188,8 +181,7 @@ public interface BlogMapper
   insert into Author (username,password,email,bio)
   values (#{username},#{password},#{email},#{bio})
 </insert>
-```
-
+```java
 对于不支持自动生成类型的数据库或可能不支持自动生成主键的 JDBC 驱动，MyBatis 有另外一种方法来生成主键。
 
 ```xml
@@ -202,8 +194,7 @@ public interface BlogMapper
   values
     (#{id}, #{username}, #{password}, #{email}, #{bio}, #{favouriteSection,jdbcType=VARCHAR})
 </insert>
-```
-
+```java
 在上面的示例中，selectKey 元素中的语句将会首先运行，Author 的 id 会被设置，然后插入语句会被调用。这可以提供给你一个与数据库中自动生成主键类似的行为，同时保持了 Java 代码的简洁。
 
 ```xml
@@ -213,8 +204,7 @@ public interface BlogMapper
   <!-- 这可以被设置为 BEFORE或AFTER。如果设置为 BEFORE，那么它会首先生成主键，设置 keyProperty 然后执行插入语句。如果设置为 AFTER，那么先执行插入语句，然后是 selectKey 中的语句 - 这和 Oracle 数据库的行为相似，在插入语句内部可能有嵌入索引调用。-->
   order="BEFORE"
   statementType="PREPARED">
-```
-
+```java
 ## 复杂参数
 
 MyBatis 允许我们传入处理复杂的参数，譬如 User 类型的参数对象传递到了语句中，id、username 和 password 属性将会被查找，然后将它们的值传入预处理语句的参数中。
@@ -224,8 +214,7 @@ MyBatis 允许我们传入处理复杂的参数，譬如 User 类型的参数对
   insert into users (id, username, password)
   values (#{id}, #{username}, #{password})
 </insert>
-```
-
+```java
 如果我们希望在 Mapper 中传入多个参数，那么需要使用 `@Param` 注解：
 
 ```java
@@ -238,8 +227,7 @@ public interface MyMapper {
 <update id="update" >
    UPDATE SOME WHERE x=#{a.x} AND y=#{b.y}
 </update>
-```
-
+```java
 或者将 parameterType 设置为 map 类型，然后按照键值引用：
 
 ```xml
@@ -254,24 +242,21 @@ void mapCategoryAndPage(@Param("categoryLocalId") Long categoryLocalId, @Param("
         (#{pageLocalId},
          #{categoryLocalId});
 </insert>
-```
-
+```java
 我们还可以为参数指定一个特殊的数据类型：
 
 ```xml
 #{property,javaType=int,jdbcType=NUMERIC}
 #{height,javaType=double,jdbcType=NUMERIC,numericScale=2}
 #{age,javaType=int,jdbcType=NUMERIC,typeHandler=MyTypeHandler}
-```
-
+```java
 ## 字符串替换
 
 默认情况下,使用 `#{}` 格式的语法会导致 MyBatis 创建 PreparedStatement 参数占位符并安全地设置参数。如果想直接在 SQL 语句中插入一个不转义的字符串，譬如在使用 ORDER BY 时候，可以这样来使用：
 
 ```xml
 ORDER BY ${columnName}
-```
-
+```java
 当 SQL 语句中的元数据（如表名或列名）是动态生成的时候，字符串替换将会非常有用。举个例子，如果你想通过任何一列从表中 select 数据时，只需要像做如下的转化就好：
 
 ```java
@@ -287,8 +272,7 @@ User findByColumn(@Param("column") String column, @Param("value") String value);
 
 User userOfId1 = userMapper.findByColumn("id", 1L);
 User userOfNameKid = userMapper.findByColumn("name", "kid");
-```
-
+```java
 ## 批量操作
 
 利用 MyBatis 提供的动态 SQL 能力，我们可以方便地在 XML 映射中执行批量插入地操作：
@@ -301,8 +285,7 @@ User userOfNameKid = userMapper.findByColumn("name", "kid");
     (#{item.username}, #{item.password}, #{item.email}, #{item.bio})
   </foreach>
 </insert>
-```
-
+```java
 # resultMap | 结果映射
 
 resultMap 元素能够替代原本 JDBC ResultSets 中的大量数据提取代码，并在一些情形下允许你进行一些 JDBC 不支持的操作。ResultMap 的设计思想是，对于简单的语句根本不需要配置显式的结果映射，而对于复杂一点的语句只需要描述它们的关系就行了。
@@ -313,8 +296,7 @@ resultMap 元素能够替代原本 JDBC ResultSets 中的大量数据提取代�
   from some_table
   where id = #{id}
 </select>
-```
-
+```java
 上述语句只是简单地将所有的列映射到 HashMap 的键上，但是 HashMap 不是一个很好的领域模型，我们也可以映射为 POJO：
 
 ```java
@@ -326,8 +308,7 @@ public class User {
 }
 // <select id="selectUsers" resultType="com.someapp.model.User">
 // ...
-```
-
+```java
 ## 映射规则
 
 id 和 result 元素都将一个列的值映射到一个简单数据类型（String, int, double, Date 等）的属性或字段。这两者之间的唯一不同是，id 元素表示的结果将是对象的标识属性，这会在比较对象实例时用到。
@@ -335,8 +316,7 @@ id 和 result 元素都将一个列的值映射到一个简单数据类型（Str
 ```xml
 <id property="id" column="post_id"/>
 <result property="subject" column="post_subject"/>
-```
-
+```java
 指定主键可以提高整体的性能，尤其是进行缓存和嵌套结果映射（也就是连接映射）的时候；在使用复合主键的时候，你可以使用 `column="{prop1=col1,prop2=col2}"` 这样的语法来指定多个传递给嵌套 select 查询语句的列名。这会使得 prop1 和 prop2 作为参数对象，被设置为对应嵌套 select 语句的参数。
 
 这两个元素都可以指定 javaType 与 jdbcType 属性，其中 javaType 是 Java 类名或者类型名别，当我们映射到 HashMap 时候，应该明确地指定 javaType 来保证行为与期望的相一致。jdbcType 则是指定 JDBC 的类型，只需要在可能执行插入、更新和删除的且允许空值的列上指定 JDBC 类型。我们还可以自定义 POJO 的构造函数：
@@ -350,8 +330,7 @@ public class User {
   }
 //...
 }
-```
-
+```java
 标准的 MyBatis 构造函数的传参是基于参数的顺序与类型：
 
 ```xml
@@ -360,8 +339,7 @@ public class User {
    <arg column="username" javaType="String"/>
    <arg column="age" javaType="_int"/>
 </constructor>
-```
-
+```java
 这种依赖于顺序的方式，简单易懂，却也有其弊端。当你在处理一个带有多个形参的构造方法时，很容易搞乱 arg 元素的顺序。从版本 3.4.3 开始，可以在利用 @Param 注解指定参数名称的前提下，以任意顺序编写 arg 元素。
 
 ```xml
@@ -370,8 +348,7 @@ public class User {
    <arg column="age" javaType="_int" name="age" />
    <arg column="username" javaType="String" name="username" />
 </constructor>
-```
-
+```java
 ## Alias | 别名
 
 ResultMap 可以帮我们优雅地解决别名问题：
@@ -382,8 +359,7 @@ ResultMap 可以帮我们优雅地解决别名问题：
   <result property="username" column="user_name"/>
   <result property="password" column="hashed_password"/>
 </resultMap>
-```
-
+```java
 而在引用它的语句中使用 resultMap 属性就行了（注意我们去掉了 resultType 属性）。比如:
 
 ```xml
@@ -392,8 +368,7 @@ ResultMap 可以帮我们优雅地解决别名问题：
   from some_table
   where id = #{id}
 </select>
-```
-
+```java
 类型别名则允许我们不用输入类的完全限定名称：
 
 ```xml
@@ -402,8 +377,7 @@ ResultMap 可以帮我们优雅地解决别名问题：
 
 <!-- SQL 映射 XML 中 -->
 <select id="selectUsers" resultType="User">
-```
-
+```java
 ## 自动映射
 
 当自动映射查询结果时，MyBatis 会获取结果中返回的列名并在 Java 类中查找相同名字的属性（忽略大小写）。这意味着如果发现了 ID 列和 id 属性，MyBatis 会将列 ID 的值赋给 id 属性。通常数据库列使用大写字母组成的单词命名，单词间用下划线分隔；而 Java 属性一般遵循驼峰命名法约定。为了在这两种命名方式之间启用自动映射，需要将 mapUnderscoreToCamelCase 设置为 true。
@@ -423,8 +397,7 @@ ResultMap 可以帮我们优雅地解决别名问题：
 <resultMap id="userResultMap" type="User">
   <result property="password" column="hashed_password"/>
 </resultMap>
-```
-
+```java
 MyBatis 提供了三种自动映射等级：
 
 - NONE: 禁用自动映射。仅对手动映射的属性进行映射。
@@ -437,8 +410,7 @@ MyBatis 提供了三种自动映射等级：
 <resultMap id="userResultMap" type="User" autoMapping="false">
   <result property="password" column="hashed_password"/>
 </resultMap>
-```
-
+```java
 # Association | 关联查询
 
 MyBatis 也允许我们通过 association 等元素来实现关联查询，即同时查询出多表的数据并且填充到 POJO 中。MyBatis 有两种不同的方式加载关联：
@@ -483,8 +455,7 @@ MyBatis 提供的强大的关联映射的能力，让我们去方便地指定多
        left outer join Tag T on PT.tag_id = T.id
   where B.id = #{id}
 </select>
-```
-
+```java
 ```xml
 <!-- 非常复杂的结果映射 -->
 <resultMap id="detailedBlogResultMap" type="Blog">
@@ -515,8 +486,7 @@ MyBatis 提供的强大的关联映射的能力，让我们去方便地指定多
     </discriminator>
   </collection>
 </resultMap>
-```
-
+```java
 ## 关联的嵌套 select 查询
 
 association 元素本身可以指定某个查询语句中获取到的列映射到子属性值中的关系：
@@ -526,8 +496,7 @@ association 元素本身可以指定某个查询语句中获取到的列映射�
   <id property="id" column="author_id"/>
   <result property="username" column="author_username"/>
 </association>
-```
-
+```java
 MyBatis 还支持关联的嵌套 select 查询，select 属性用于加载复杂类型属性的映射语句的 ID，它会从 column 属性指定的列中检索数据，作为参数传递给目标 select 语句。
 
 ```xml
@@ -542,8 +511,7 @@ MyBatis 还支持关联的嵌套 select 查询，select 属性用于加载复杂
 <select id="selectAuthor" resultType="Author">
   SELECT * FROM AUTHOR WHERE ID = #{id}
 </select>
-```
-
+```java
 两个 select 查询语句分别加载 Blog 与 Author 对象，其它所有的属性将会被自动加载，只要它们的列名和属性名相匹配。这种方式虽然简单，但是可能会存在所谓的 `N + 1` 查询问题，即：
 
 - 执行了一个单独的 SQL 语句来获取结果的一个列表（就是“+1”）。
@@ -569,8 +537,7 @@ MyBatis 能够对这样的查询进行延迟加载，因此可以将大量语句
   from Blog B left outer join Author A on B.author_id = A.id
   where B.id = #{id}
 </select>
-```
-
+```java
 这里为确保结果能够拥有唯一且清晰的名字，我们设置的别名，而在 resultMap 中我们又需要将别名映射到属性：
 
 ```xml
@@ -587,8 +554,7 @@ MyBatis 能够对这样的查询进行延迟加载，因此可以将大量语句
   <result property="email" column="author_email"/>
   <result property="bio" column="author_bio"/>
 </resultMap>
-```
-
+```java
 如果 Blog 存在另一个 Author 属性域，譬如第二作者等，那么就可以复用 authorResult 这个结果映射：
 
 ```xml
@@ -621,16 +587,14 @@ MyBatis 能够对这样的查询进行延迟加载，因此可以将大量语句
     resultMap="authorResult"
     columnPrefix="co_" />
 </resultMap>
-```
-
+```java
 ## 关联的多结果集
 
 集合元素和关联元素几乎是一样的，不过它们能够用来描述多条数据，譬如某个 Blog 包含多个 Post，那么 Blog 类就会包含如下成员：
 
 ```java
 private List<Post> posts;
-```
-
+```java
 然后同样编写多条 select 语句：
 
 ```xml
@@ -647,8 +611,7 @@ private List<Post> posts;
 <select id="selectPostsForBlog" resultType="Post">
   SELECT * FROM POST WHERE BLOG_ID = #{id}
 </select>
-```
-
+```java
 ofType 属性用来将 JavaBean（或字段）属性的类型和集合存储的类型区分开来，我们同样可以为 collection 元素添加别名等配置：
 
 ```xml
@@ -657,8 +620,7 @@ ofType 属性用来将 JavaBean（或字段）属性的类型和集合存储的�
   <result property="subject" column="post_subject"/>
   <result property="body" column="post_body"/>
 </collection>
-```
-
+```java
 对于复杂嵌套属性的处理则同样类似于单结果集关联：
 
 ```xml
@@ -686,4 +648,4 @@ ofType 属性用来将 JavaBean（或字段）属性的类型和集合存储的�
   <result property="subject" column="subject"/>
   <result property="body" column="body"/>
 </resultMap>
-```
+```java

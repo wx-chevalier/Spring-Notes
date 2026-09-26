@@ -8,8 +8,7 @@
         <version>0.0.9</version>
     </dependency>
 </dependencies>
-```
-
+```java
 ```java
 @Controller
 public class RegisterKaptchaController extends KaptchaExtend {
@@ -57,8 +56,7 @@ public class RegisterKaptchaController extends KaptchaExtend {
     return model;
   }
 }
-```
-
+```java
 ```xml
 <!-- 配置验证码 -->
 <bean id="captchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">
@@ -97,4 +95,4 @@ public class RegisterKaptchaController extends KaptchaExtend {
         </bean>
     </property>
 </bean>
-```
+```java

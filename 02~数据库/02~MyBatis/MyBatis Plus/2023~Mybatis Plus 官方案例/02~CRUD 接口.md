@@ -22,8 +22,7 @@ boolean saveOrUpdate(T entity, Wrapper<T> updateWrapper);
 boolean saveOrUpdateBatch(Collection<T> entityList);
 // 批量修改插入
 boolean saveOrUpdateBatch(Collection<T> entityList, int batchSize);
-```
-
+```java
 ## Remove
 
 ```java
@@ -35,8 +34,7 @@ boolean removeById(Serializable id);
 boolean removeByMap(Map<String, Object> columnMap);
 // 删除（根据ID 批量删除）
 boolean removeByIds(Collection<? extends Serializable> idList);
-```
-
+```java
 ## Update
 
 ```java
@@ -50,8 +48,7 @@ boolean updateById(T entity);
 boolean updateBatchById(Collection<T> entityList);
 // 根据 ID 批量更新
 boolean updateBatchById(Collection<T> entityList, int batchSize);
-```
-
+```java
 ## Get
 
 ```java
@@ -65,8 +62,7 @@ T getOne(Wrapper<T> queryWrapper, boolean throwEx);
 Map<String, Object> getMap(Wrapper<T> queryWrapper);
 // 根据 Wrapper，查询一条记录
 <V> V getObj(Wrapper<T> queryWrapper, Function<? super Object, V> mapper);
-```
-
+```java
 ## List
 
 ```java
@@ -90,8 +86,7 @@ List<Object> listObjs();
 List<Object> listObjs(Wrapper<T> queryWrapper);
 // 根据 Wrapper 条件，查询全部记录
 <V> List<V> listObjs(Wrapper<T> queryWrapper, Function<? super Object, V> mapper);
-```
-
+```java
 ## Page
 
 ```java
@@ -103,8 +98,7 @@ IPage<T> page(IPage<T> page, Wrapper<T> queryWrapper);
 IPage<Map<String, Object>> pageMaps(IPage<T> page);
 // 条件分页查询
 IPage<Map<String, Object>> pageMaps(IPage<T> page, Wrapper<T> queryWrapper);
-```
-
+```java
 ## Count
 
 ```java
@@ -112,8 +106,7 @@ IPage<Map<String, Object>> pageMaps(IPage<T> page, Wrapper<T> queryWrapper);
 int count();
 // 根据 Wrapper 条件，查询总记录数
 int count(Wrapper<T> queryWrapper);
-```
-
+```java
 ## Chain
 
 ```java
@@ -134,8 +127,7 @@ LambdaUpdateChainWrapper<T> lambdaUpdate();
 // 示例：
 update().eq("column", value).remove();
 lambdaUpdate().eq(Entity::getId, value).update(entity);
-```
-
+```java
 # Mapper CRUD 接口
 
 通用 CRUD 封装 BaseMapper (opens new window)接口，为 Mybatis-Plus 启动时自动解析实体表关系映射转换为 Mybatis 内部对象注入容器。泛型 T 为任意实体对象，参数 Serializable 为任意类型主键 Mybatis-Plus 不推荐使用复合主键约定每一张表都有自己的唯一 id 主键。
@@ -145,8 +137,7 @@ lambdaUpdate().eq(Entity::getId, value).update(entity);
 ```java
 // 插入一条记录
 int insert(T entity);
-```
-
+```java
 ## Delete
 
 ```java
@@ -158,8 +149,7 @@ int deleteBatchIds(@Param(Constants.COLLECTION) Collection<? extends Serializabl
 int deleteById(Serializable id);
 // 根据 columnMap 条件，删除记录
 int deleteByMap(@Param(Constants.COLUMN_MAP) Map<String, Object> columnMap);
-```
-
+```java
 ## Update
 
 ```java
@@ -167,8 +157,7 @@ int deleteByMap(@Param(Constants.COLUMN_MAP) Map<String, Object> columnMap);
 int update(@Param(Constants.ENTITY) T entity, @Param(Constants.WRAPPER) Wrapper<T> updateWrapper);
 // 根据 ID 修改
 int updateById(@Param(Constants.ENTITY) T entity);
-```
-
+```java
 ## Select
 
 ```java
@@ -194,8 +183,7 @@ IPage<T> selectPage(IPage<T> page, @Param(Constants.WRAPPER) Wrapper<T> queryWra
 IPage<Map<String, Object>> selectMapsPage(IPage<T> page, @Param(Constants.WRAPPER) Wrapper<T> queryWrapper);
 // 根据 Wrapper 条件，查询总记录数
 Integer selectCount(@Param(Constants.WRAPPER) Wrapper<T> queryWrapper);
-```
-
+```java
 |                类型                |    参数名    |                   描述                   |
 | :--------------------------------: | :----------: | :--------------------------------------: |
 |            Serializable            |      id      |                 主键 ID                  |
@@ -225,14 +213,12 @@ public class SampleTest {
         assertThat(user.getId()).isNotNull();
     }
 
-
     @Test
     public void bDelete() {
         assertThat(mapper.deleteById(3L)).isGreaterThan(0);
         assertThat(mapper.delete(new QueryWrapper<User>()
                 .lambda().eq(User::getName, "Sandy"))).isGreaterThan(0);
     }
-
 
     @Test
     public void cUpdate() {
@@ -276,7 +262,6 @@ public class SampleTest {
         assertThat(user.getEmail()).isEqualTo("miemie2@baomidou.com");
         assertThat(user.getAge()).isNull();
     }
-
 
     @Test
     public void dSelect() {
@@ -356,7 +341,7 @@ public class SampleTest {
             System.out.println(mp);
         }
         /**
-         * lambdaQueryWrapper groupBy orderBy
+         - lambdaQueryWrapper groupBy orderBy
          */
         LambdaQueryWrapper<User> lambdaQueryWrapper = new QueryWrapper<User>().lambda()
                 .select(User::getAge)
@@ -390,4 +375,4 @@ public class SampleTest {
     }
 
 }
-```
+```java

@@ -39,8 +39,7 @@ MyBatis 是一款优秀的持久层框架，它支持自定义 SQL、存储过�
         SELECT * FROM users WHERE id = #{id}
     </select>
 </mapper>
-```
-
+```java
 2. **动态 SQL**
 
 ```xml
@@ -53,8 +52,7 @@ MyBatis 是一款优秀的持久层框架，它支持自定义 SQL、存储过�
         AND age = #{age}
     </if>
 </select>
-```
-
+```java
 3. **结果映射**
 
 ```xml
@@ -63,8 +61,7 @@ MyBatis 是一款优秀的持久层框架，它支持自定义 SQL、存储过�
     <result property="name" column="user_name"/>
     <result property="email" column="user_email"/>
 </resultMap>
-```
-
+```java
 ### 2.2 高级特性
 
 // ... 前面内容保持不变 ...
@@ -85,8 +82,7 @@ MyBatis 是一款优秀的持久层框架，它支持自定义 SQL、存储过�
     flushInterval="100000"
     size="1024"
     readOnly="true"/>
-```
-
+```java
 2. **延迟加载**
 
 ```xml
@@ -106,8 +102,7 @@ MyBatis 是一款优秀的持久层框架，它支持自定义 SQL、存储过�
                 column="user_id"
                 fetchType="lazy"/>
 </resultMap>
-```
-
+```java
 3. **插件机制**
 
 ```java
@@ -134,8 +129,7 @@ public class ExamplePlugin implements Interceptor {
         <property name="someProperty" value="100"/>
     </plugin>
 </plugins>
-```
-
+```java
 4. **注解支持**
 
 ```java
@@ -154,8 +148,7 @@ public interface UserMapper {
     @Delete("DELETE FROM users WHERE id = #{id}")
     int deleteById(@Param("id") Long id);
 }
-```
-
+```java
 ## 3. MyBatis 生态圈
 
 ### 3.1 核心项目

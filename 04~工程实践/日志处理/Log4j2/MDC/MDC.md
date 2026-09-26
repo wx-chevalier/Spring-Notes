@@ -20,8 +20,7 @@ public class Transfer {
         this.amount = amount;
     }
 }
-```
-
+```java
 为了执行转移，我们需要使用一个由简单 API 支持的服务。
 
 ```java
@@ -35,8 +34,7 @@ public abstract class TransferService {
 
     abstract protected void afterTransfer(long amount, boolean outcome);
 }
-```
-
+```java
 beforeTransfer() 和 afterTransfer() 方法可以被重写，以便在传输完成之前和之后运行自定义代码。我们将利用 beforeTransfer() 和 afterTransfer() 来记录一些关于传输的信息。
 
 ```java
@@ -57,8 +55,7 @@ public class Log4JTransferService extends TransferService {
           "Has transfer of " + amount + "$ completed successfully ? " + outcome + ".");
     }
 }
-```
-
+```java
 这里需要注意的主要问题是，当创建日志信息时，不可能访问 Transfer 对象；只有金额可以访问，因此不可能记录交易 ID 或发件人。让我们设置通常的 log4j.properties 文件，以便在控制台记录。
 
 ```yml
@@ -66,8 +63,7 @@ log4j.appender.consoleAppender=org.apache.log4j.ConsoleAppender
 log4j.appender.consoleAppender.layout=org.apache.log4j.PatternLayout
 log4j.appender.consoleAppender.layout.ConversionPattern=%-4r [%t] %5p %c %x - %m%n
 log4j.rootLogger = TRACE, consoleAppender
-```
-
+```java
 最后让我们设置一个小程序，它能够通过 ExecutorService 同时运行多个传输。
 
 ```java
@@ -84,8 +80,7 @@ public class TransferDemo {
         executor.shutdown();
     }
 }
-```
-
+```java
 我们注意到，为了使用 ExecutorService，我们需要将 Log4JTransferService 的执行包装在一个适配器中，因为 executor.submit()期望有一个 Runnable。
 
 ```java
@@ -100,8 +95,7 @@ public class Log4JRunnable implements Runnable {
         log4jBusinessService.transfer(tx.getAmount());
     }
 }
-```
-
+```java
 当我们运行同时管理多笔转账的演示程序时，我们很快发现，日志并不像我们希望的那样有用。跟踪每笔转账的执行情况是很复杂的，因为被记录的唯一有用的信息是转账的金额和执行该特定转账的线程的名称。更重要的是，我们不可能区分由同一个线程执行的相同金额的两个不同交易，因为相关的日志行看起来基本相同。
 
 ## Log4j
@@ -126,15 +120,13 @@ public class Log4JRunnable implements Runnable {
         MDC.clear();
     }
 }
-```
-
+```java
 不出所料，MDC.put() 被用来在 MDC 中添加一个键和一个相应的值，而 MDC.clear() 则清空 MDC。现在让我们修改 log4j.properties 来打印我们刚刚存储在 MDC 中的信息。只需改变转换模式，用 %X{} 占位符来表示我们希望被记录的 MDC 中的每个条目。
 
 ```yaml
 log4j.appender.consoleAppender.layout.ConversionPattern=
 %-4r [%t] %5p %c{1} %x - %m - tx.id=%X{transaction.id} tx.owner=%X{transaction.owner}%n
-```
-
+```java
 现在，如果我们运行这个应用程序，我们会注意到每一行都带有正在处理的事务的信息，使我们更容易跟踪应用程序的执行。
 
 ```log
@@ -154,8 +146,7 @@ log4j.appender.consoleAppender.layout.ConversionPattern=
   - Has transfer of 1685$ completed successfully ? false. - tx.id=4 tx.owner=John
 1260 [pool-1-thread-2]  INFO Log4JBusinessService
   - Preparing to transfer 1667$. - tx.id=7 tx.owner=Marc
-```
-
+```java
 ## Log4j2
 
 Log4j2 中也有同样的功能，让我们看看如何使用它。首先让我们建立一个 TransferService 子类，使用 Log4j2 进行记录。
@@ -177,8 +168,7 @@ public class Log4J2TransferService extends TransferService {
         logger.info("Has transfer of {}$ completed successfully ? {}.", amount, outcome);
     }
 }
-```
-
+```java
 然后让我们改变使用 MDC 的代码，它在 Log4j2 中实际上叫做 ThreadContext。
 
 ```java
@@ -199,8 +189,7 @@ public class Log4J2Runnable implements Runnable {
         ThreadContext.clearAll();
     }
 }
-```
-
+```java
 同样，ThreadContext.put() 在 MDC 中添加了一个条目，而 ThreadContext.clearAll() 则删除了所有现有条目。我们仍然想念 log4j2.xml 文件来配置日志记录。我们可以注意到，指定哪些 MDC 条目应该被记录的语法与 Log4j 中使用的语法相同。
 
 ```xml
@@ -218,8 +207,7 @@ public class Log4J2Runnable implements Runnable {
         </AsyncRoot>
     </Loggers>
 </Configuration>
-```
-
+```java
 再次，让我们执行应用程序，我们将看到 MDC 信息被打印在日志中。
 
 ```log
@@ -233,8 +221,7 @@ public class Log4J2Runnable implements Runnable {
   - Preparing to transfer 1108$. - tx.id=6 tx.owner=Susan
 1794 [pool-1-thread-1]  INFO Log4J2BusinessService
   - Has transfer of 645$ completed successfully ? true. - tx.id=4 tx.owner=Susan
-```
-
+```java
 ## Slf4j/Logback
 
 在 Slf4j 中，MDC 也是可用的，条件是底层日志库支持它。正如我们刚才看到的，Logback 和 Log4j 都支持 MDC，所以我们不需要什么特别的东西就可以在标准的设置下使用它。让我们准备一下通常的 TransferService 子类，这次使用 Java 的 Simple Logging Facade。
@@ -256,8 +243,7 @@ final class Slf4TransferService extends TransferService {
         logger.info("Has transfer of {}$ completed successfully ? {}.", amount, outcome);
     }
 }
-```
-
+```java
 现在让我们使用 SLF4J 的 MDC 味道。在这种情况下，其语法和语义与 log4j 中的相同。
 
 ```java
@@ -277,8 +263,7 @@ public class Slf4jRunnable implements Runnable {
         MDC.clear();
     }
 }
-```
-
+```java
 我们必须提供 Logback 的配置文件：logback.xml。
 
 ```xml
@@ -292,8 +277,7 @@ public class Slf4jRunnable implements Runnable {
         <appender-ref ref="stdout" />
     </root>
 </configuration>
-```
-
+```java
 同样，我们将看到 MDC 中的信息被正确地添加到了日志信息中，尽管这些信息并没有在 log.info() 方法中明确提供。
 
 ```log
@@ -309,8 +293,7 @@ public class Slf4jRunnable implements Runnable {
   - Has transfer of 1110$ completed successfully ? true. - tx.id=5 tx.owner=Samantha
 1493 [pool-1-thread-2]  INFO c.b.m.s.Slf4jBusinessService
   - Preparing to transfer 644$. - tx.id=8 tx.owner=John
-```
-
+```java
 # MDC and Thread Pools
 
 **MDC implementations are usually using \*ThreadLocal\*s to store the contextual information.** That's an easy and reasonable way to achieve thread-safety. However, we should be careful using MDC with thread pools.
@@ -349,8 +332,7 @@ public class MdcAwareThreadPoolExecutor extends ThreadPoolExecutor {
         ThreadContext.clearAll();
     }
 }
-```
-
+```java
 This way, the MDC cleanup would happen after each normal or exceptional execution automatically. So, there is no need to do it manually:
 
 ```java
@@ -361,8 +343,7 @@ public void run() {
 
     new Slf4TransferService().transfer(tx.getAmount());
 }
-```
-
+```java
 Now we can re-write the same demo with our new executor implementation:
 
 ```java
@@ -379,4 +360,4 @@ for (int i = 0; i < 10; i++) {
 }
 
 executor.shutdown();
-```
+```java

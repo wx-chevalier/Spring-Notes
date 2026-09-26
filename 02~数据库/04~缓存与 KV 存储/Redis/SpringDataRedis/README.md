@@ -16,8 +16,7 @@ Spring Boot 集成 redis 很方便，只需要导入一个 redis 的 starter 依
     <artifactId>fastjson</artifactId>
     <version>1.2.35</version>
 </dependency>
-```
-
+```java
 导入了依赖之后，我们在 application.yml 文件里配置 redis：
 
 ```yaml
@@ -42,8 +41,7 @@ spring:
         max-active: 1000
         # 等待可用连接的最大时间，单位毫秒，默认值为-1，表示永不超时。如果超过等待时间，则直接抛出JedisConnectionException
         max-wait: 2000
-```
-
+```java
 注意，有两个 redis 模板：RedisTemplate 和 StringRedisTemplate。我们不使用 RedisTemplate，RedisTemplate 提供给我们操作对象，操作对象的时候，我们通常是以 json 格式存储，但在存储的时候，会使用 Redis 默认的内部序列化器；导致我们存进里面的是乱码之类的东西。当然了，我们可以自己定义序列化，但是比较麻烦，所以使用 StringRedisTemplate 模板。StringRedisTemplate 主要给我们提供字符串操作，我们可以将实体类等转成 json 字符串即可，在取出来后，也可以转成相应的对象。
 
 ```java
@@ -51,18 +49,18 @@ public class RedisService {
     @Resource
     private StringRedisTemplate stringRedisTemplate;
     /**
-     * set redis: string类型
-     * @param key key
-     * @param value value
+     - set redis: string类型
+     - @param key key
+     - @param value value
      */
     public void setString(String key, String value){
         ValueOperations<String, String> valueOperations = stringRedisTemplate.opsForValue();
         valueOperations.set(key, value);
     }
     /**
-     * get redis: string类型
-     * @param key key
-     * @return
+     - get redis: string类型
+     - @param key key
+     - @return
      */
     public String getString(String key){
         return stringRedisTemplate.opsForValue().get(key);
@@ -85,8 +83,7 @@ public class Course14ApplicationTests {
         logger.info("用户信息：{}", redisService.getString("userInfo"));
     }
 }
-```
-
+```java
 ## 常用操作
 
 ```java
@@ -103,7 +100,7 @@ public class TestRedis {
   }
 
   /**
-   * redis存储字符串
+   - redis存储字符串
    */
   @Test
   public void testString() {
@@ -126,7 +123,7 @@ public class TestRedis {
   }
 
   /**
-   * redis操作Map
+   - redis操作Map
    */
   @Test
   public void testMap() {
@@ -158,7 +155,7 @@ public class TestRedis {
   }
 
   /**
-   * jedis操作List
+   - jedis操作List
    */
   @Test
   public void testList() {
@@ -183,7 +180,7 @@ public class TestRedis {
   }
 
   /**
-   * jedis操作Set
+   - jedis操作Set
    */
   @Test
   public void testSet() {
@@ -222,4 +219,4 @@ public class TestRedis {
     System.out.println(RedisUtil.getJedis().get("newname"));
   }
 }
-```
+```java

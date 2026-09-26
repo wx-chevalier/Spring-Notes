@@ -20,17 +20,15 @@ Metrics，谷歌翻译就是度量的意思。当我们需要为某个系统某�
 
 `MetricRegistry`类是 Metrics 的核心，它是存放应用中所有 metrics 的容器。也是我们使用 Metrics 库的起点。
 
-```
+```java
 MetricRegistry registry = new MetricRegistry();
-```
-
+```java
 每一个 metric 都有它独一无二的名字，Metrics 中使用句点名字，如 com.example.Queue.size。当你在 com.example.Queue 下有两个 metric 实例，可以指定地更具体：com.example.Queue.requests.size 和 com.example.Queue.response.size 。使用`MetricRegistry`类，可以非常方便地生成名字。
 
-```
+```java
 MetricRegistry.name(Queue.class, "requests", "size")
 MetricRegistry.name(Queue.class, "responses", "size")
-```
-
+```java
 # Metrics 数据展示
 
 Metrics 提供了 Report 接口，用于展示 metrics 获取到的统计数据。metrics-core 中主要实现了四种 reporter： JMX, console, SLF4J, 和 CSV。在本文的例子中，我们使用 ConsoleReporter 。
@@ -66,8 +64,7 @@ public class GaugeTest {
     }
 }
 
-```
-
+```java
 其中第 7 行和第 8 行添加了 ConsoleReporter，可以每秒钟将度量指标打印在屏幕上，理解起来会更清楚。但是对于大多数队列数据结构，我们并不想简单地返回 queue.size()，因为 java.util 和 java.util.concurrent 中实现的#size()方法很多都是 O(n) 的复杂度，这会影响 Gauge 的性能。
 
 ## Counters
@@ -115,8 +112,7 @@ public class CounterTest {
         }
     }
 }
-```
-
+```java
 运行之后的结果大致如下：
 
 ```sh
@@ -130,8 +126,7 @@ add job : Job-19
 java.util.Queue.pending-jobs.size
              count = 5
 
-```
-
+```java
 ## Meters
 
 Meter 度量一系列事件发生的速率(rate)，例如 TPS。Meters 会统计最近 1 分钟，5 分钟，15 分钟，还有全部时间的速率。
@@ -167,8 +162,7 @@ public class MeterTest {
 
     }
 }
-```
-
+```java
 运行结果大致如下：
 
 ```java
@@ -182,8 +176,7 @@ com.alibaba.wuchong.metrics.MeterTest.request.tps
      1-minute rate = 2.52 events/second
      5-minute rate = 3.16 events/second
     15-minute rate = 3.32 events/second
-```
-
+```java
 非常像 Unix 系统中 uptime 和 top 中的 load。
 
 ## Histograms
@@ -210,8 +203,7 @@ public class HistogramTest {
     }
 }
 
-```
-
+```java
 运行之后结果大致如下：
 
 ```sh
@@ -228,14 +220,13 @@ java.util.Queue.queue.histogram
               98% <= 94011.00
               99% <= 99650.00
             99.9% <= 99650.00
-```
-
+```java
 ## Timers
 
 Timer 其实是 Histogram 和 Meter 的结合，histogram 某部分代码/调用的耗时，meter 统计 TPS。
 Timer 其实是 Histogram 和 Meter 的结合，histogram 某部分代码/调用的耗时，meter 统计 TPS。
 
-```
+```java
 public class TimerTest {
 
     public static Random random = new Random();
@@ -258,11 +249,10 @@ public class TimerTest {
     }
 
 }
-```
-
+```java
 运行之后结果如下：
 
-```
+```java
 -- Timers ------------------------------------------------
 com.alibaba.wuchong.metrics.TimerTest.get-latency
              count = 38
@@ -280,4 +270,4 @@ com.alibaba.wuchong.metrics.TimerTest.get-latency
               98% <= 988.71 milliseconds
               99% <= 988.71 milliseconds
             99.9% <= 988.71 milliseconds
-```
+```java

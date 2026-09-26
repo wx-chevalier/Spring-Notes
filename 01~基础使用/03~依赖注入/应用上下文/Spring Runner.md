@@ -23,8 +23,7 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
     );
   }
 }
-```
-
+```java
 ## ApplicationRunner
 
 ApplicationRunner 则是对启动参数进行了二次封装：
@@ -44,4 +43,4 @@ public class AppStartupRunner implements ApplicationRunner {
     );
   }
 }
-```
+```java

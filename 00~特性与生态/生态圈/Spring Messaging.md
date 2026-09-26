@@ -11,8 +11,7 @@ public interface Message<T> {
   T getPayload();
   MessageHeaders getHeaders();
 }
-```
-
+```java
 消息通道 MessageChannel 用于接收消息，调用 send 方法可以将消息发送至该消息通道中：
 
 ![消息传递](https://s2.ax1x.com/2019/10/19/KnCG24.png)
@@ -26,8 +25,7 @@ public interface MessageChannel {
   }
   boolean send(Message<?> message, long timeout);
 }
-```
-
+```java
 # 消息消费
 
 由消息通道的子接口可订阅的消息通道 SubscribableChannel 实现，被 MessageHandler 消息处理器所订阅:
@@ -37,8 +35,7 @@ public interface SubscribableChannel extends MessageChannel {
   boolean subscribe(MessageHandler handler);
   boolean unsubscribe(MessageHandler handler);
 }
-```
-
+```java
 由 MessageHandler 真正地消费/处理消息:
 
 ```java
@@ -46,8 +43,7 @@ public interface SubscribableChannel extends MessageChannel {
 public interface MessageHandler {
   void handleMessage(Message<?> message) throws MessagingException;
 }
-```
-
+```java
 Spring Messaging 内部在消息模型的基础上衍生出了其它的一些功能，如：
 
 - 消息接收参数及返回值处理：消息接收参数处理器 HandlerMethodArgumentResolver 配合 @Header, @Payload 等注解使用；消息接收后的返回值处理器 HandlerMethodReturnValueHandler 配合 @SendTo 注解使用；

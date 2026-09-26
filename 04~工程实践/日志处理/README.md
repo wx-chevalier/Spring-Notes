@@ -20,8 +20,7 @@ public class LoggingController {
     return "Howdy! Check out the Logs to see the output...";
   }
 }
-```
-
+```java
 Spring Boot 内置的日志级别是 Info，如果我们需要打印 Debug 或者 Trace 级别的日志，可以添加环境变量：
 
 ```sh
@@ -29,13 +28,11 @@ $ mvn spring-boot:run
   -Dspring-boot.run.arguments=--logging.level.org.springframework=TRACE,--logging.level.com.baeldung=TRACE
 
 $ ./gradlew bootRun -Pargs=--logging.level.org.springframework=TRACE,--logging.level.com.baeldung=TRACE
-```
-
+```java
 也可以通过修改 application.properties 文件：
 
 ```sh
 logging.level.root=WARN
 logging.level.com.baeldung=TRACE
-```
-
+```java
 在实际的工程中，我们需要严格规范日志输出等级，影响业务进行或意料外异常输出 Error 级别，并统一输出到独立文件，接入系统错误监控告警。不过 Error 级别的日志也要不断地进行优化降噪，以保证及时有效地人为介入处理。对于接口层，则需要统一拦截捕获，避免异常向外系统传播，自身系统无法感知问题；服务层中则应该统一日志输出，包括耗时、接口成功标识、业务成功标识，为监控做准备。并且应该统一输出日志的 traceId，以方便进行分布式追踪，可以通过扩展 `ch.qos.logback.classic.pattern.ClassicConverter` 来实现自动输出。

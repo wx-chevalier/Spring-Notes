@@ -19,16 +19,14 @@ public class User {
  }
  // getter setter
 }
-```
-
+```java
 再定义一个接口 UserMapper.java。
 
 ```java
 public interface UserMapper {
  public User getUserById(Integer id);
 }
-```
-
+```java
 自定义一个 InvocationHandler。
 
 ```java
@@ -57,8 +55,7 @@ public class MapperProxy implements InvocationHandler {
   return new User((Integer) args[0], "zhangsan", 18);
  }
 }
-```
-
+```java
 上面代码中的 target，在执行 Object.java 内的方法时，target 被指向了 this。
 
 ```java
@@ -74,8 +71,7 @@ public static void main(String[] args) {
 
  System.out.println(mapper.toString());
 }
-```
-
+```java
 # Mybatis 自动映射器 Mapper
 
 ```java
@@ -99,8 +95,7 @@ public interface StudentMapper {
     Student findStudentById(Integer id);
     void insertStudent(Student student);
 }
-```
-
+```java
 org.apache.ibatis.binding.MapperProxy.java 部分源码。
 
 ```java
@@ -131,8 +126,7 @@ public class MapperProxy<T> implements InvocationHandler, Serializable {
     return mapperMethod.execute(sqlSession, args);
   }
   // ...
-```
-
+```java
 org.apache.ibatis.binding.MapperProxyFactory.java 部分源码。
 
 ```java
@@ -144,4 +138,4 @@ public class MapperProxyFactory<T> {
   protected T newInstance(MapperProxy<T> mapperProxy) {
     return (T) Proxy.newProxyInstance(mapperInterface.getClassLoader(), new Class[] { mapperInterface }, mapperProxy);
   }
-```
+```java

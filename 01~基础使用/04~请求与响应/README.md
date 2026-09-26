@@ -19,8 +19,7 @@ public class User {
     private Integer age;
 
 }
-```
-
+```java
 然后实现对 User 对象的操作接口：
 
 ```java
@@ -37,9 +36,9 @@ public class UserController {
     static Map<Long, User> users = Collections.synchronizedMap(new HashMap<Long, User>());
 
     /**
-     * 处理"/users/"的GET请求，用来获取用户列表
+     - 处理"/users/"的GET请求，用来获取用户列表
      *
-     * @return
+     - @return
      */
     @GetMapping("/")
     public List<User> getUserList() {
@@ -49,10 +48,10 @@ public class UserController {
     }
 
     /**
-     * 处理"/users/"的POST请求，用来创建User
+     - 处理"/users/"的POST请求，用来创建User
      *
-     * @param user
-     * @return
+     - @param user
+     - @return
      */
     @PostMapping("/")
     public String postUser(@RequestBody User user) {
@@ -62,10 +61,10 @@ public class UserController {
     }
 
     /**
-     * 处理"/users/{id}"的GET请求，用来获取url中id值的User信息
+     - 处理"/users/{id}"的GET请求，用来获取url中id值的User信息
      *
-     * @param id
-     * @return
+     - @param id
+     - @return
      */
     @GetMapping("/{id}")
     public User getUser(@PathVariable Long id) {
@@ -74,11 +73,11 @@ public class UserController {
     }
 
     /**
-     * 处理"/users/{id}"的PUT请求，用来更新User信息
+     - 处理"/users/{id}"的PUT请求，用来更新User信息
      *
-     * @param id
-     * @param user
-     * @return
+     - @param id
+     - @param user
+     - @return
      */
     @PutMapping("/{id}")
     public String putUser(@PathVariable Long id, @RequestBody User user) {
@@ -90,10 +89,10 @@ public class UserController {
     }
 
     /**
-     * 处理"/users/{id}"的DELETE请求，用来删除User
+     - 处理"/users/{id}"的DELETE请求，用来删除User
      *
-     * @param id
-     * @return
+     - @param id
+     - @return
      */
     @DeleteMapping("/{id}")
     public String deleteUser(@PathVariable Long id) {
@@ -102,8 +101,7 @@ public class UserController {
     }
 
 }
-```
-
+```java
 下面针对该 Controller 编写测试用例验证正确性，具体如下。当然也可以通过浏览器插件等进行请求提交验证。
 
 ```java
@@ -169,8 +167,7 @@ public class Chapter21ApplicationTests {
 
 }
 
-```
-
+```java
 # 常用注解
 
 ## @RestController
@@ -186,16 +183,14 @@ public class Chapter21ApplicationTests {
 public @interface RestController {
     String value() default "";
 }
-```
-
+```java
 可以看出，@RestController 注解包含了原来的 @Controller 和 @ResponseBody 注解，使用过 Spring 的朋友对 @Controller 注解已经非常了解了，这里不再赘述，@ResponseBody 注解是将返回的数据结构转换为 Json 格式。所以 @RestController 可以看作是 @Controller 和 @ResponseBody 的结合体，相当于偷个懒，我们使用 @RestController 之后就不用再使用 @Controller 了。但是需要注意一个问题：如果是前后端分离，不用模板渲染的话，比如 Thymeleaf，这种情况下是可以直接使用@RestController 将数据以 json 格式传给前端，前端拿到之后解析；但如果不是前后端分离，需要使用模板来渲染的话，一般 Controller 中都会返回到具体的页面，那么此时就不能使用@RestController 了，比如：
 
 ```java
 public String getUser() {
 	return "user";
 }
-```
-
+```java
 其实是需要返回到 user.html 页面的，如果使用 @RestController 的话，会将 user 作为字符串返回的，所以这时候我们需要使用 @Controller 注解。
 
 ## @RequestMapping
@@ -217,8 +212,7 @@ public class TestController {
         return "success";
     }
 }
-```
-
+```java
 这个很简单，启动项目在浏览器中输入 localhost:8080/test/get 测试一下即可。针对四种不同的请求方式，是有相应注解的，不用每次在 @RequestMapping 注解中加 method 属性来指定，上面的 GET 方式请求可以直接使用 @GetMapping("/get") 注解，效果一样。相应地，PUT 方式、POST 方式和 DELETE 方式对应的注解分别为 @PutMapping、@PostMapping 和 DeleteMapping。
 
 ## @PathVariable
@@ -232,8 +226,7 @@ public String testPathVariable(@PathVariable Integer id) {
 	System.out.println("获取到的id为：" + id);
 	return "success";
 }
-```
-
+```java
 这里需要注意一个问题，如果想要 url 中占位符中的 id 值直接赋值到参数 id 中，需要保证 url 中的参数和方法接收参数一致，否则就无法接收。如果不一致的话，其实也可以解决，需要用 @PathVariable 中的 value 属性来指定对应关系。如下：
 
 ```java
@@ -243,8 +236,7 @@ public String testPathVariable(@PathVariable(value = "idd") Integer id) {
 	System.out.println("获取到的id为：" + id);
 	return "success";
 }
-```
-
+```java
 对于访问的 url，占位符的位置可以在任何位置，不一定非要在最后，比如这样也行：/xxx/{id}/user。另外，url 也支持多个占位符，方法参数使用同样数量的参数来接收，原理和一个参数是一样的，例如：
 
 ```java
@@ -255,15 +247,13 @@ public String testPathVariable(@PathVariable(value = "idd") Integer id) {
         System.out.println("获取到的name为：" + name);
         return "success";
     }
-```
-
+```java
 运行项目，在浏览器中请求 localhost:8080/test/user/2/zhangsan 可以看到控制台输出如下信息：
 
 ```java
 获取到的id为：2
 获取到的name为：zhangsan
-```
-
+```java
 所以支持多个参数的接收。同样地，如果 url 中的参数和方法中的参数名称不同的话，也需要使用 value 属性来绑定两个参数。
 
 ## @RequestParam
@@ -276,8 +266,7 @@ public String testRequestParam(@RequestParam Integer id) {
 	System.out.println("获取到的id为：" + id);
 	return "success";
 }
-```
-
+```java
 可以正常从控制台打印出 id 信息。同样地，url 上面的参数和方法的参数需要一致，如果不一致，也需要使用 value 属性来说明，比如 url 为：http://localhost:8080/user?idd=1：
 
 ```java
@@ -287,8 +276,7 @@ public String testRequestParam(@RequestParam(value = "idd", required = false) In
 	System.out.println("获取到的id为：" + id);
 	return "success";
 }
-```
-
+```java
 除了 value 属性外，还有个两个属性比较常用：
 
 - required 属性：true 表示该参数必须要传，否则就会报 404 错误，false 表示可有可无。
@@ -303,8 +291,7 @@ public String testForm(@RequestParam String username, @RequestParam String passw
     System.out.println("获取到的password为：" + password);
     return "success";
 }
-```
-
+```java
 如果表单数据很多，我们不可能在后台方法中写上很多参数，每个参数还要 @RequestParam 注解。针对这种情况，我们需要封装一个实体类来接收这些参数，实体中的属性名和表单中的参数名一致即可。
 
 ```java
@@ -313,8 +300,7 @@ public class User {
 	private String password;
 	// set get
 }
-```
-
+```java
 使用实体接收的话，我们不能在前面加 @RequestParam 注解了，直接使用即可。
 
 ```java
@@ -325,8 +311,7 @@ public String testForm(User user) {
     System.out.println("获取到的password为：" + user.getPassword());
     return "success";
 }
-```
-
+```java
 ## @RequestBody
 
 @RequestBody 注解用于接收前端传来的实体，接收参数也是对应的实体，比如前端通过 json 提交传来两个参数 username 和 password，此时我们需要在后端封装一个实体来接收。在传递的参数比较多的情况下，使用 @RequestBody 接收会非常方便。例如：
@@ -344,4 +329,4 @@ public String testRequestBody(@RequestBody User user) {
 	System.out.println("获取到的password为：" + user.getPassword());
 	return "success";
 }
-```
+```java

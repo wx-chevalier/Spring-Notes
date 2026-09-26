@@ -15,8 +15,7 @@
     <artifactId>swagger-spring-boot-starter</artifactId>
     <version>1.9.0.RELEASE</version>
 </dependency>
-```
-
+```java
 应用主类中添加 @EnableSwagger2Doc 注解，具体如下：
 
 ```java
@@ -29,8 +28,7 @@ public class Application {
     }
 
 }
-```
-
+```java
 application.properties 中配置文档相关内容，比如：
 
 ```yml
@@ -45,8 +43,7 @@ swagger.contact.url=http://blog.didispace.com
 swagger.contact.email=dyc87112@qq.com
 swagger.base-package=com.didispace
 swagger.base-path=/**
-```
-
+```java
 各参数配置含义如下：
 
 - `swagger.title`：标题
@@ -126,8 +123,7 @@ public class User {
     private Integer age;
 
 }
-```
-
+```java
 # 接口分组
 
 我们在 Spring Boot 中定义各个接口是以 Controller 作为第一级维度来进行组织的，Controller 与具体接口之间的关系是一对多的关系。我们可以将同属一个模块的接口定义在一个 Controller 里。默认情况下，Swagger 是以 Controller 为单位，对接口进行分组管理的。这个分组的元素在 Swagger 中称为 Tag，但是这里的 Tag 与接口的关系并不是一对多的，它支持更丰富的多对多关系。
@@ -171,8 +167,7 @@ static class StudentController {
     }
 
 }
-```
-
+```java
 启动应用之后，我们可以看到 Swagger 中这两个 Controller 是这样组织的：
 
 ![Swagger Controller 分组](https://s3.ax1x.com/2021/02/07/ytOLWt.png)
@@ -201,8 +196,7 @@ static class StudentController {
     // ...
 
 }
-```
-
+```java
 再次启动应用之后，我们就看到了如下的分组内容，代码中@Api 定义的 tags 内容替代了默认产生的 teacher-controller 和 student-controller。
 
 ![自定义 Tag](https://s3.ax1x.com/2021/02/07/ytOvy8.png)
@@ -230,8 +224,7 @@ static class StudentController {
 
 }
 
-```
-
+```java
 最终效果如下：
 
 ![多分组](https://s3.ax1x.com/2021/02/07/ytXPFs.png)
@@ -278,8 +271,7 @@ static class StudentController {
     }
 
 }
-```
-
+```java
 效果如下图所示：
 
 ![部分分组](https://s3.ax1x.com/2021/02/07/ytXVyT.png)
@@ -316,16 +308,14 @@ static class StudentController {
     // ...
 
 }
-```
-
+```java
 ## 接口的排序
 
 在完成了分组排序问题之后，在来看看同一分组内各个接口该如何实现排序。同样的，凡事先查文档，可以看到 Swagger 也提供了相应的配置，下面也分两种配置方式介绍：
 
 ```yml
 swagger.ui-config.operations-sorter=alpha
-```
-
+```java
 ## 参数的排序
 
 完成了接口的排序之后，更细粒度的就是请求参数的排序了。默认情况下，Swagger 对 Model 参数内容的展现也是按字母顺序排列的。如果我们希望可以按照 Model 中定义的成员变量顺序来展现，那么需要我们通过@ApiModelProperty 注解的 position 参数来实现位置的设置，比如：
@@ -355,4 +345,4 @@ public class User {
     private String email;
 
 }
-```
+```java

@@ -20,8 +20,7 @@ public class SelfBeanFactoryLoader implements BeanFactoryPostProcessor {
     beanFactory.registerSingleton("windowQpsControl", new WindowQpsControl());
   }
 }
-```
-
+```java
 ## BeanDefinitionRegistryPostProcessor 接口
 
 这个接口是继承自 BeanFactoryPostProcessor Bean 注册相关的可以参考上文：
@@ -47,8 +46,7 @@ public class SelfBeanLoader implements BeanDefinitionRegistryPostProcessor {
     registry.registerBeanDefinition("cacheHelper", cacheHelper);
   }
 }
-```
-
+```java
 ## ApplicationContextAware
 
 这个接口比较靠后也是大家使用比较多的，在前两者 Bean 的基础上，增加 xml 注入，而且这里给出了另外一个参数 environment，便于用户在此注入特殊的 profile。
@@ -89,8 +87,7 @@ public class SelfContextLoader implements ApplicationContextAware {
     }
   }
 }
-```
-
+```java
 # 案例：结合策略模式
 
 策略模式相信大家都应该比较熟悉，它定义了一系列的算法，并将每一个算法封装起来，使每个算法可以相互替代，使算法本身和使用算法的客户端分割开来，相互独立。其适用的场景是这样的：一个大功能，它有许多不同类型的实现（策略类），具体根据客户端来决定采用哪一个策略类。比如下单优惠策略、物流对接策略等，应用场景还是非常多的。
@@ -101,15 +98,15 @@ public class SelfContextLoader implements ApplicationContextAware {
 
 ```java
 /**
- * 业务权限校验处理器
+ - 业务权限校验处理器
  */
 publicinterface PermissionCheckHandler {
     /**
-     * 判断是否是自己能够处理的权限校验类型
+     - 判断是否是自己能够处理的权限校验类型
      */
     boolean isMatched(BizType bizType);
     /**
-     * 权限校验逻辑
+     - 权限校验逻辑
      */
     PermissionCheckResultDTO permissionCheck(Long userId, String bizCode);
 }
@@ -117,7 +114,7 @@ publicinterface PermissionCheckHandler {
 // 业务1的鉴权逻辑我们假设是这样的：
 
 /**
- * 冷启动权限校验处理器
+ - 冷启动权限校验处理器
  */
 @Component
 publicclass ColdStartPermissionCheckHandlerImpl implements PermissionCheckHandler {
@@ -134,7 +131,7 @@ publicclass ColdStartPermissionCheckHandlerImpl implements PermissionCheckHandle
 // 业务2的鉴权逻辑我们假设是这样的：
 
 /**
- * 趋势业务权限校验处理器
+ - 趋势业务权限校验处理器
  */
 @Component
 publicclass TrendPermissionCheckHandlerImpl implements PermissionCheckHandler {
@@ -147,8 +144,7 @@ publicclass TrendPermissionCheckHandlerImpl implements PermissionCheckHandler {
         //业务特有鉴权逻辑
     }
 }
-```
-
+```java
 Spring 主要为我们提供了三类扩展点，分别对应不同 Bean 生命周期阶段：
 
 - Aware 接口
@@ -161,7 +157,7 @@ Spring 主要为我们提供了三类扩展点，分别对应不同 Bean 生命�
 
 ```java
 /**
- * 权限校验服务类
+ - 权限校验服务类
  */
 @Slf4j
 @Service
@@ -202,4 +198,4 @@ publicclass PermissionServiceImpl
         this.applicationContext = applicationContext;
     }
 }
-```
+```java

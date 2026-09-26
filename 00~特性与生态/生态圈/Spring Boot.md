@@ -38,8 +38,7 @@ Spring Boot 是伴随着 Spring 4.0 诞生的，从字面理解，Boot 是引导
 	<groupId>org.springframework.boot</groupId>
 	<artifactId>spring-boot-starter-web</artifactId>
 </dependency>
-```
-
+```java
 我们点击进入该依赖后可以看到，Spring Boot 这个 starter-web 已经包含了多个依赖，包括之前在 Spring 工程中需要导入的依赖，我们看一下其中的一部分，如下：
 
 ```xml
@@ -56,8 +55,7 @@ Spring Boot 是伴随着 Spring 4.0 诞生的，从字面理解，Boot 是引导
     <version>5.0.7.RELEASE</version>
     <scope>compile</scope>
 </dependency>
-```
-
+```java
 ## 简化配置
 
 Spring 虽然号称 Java EE 轻量级框架，但由于其繁琐的配置，一度被人认为是“配置地狱”。各种 XML、Annotation 配置会让人眼花缭乱，而且配置多的话，如果出错了也很难找出原因。Spring Boot 更多的是采用 Java Config 的方式，对 Spring 进行配置。举个例子，我新建一个类，但是我不用 @Service 注解，也就是说，它是个普通的类，那么我们如何使它也成为一个 Bean 让 Spring 去管理呢？只需要@Configuration 和@Bean 两个注解即可，如下：
@@ -77,15 +75,13 @@ public class JavaConfig {
     }
 }
 
-```
-
+```java
 @Configuration 表示该类是个配置类，@Bean 表示该方法返回一个 Bean。这样就把 TestService 作为 Bean 让 Spring 去管理了，在其他地方，我们如果需要使用该 Bean，和原来一样，直接使用@Resource 注解注入进来即可使用，非常方便。
 
 ```java
 @Resource
 private TestService testService;
-```
-
+```java
 另外，部署配置方面，原来 Spring 有多个 xml 和 properties 配置，在 Spring Boot 中只需要个 application.yml 即可。
 
 ## 简化部署

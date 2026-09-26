@@ -33,27 +33,24 @@
    <!-- more bean definitions go here -->
 
 </beans>
-```
-
+```java
 ### Instantiation:Bean 定义与初始化
 
 #### Constructor:构造函数法
 
-```
+```java
 <bean id="exampleBean" class="examples.ExampleBean"/>
 
 <bean name="anotherExample" class="examples.ExampleBeanTwo"/>
-```
-
+```java
 #### Static Factory Method
 
-```
+```java
 <bean id="clientService"
     class="examples.ClientService"
     factory-method="createInstance"/>
-```
-
-```
+```java
+```java
 public class ClientService {
     private static ClientService clientService = new ClientService();
     private ClientService() {}
@@ -62,8 +59,7 @@ public class ClientService {
         return clientService;
     }
 }
-```
-
+```java
 #### Instance Factory Method:实例工厂方法
 
 ```xml
@@ -76,8 +72,7 @@ public class ClientService {
 <bean id="clientService"
     factory-bean="serviceLocator"
     factory-method="createClientServiceInstance"/>
-```
-
+```java
 ```java
 public class DefaultServiceLocator {
 
@@ -88,8 +83,7 @@ public class DefaultServiceLocator {
         return clientService;
     }
 }
-```
-
+```java
 当然，实例工厂方法也可以在一个工厂类中提供多个方法：
 
 ```xml
@@ -104,8 +98,7 @@ public class DefaultServiceLocator {
 <bean id="accountService"
     factory-bean="serviceLocator"
     factory-method="createAccountServiceInstance"/>
-```
-
+```java
 ```java
 public class DefaultServiceLocator {
 
@@ -123,11 +116,10 @@ public class DefaultServiceLocator {
     }
 
 }
-```
-
+```java
 一般来说，如果完全用注解方式来定义 Bean，可以用 Configuration 方式来定义一系列的 Bean，譬如:
 
-```
+```java
 @Configuration
 public class TestConfig {
 
@@ -139,8 +131,7 @@ factory.setServiceInterface(HelloService.class);
 return factory;
 }
 }
-```
-
+```java
 这里用 Configuration 进行注解之后，其中注解为@Bean 的方法就可以自动地变为了实例工厂方法。
 
 ### Definition Inheritance(定义继承)
@@ -166,8 +157,7 @@ return factory;
    </bean>
 
 </beans>
-```
-
+```java
 对应的 HelloWorld.java 文件定义如下：
 
 ```java
@@ -193,8 +183,7 @@ public class HelloWorld {
       System.out.println("World Message2 : " + message2);
    }
 }
-```
-
+```java
 HelloIndia.java 文件为：
 
 ```java
@@ -229,8 +218,7 @@ public class HelloIndia {
       System.out.println("India Message3 : " + message3);
    }
 }
-```
-
+```java
 而主应用文件定义如下：
 
 ```java
@@ -254,18 +242,16 @@ public class MainApp {
       objB.getMessage3();
    }
 }
-```
-
+```java
 运行结果如下所示：
 
-```
+```java
 World Message1 : Hello World!
 World Message2 : Hello Second World!
 India Message1 : Hello India!
 India Message2 : Hello Second World!
 India Message3 : Namaste India!
-```
-
+```java
 #### Bean Definition Template
 
 有时候可以创建一个抽象的 Bean 定义的模板以方便被其他的 Bean 定义时候使用。在定义模板时，并不需要指定一个类属性而只需要指定为抽象即可。
@@ -290,8 +276,7 @@ India Message3 : Namaste India!
    </bean>
 
 </beans>
-```
-
+```java
 ## Scope(作用域)
 
 Spring 框架中主要的作用域为如下五种，其中三种只能用在基于 Web 的 ApplicationContext 中：
@@ -324,8 +309,7 @@ Spring 框架中主要的作用域为如下五种，其中三种只能用在基�
    </bean>
 
 </beans>
-```
-
+```java
 - 创建 Java 文件
 
 ```java
@@ -342,8 +326,7 @@ public class HelloWorld {
       System.out.println("Your Message : " + message);
    }
 }
-```
-
+```java
 - 创建全局容器
 
 ```java
@@ -365,18 +348,16 @@ public class MainApp {
       objB.getMessage();
    }
 }
-```
-
+```java
 运行上述代码后，可以得到如下结果：
 
-```
+```java
 Your Message : I'm object A
 Your Message : I'm object A
-```
-
+```java
 如果你信不过 Spring IoC 或者需要一些额外的操作，那么可以用如下方式手动创建：
 
-```
+```java
 @Service
 public class Singleton {
 
@@ -393,8 +374,7 @@ return INSTANCE.get();
 }
 
 }
-```
-
+```java
 ### Prototype
 
 - Java Class
@@ -413,8 +393,7 @@ public class HelloWorld {
       System.out.println("Your Message : " + message);
    }
 }
-```
-
+```java
 - App
 
 ```java
@@ -436,8 +415,7 @@ public class MainApp {
       objB.getMessage();
    }
 }
-```
-
+```java
 - Beans.xml
 
 ```xml
@@ -453,15 +431,13 @@ public class MainApp {
    </bean>
 
 </beans>
-```
-
+```java
 结果如下：
 
-```
+```java
 Your Message : I'm object A
 Your Message : null
-```
-
+```java
 ## LifeCycle
 
 容器初始化 bean 和销毁前所做的操作定义方式有三种：
@@ -504,8 +480,7 @@ public class PersonService {
 		System.out.println("I'm  destory method  using  @PreDestroy....."+message);
 	}
 }
-```
-
+```java
 - 定义相关的配置文件
 
 ```xml
@@ -527,8 +502,7 @@ http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 </bean>
 
 </beans>
-```
-
+```java
 ### InitializingBean,DisposableBean
 
 - 定义相应类实现 InitializingBean ,DisposableBean 接口
@@ -569,8 +543,7 @@ public class PersonService  implements InitializingBean,DisposableBean{
 	}
 
 }
-```
-
+```java
 - 定义相应的配置文件
 
 ```xml
@@ -587,7 +560,6 @@ http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
 <!-- <context:annotation-config /> -->
 
-
 <!-- <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor" />
 <bean id="personService" class="com.myapp.core.annotation.init.PersonService">
 		  <property name="message" value="123"></property>
@@ -599,11 +571,10 @@ http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 </bean>
 
 </beans>
-```
-
+```java
 - 测试类
 
-```
+```java
 package com.myapp.core.annotation.init;
 
 import org.springframework.context.ApplicationContext;
@@ -622,8 +593,7 @@ public class MainTest {
 	}
 
 }
-```
-
+```java
 # ApplicationContext
 
 ## Configuration(配置)
@@ -643,8 +613,7 @@ public class MainTest {
                 expression="org.springframework.stereotype.Repository"/>
     </context:component-scan>
 </beans>
-```
-
+```java
 ### Annotation-Based
 
 基于注解的配置方案同样是选择了 XML 作为第一配置入口，但是会将大量的 Controller 等 Bean 的配置放置在 Java 代码中。
@@ -661,8 +630,7 @@ public class MainTest {
 
     <context:annotation-config/>
 </beans>
-```
-
+```java
 ### Java-Based
 
 基于 Java 代码的配置方案即是选择将 Java 类作为第一配置入口。
@@ -675,8 +643,7 @@ public class MainTest {
 public class AppConfig {
     ...
 }
-```
-
+```java
 同样的，在配置类中依然可以引入 XML 配置的内容：
 
 ```java
@@ -688,8 +655,7 @@ public class AppConfig {
 public class SpringConfiguration {
 
 }
-```
-
+```java
 有时候，也可以使用@ContextConfiguration 注解：
 
 ```java
@@ -697,8 +663,7 @@ public class SpringConfiguration {
 @ContextConfiguration({ "classpath:META-INF/conf/spring/this-xml-conf.xml",
                     "classpath:META-INF/conf/spring/that-other-xml-conf.xml" })
 public class CleverMoneyMakingBusinessServiceIntegrationTest {...}
-```
-
+```java
 ## Instantiating(加载)
 
 在配置了基本的 Bean 和整个 ApplicationContext 之后，在具体应用时就需要从容器中获取相对应的 Bean。在 Web 项目中，类似于 Tomcat 或者 Jetty 这样的 Servlet 容器会自动从 web.xml 开始加载配置文件，此处不赘述，可以详见笔者的 Spring-MVC 系列实战笔记。而在本系列中主要介绍如何在 Java 代码中加载整个 Spring ApplicationContext。
@@ -709,8 +674,7 @@ public class CleverMoneyMakingBusinessServiceIntegrationTest {...}
 new ClassPathXmlApplicationContext(
     new String[] { "classpath:META-INF/conf/spring/this-xml-conf.xml",
                    "classpath:META-INF/conf/spring/that-other-xml-conf.xml" } );
-```
-
+```java
 ### AnnotationConfigApplicationContext
 
 AnnotationConfigApplicationContext 可以从某个以`@Configuration`配置的类中初始化加载所有的 Bean，即以`@Configuration`注解的类本身会注册成某个 Bean，以及所有声明在其中的 Bean 也会完成在 ApplicationContext 中的注册。
@@ -721,8 +685,7 @@ public static void main(String[] args) {
     MyService myService = ctx.getBean(MyService.class);
     myService.doStuff();
 }
-```
-
+```java
 `AnnotationConfigApplicationContext`并不仅仅只可以传入某个配置类作为参数，任何以`@Component`作为注解的类都可以作为参数传入其构造器中：
 
 ```java
@@ -731,8 +694,7 @@ public static void main(String[] args) {
     MyService myService = ctx.getBean(MyService.class);
     myService.doStuff();
 }
-```
-
+```java
 除了在初始化时候传入一些 Bean 的配置，`AnnotationConfigApplicationContext`还允许在运行时利用代码动态地注册一些 Bean 的配置类，如下所示：
 
 ```java
@@ -745,8 +707,7 @@ public static void main(String[] args) {
     MyService myService = ctx.getBean(MyService.class);
     myService.doStuff();
 }
-```
-
+```java
 # Dependence Injection | 依赖注入
 
 自动注入的具体表现即所有在 ApplicationContext 中声明的 Bean 可以允许其他同样注册的 Bean 根据接口类或者名称自动完成赋值或者实例化。
@@ -755,7 +716,7 @@ public static void main(String[] args) {
 
 Constructor-based DI is accomplished when the container invokes a class constructor with a number of arguments, each representing a dependency on other class.
 
-```
+```java
 package x.y;
 
 public class Foo {
@@ -765,9 +726,8 @@ public class Foo {
     }
 
 }
-```
-
-```
+```java
+```java
 <beans>
     <bean id="foo" class="x.y.Foo">
         <constructor-arg ref="bar"/>
@@ -778,8 +738,7 @@ public class Foo {
 
     <bean id="baz" class="x.y.Baz"/>
 </beans>
-```
-
+```java
 ### [Setter-based dependency injection](http://www.tutorialspoint.com/spring/setter_based_dependency_injection.htm)
 
 Setter-based DI is accomplished by the container calling setter methods on your beans after invoking a no-argument constructor or no-argument static factory method to instantiate your bean.
@@ -798,8 +757,7 @@ Setter-based DI is accomplished by the container calling setter methods on your 
 
 <bean id="anotherExampleBean" class="examples.AnotherBean"/>
 <bean id="yetAnotherBean" class="examples.YetAnotherBean"/>
-```
-
+```java
 ### Autowiring
 
 有些依赖不需要显示声明，而只需要在 Java 的类定义时使用@Autowired 注解即可。
@@ -814,57 +772,44 @@ Setter-based DI is accomplished by the container calling setter methods on your 
 
 You can apply the `@Autowired` annotation to constructors:
 
-```
+```java
 public class MovieRecommender {
 
-
   private final CustomerPreferenceDao customerPreferenceDao;
-
 
   @Autowired
   public MovieRecommender(CustomerPreferenceDao customerPreferenceDao) {
   this.customerPreferenceDao = customerPreferenceDao;
   }
 
-
   // ...
 
-
 }
-```
-
+```java
 As expected, you can also apply the `@Autowired` annotation to "traditional" setter methods:
 
-```
+```java
 public class SimpleMovieLister {
 
-
   private MovieFinder movieFinder;
-
 
   @Autowired
   public void setMovieFinder(MovieFinder movieFinder) {
   this.movieFinder = movieFinder;
   }
 
-
   // ...
 
-
 }
-```
-
+```java
 You can also apply the annotation to methods with arbitrary names and/or multiple arguments:
 
-```
+```java
 public class MovieRecommender {
-
 
   private MovieCatalog movieCatalog;
 
-
   private CustomerPreferenceDao customerPreferenceDao;
-
 
   @Autowired
   public void prepare(MovieCatalog movieCatalog,
@@ -873,117 +818,89 @@ public class MovieRecommender {
   this.customerPreferenceDao = customerPreferenceDao;
   }
 
-
   // ...
 
-
 }
-```
-
+```java
 You can apply `@Autowired` to fields as well and even mix it with constructors:
 
-```
+```java
 public class MovieRecommender {
-
 
   private final CustomerPreferenceDao customerPreferenceDao;
 
-
   @Autowired
   private MovieCatalog movieCatalog;
-
 
   @Autowired
   public MovieRecommender(CustomerPreferenceDao customerPreferenceDao) {
   this.customerPreferenceDao = customerPreferenceDao;
   }
 
-
   // ...
 
-
 }
-```
-
+```java
 It is also possible to provide _all_ beans of a particular type from the `ApplicationContext` by adding the annotation to a field or method that expects an array of that type:
 
-```
+```java
 public class MovieRecommender {
-
 
   @Autowired
   private MovieCatalog[] movieCatalogs;
 
-
   // ...
 
-
 }
-```
-
+```java
 The same applies for typed collections:
 
-```
+```java
 public class MovieRecommender {
 
-
   private Set<MovieCatalog> movieCatalogs;
-
 
   @Autowired
   public void setMovieCatalogs(Set<MovieCatalog> movieCatalogs) {
   this.movieCatalogs = movieCatalogs;
   }
 
-
   // ...
 
-
 }
-```
-
+```java
 Even typed Maps can be autowired as long as the expected key type is `String`. The Map values will contain all beans of the expected type, and the keys will contain the corresponding bean names:
 
-```
+```java
 public class MovieRecommender {
 
-
   private Map<String, MovieCatalog> movieCatalogs;
-
 
   @Autowired
   public void setMovieCatalogs(Map<String, MovieCatalog> movieCatalogs) {
   this.movieCatalogs = movieCatalogs;
   }
 
-
   // ...
 
-
 }
-```
-
+```java
 By default, the autowiring fails whenever _zero_ candidate beans are available; the default behavior is to treat annotated methods, constructors, and fields as indicating*required* dependencies. This behavior can be changed as demonstrated below.
 
-```
+```java
 public class SimpleMovieLister {
 
-
   private MovieFinder movieFinder;
-
 
   @Autowired(required=false)
   public void setMovieFinder(MovieFinder movieFinder) {
   this.movieFinder = movieFinder;
   }
 
-
   // ...
 
-
 }
-```
-
+```java
 #### Qualifier
 
 如果有同一个类的不同的声明：
@@ -991,8 +908,7 @@ public class SimpleMovieLister {
 ```xml
 <bean id="a" class="com.package.MyClass"/>
 <bean id="b" class="com.package.MyClass"/>
-```
-
+```java
 可以使用：
 
 ```java
@@ -1003,8 +919,7 @@ MyClass a;
 @Autowired
 @Qualifier("b")
 MyClass b;
-```
-
+```java
 # 注解方式声明
 
 在 Spring 2.0 之前的版本中，@Repository 注解可以标记在任何的类上，用来表明该类是用来执行与数据库相关的操作（即 DAO 对象），并支持自动处理数据库操作产生的异常。在 Spring 2.5 版本中，引入了更多的 Spring 类注解：@Component,@Service,@Controller。@Component 是一个通用的 Spring 容器管理的单例 bean 组件。而@Repository, @Service, @Controller 就是针对不同的使用场景所采取的特定功能化的注解组件。
@@ -1021,8 +936,7 @@ Class conditions allow us to specify that a configuration bean will be included 
 public class MySQLAutoconfiguration {
   //...
 }
-```
-
+```java
 也可以根据某个 Bean 是否存在来决定是否需要创建 Bean:
 
 ```java
@@ -1035,8 +949,7 @@ public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
     ...
     return em;
 }
-```
-
+```java
 还可以根据是否存在某个属性配置来决定是否需要创建某个 Bean:
 
 ```java
@@ -1050,8 +963,7 @@ public DataSource dataSource() {
     ...
     return dataSource;
 }
-```
-
+```java
 ```java
 // Defining Condition that checks if the JdbcTemplate is available on the classpath
 //
@@ -1075,8 +987,7 @@ public class JdbcTemplateCondition implements Condition {
 public class MyService {
   ...
 }
-```
-
+```java
 | 条件化注解                      | 配置生效条件                                            |
 | ------------------------------- | ------------------------------------------------------- |
 | @ConditionalOnBean              | 配置了某个特定 bean                                     |

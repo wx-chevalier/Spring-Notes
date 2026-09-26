@@ -13,8 +13,7 @@ public DeferredResult<String> quotes() {
 
 // From some other thread...
 deferredResult.setResult(data);
-```
-
+```java
 控制器可以从不同的线程异步生成返回值，例如，响应外部事件（JMS 消息），计划任务或其他事件等。
 
 ```java
@@ -40,15 +39,13 @@ public CompletableFuture<Message> getAMessageFuture() {
         return new Message("data 1");
     }, futureExecutor);
 }
-```
-
+```java
 # 源码分析
 
 ```java
 public class DeferredResult<T> {
 
 	private static final Object RESULT_NONE = new Object()
-
 
 	// 超时时间（ms）可以不配置
 	@Nullable
@@ -61,13 +58,11 @@ public class DeferredResult<T> {
 	private Consumer<Throwable> errorCallback;
 	private Runnable completionCallback;
 
-
 	// 这个比较强大，就是能把我们结果再交给这个自定义的函数处理了 他是个@FunctionalInterface
 	private DeferredResultHandler resultHandler;
 
 	private volatile Object result = RESULT_NONE;
 	private volatile boolean expired = false;
-
 
 	// 判断这个DeferredResult是否已经被set过了（被set过的对象，就可以移除了嘛）
 	// 如果expired表示已经过期了你还没set，也是返回false的
@@ -88,7 +83,6 @@ public class DeferredResult<T> {
 		return (resultToCheck != RESULT_NONE ? resultToCheck : null);
 	}
 
-
 	public void onTimeout(Runnable callback) {
 		this.timeoutCallback = callback;
 	}
@@ -98,7 +92,6 @@ public class DeferredResult<T> {
 	public void onCompletion(Runnable callback) {
 		this.completionCallback = callback;
 	}
-
 
 	// 如果你的result还需要处理，可以这是一个resultHandler，会对你设置进去的结果进行处理
 	public final void setResultHandler(DeferredResultHandler resultHandler) {
@@ -218,6 +211,5 @@ public class DeferredResult<T> {
 	}
 
 }
-```
-
+```java
 DeferredResult 的超时处理，采用委托机制，也就是在实例 DeferredResult 时给予一个超时时长（毫秒），同时在 onTimeout 中委托（传入）一个新的处理线程（我们可以认为是超时线程）；当超时时间到来，DeferredResult 启动超时线程，超时线程处理业务，封装返回数据，给 DeferredResult 赋值（正确返回的或错误返回的）

@@ -13,8 +13,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     User findUser(@Param("name") String name);
 
 }
-```
-
+```java
 在 pom.xml 中引入 cache 依赖，添加如下内容：
 
 ```xml
@@ -22,8 +21,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-cache</artifactId>
 </dependency>
-```
-
+```java
 在 Spring Boot 主类中增加@EnableCaching 注解开启缓存功能，如下：
 
 ```java
@@ -36,8 +34,7 @@ public class Chapter51Application {
 	}
 
 }
-```
-
+```java
 在数据访问接口中，增加缓存配置注解，如：
 
 ```java
@@ -48,8 +45,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     User findByName(String name);
 
 }
-```
-
+```java
 到这里，我们可以看到，在调用第二次 findByName 函数时，没有再执行 select 语句，也就直接减少了一次数据库的读取操作。
 
 回过头来我们再来看这里使用到的两个注解分别作了什么事情：

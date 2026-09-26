@@ -17,8 +17,7 @@ public class UserThreadTask implements Runnable {
     System.out.println(user);
   }
 }
-```
-
+```java
 造成这种注入失败的原因就是 spring 和多线程的安全问题，不支持这样的注入方式。我们可以通过构造函数传入到多线程环境中：
 
 ```java
@@ -35,15 +34,13 @@ public class UserThreadTask implements Runnable {
     System.out.println(user);
   }
 }
-```
-
+```java
 调用方式如下：
 
 ```java
 Thread t = new Thread(new UserThreadTask(userThreadService));
 t.start();
-```
-
+```java
 我们也可以通过 ApplicaContext 获取所需的 Service：
 
 ```java
@@ -80,12 +77,10 @@ public class ApplicationContextHolder implements ApplicationContextAware {
     return context.getBeanDefinitionNames();
   }
 }
-```
-
+```java
 调用方式如下：
 
 ```java
 UserService user = (UserService) ApplicationContextHolder.getBeanByName("userService");
-```
-
+```java
 这种方式不管是否为多线程，还是不接收 Spring 管理的类，都可以用这种方式获得 spring 管理的类。

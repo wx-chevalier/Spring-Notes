@@ -10,8 +10,7 @@ static ProxyConnection getProxyConnection(final PoolEntry poolEntry, final Conne
     // Body is replaced (injected) by JavassistProxyFactory
     throw new IllegalStateException("You need to run the CLI build and you need target/classes in your classpath to run.");
 }
-```
-
+```java
 发现这些代理方法中只有一行直接抛异常的代码，注释写着“Body is replaced (injected) by JavassistProxyFactory”，其实方法 body 中的代码是在编译时调用 JavassistProxyFactory 才生成的，主要代码如下：
 
 ```java
@@ -68,8 +67,7 @@ private static void modifyProxyFactory() throws NotFoundException, CannotCompile
 
     proxyCt.writeFile(genDirectory + "target/classes");
 }
-```
-
+```java
 之所以使用 Javassist 生成动态代理，是因为其速度更快，相比于 JDK Proxy 生成的字节码更少，精简了很多不必要的字节码。
 
 ## ConcurrentBag
